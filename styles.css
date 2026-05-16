@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   StudyOS · Premium Design System
+   StudyOS
    By Indraneel Mandal
 ═══════════════════════════════════════════════════════════════ */
 
@@ -3356,4 +3356,330 @@ a:focus-visible {
 @media print {
   .sidebar, .topbar, .app-footer, #wCanvas, .grain { display: none !important; }
   .main { margin-left: 0 !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FINAL POLISH · Light/Dark Uniformity Pass
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── Footer 2-column layout (mid removed) ─── */
+.app-footer {
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 24px 40px !important;
+  gap: 24px !important;
+}
+.footer-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  min-width: 0 !important;
+}
+.footer-tagline {
+  font-family: var(--f-body) !important;
+  font-size: 12.5px !important;
+  color: var(--tx-3) !important;
+  letter-spacing: -0.005em !important;
+  padding-left: 16px !important;
+  margin-left: 4px !important;
+  border-left: 1px solid var(--bd-1) !important;
+  font-weight: 400 !important;
+}
+.footer-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex-shrink: 0 !important;
+}
+.footer-copy {
+  font-family: var(--f-mono) !important;
+  font-size: 11px !important;
+  color: var(--tx-3) !important;
+  letter-spacing: 0.04em !important;
+}
+.footer-copy strong {
+  color: var(--tx-2) !important;
+  font-weight: 600 !important;
+}
+.footer-version {
+  font-family: var(--f-mono) !important;
+  font-size: 10px !important;
+  color: var(--tx-4) !important;
+  letter-spacing: 0.10em !important;
+  padding: 3px 11px !important;
+  border-radius: 100px !important;
+  border: 1px solid var(--bd-1) !important;
+  background: var(--bg-elev-1) !important;
+}
+
+@media (max-width: 720px) {
+  .app-footer {
+    flex-direction: column !important;
+    padding: 20px !important;
+    text-align: center !important;
+  }
+  .footer-tagline {
+    border-left: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* ─── LIGHT/DARK THEME UNIFORMITY ─── */
+
+/* Glass cards — matched elevation in both themes */
+[data-theme="light"] .glass-card {
+  background: rgba(255,255,255,0.78) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02) !important;
+}
+[data-theme="light"] .glass-card:hover {
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.03) !important;
+}
+
+[data-theme="dark"] .glass-card,
+:root:not([data-theme="light"]) .glass-card {
+  background: rgba(255,255,255,0.025) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+[data-theme="dark"] .glass-card:hover,
+:root:not([data-theme="light"]) .glass-card:hover {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+}
+
+/* Stat cards — uniform light/dark */
+[data-theme="light"] .stat-card,
+[data-theme="light"] .tstat {
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+}
+[data-theme="light"] .stat-card:hover,
+[data-theme="light"] .tstat:hover {
+  background: rgba(255,255,255,1) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+}
+
+/* Modal — uniform glass treatment */
+[data-theme="light"] .modal {
+  background: rgba(255,255,255,0.98) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04) !important;
+}
+[data-theme="light"] .modal::before {
+  background: linear-gradient(90deg, transparent, rgba(0,113,227,0.4) 50%, transparent) !important;
+  opacity: 0.55 !important;
+}
+
+/* Sidebar — uniform glass */
+[data-theme="light"] .sidebar {
+  background: rgba(255,255,255,0.88) !important;
+  border-right-color: rgba(0,0,0,0.06) !important;
+}
+
+[data-theme="light"] .nav-item {
+  color: var(--tx-2) !important;
+}
+[data-theme="light"] .nav-item:hover {
+  background: rgba(0,0,0,0.04) !important;
+  color: var(--tx-1) !important;
+}
+[data-theme="light"] .nav-item.active {
+  background: rgba(0,113,227,0.08) !important;
+  color: var(--tx-1) !important;
+}
+[data-theme="light"] .nav-item.active::before {
+  background: var(--blue) !important;
+  box-shadow: 0 0 10px rgba(0,113,227,0.45) !important;
+}
+
+/* Topbar — uniform glass */
+[data-theme="light"] .topbar {
+  background: rgba(245,245,247,0.86) !important;
+  border-bottom-color: rgba(0,0,0,0.06) !important;
+}
+
+/* Footer — uniform glass */
+[data-theme="light"] .app-footer {
+  background: rgba(245,245,247,0.86) !important;
+  border-top: 1px solid rgba(0,0,0,0.06) !important;
+}
+[data-theme="dark"] .app-footer,
+:root:not([data-theme="light"]) .app-footer {
+  background: rgba(0,0,10,0.82) !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+.app-footer {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Buttons — match in both themes */
+[data-theme="light"] .btn-primary {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .btn-primary:hover {
+  background: #000 !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.20) !important;
+}
+[data-theme="light"] .btn-outline {
+  background: rgba(0,0,0,0.02) !important;
+  border-color: rgba(0,0,0,0.10) !important;
+  color: var(--tx-1) !important;
+}
+[data-theme="light"] .btn-outline:hover {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.16) !important;
+}
+
+/* Inputs — uniform feel */
+[data-theme="light"] .input-field,
+[data-theme="light"] .form-input,
+[data-theme="light"] .cell {
+  background: rgba(0,0,0,0.025) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  color: var(--tx-1) !important;
+}
+[data-theme="light"] .input-field:focus,
+[data-theme="light"] .form-input:focus {
+  background: rgba(0,113,227,0.04) !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(0,113,227,0.12), 0 0 20px rgba(0,113,227,0.06) !important;
+}
+[data-theme="light"] .input-field::placeholder,
+[data-theme="light"] .form-input::placeholder {
+  color: rgba(99,99,102,0.7) !important;
+}
+
+/* Task / note / goal / ref cards — uniform light theme */
+[data-theme="light"] .task-item,
+[data-theme="light"] .note-card,
+[data-theme="light"] .ref-card,
+[data-theme="light"] .pq-item,
+[data-theme="light"] .journal-entry,
+[data-theme="light"] .goal-slot,
+[data-theme="light"] .sat-row,
+[data-theme="light"] .paper-item,
+[data-theme="light"] .score-item {
+  background: rgba(255,255,255,0.85) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+}
+[data-theme="light"] .task-item:hover,
+[data-theme="light"] .note-card:hover,
+[data-theme="light"] .ref-card:hover,
+[data-theme="light"] .pq-item:hover,
+[data-theme="light"] .journal-entry:hover,
+[data-theme="light"] .goal-slot:hover,
+[data-theme="light"] .sat-row:hover,
+[data-theme="light"] .paper-item:hover,
+[data-theme="light"] .score-item:hover {
+  background: rgba(255,255,255,1) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05) !important;
+}
+
+/* Toasts — uniform in light */
+[data-theme="light"] .toast {
+  background: rgba(29,29,31,0.96) !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.20), 0 0 0 1px rgba(0,0,0,0.04) !important;
+}
+
+/* Pomo presets / chips / tabs — uniform */
+[data-theme="light"] .ref-tab.active,
+[data-theme="light"] .preset.on,
+[data-theme="light"] .pomo-preset-btn.on {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .ref-tabs {
+  background: rgba(0,0,0,0.03) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Schedule cells light theme */
+[data-theme="light"] .sch-cell {
+  background: rgba(255,255,255,0.85) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+}
+[data-theme="light"] .sch-cell:not(:empty):not(:focus) {
+  background: rgba(0,113,227,0.08) !important;
+  border-color: rgba(0,113,227,0.22) !important;
+  color: var(--blue) !important;
+}
+
+/* Pane title contrast in light */
+[data-theme="light"] .pane-title {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .pane-title .g {
+  color: rgba(29,29,31,0.32) !important;
+}
+[data-theme="light"] .pane-sub {
+  color: rgba(58,58,60,0.85) !important;
+}
+
+/* Streak tile — matched both themes */
+[data-theme="light"] .tb-streak {
+  background: linear-gradient(135deg, rgba(255,159,10,0.10), rgba(255,159,10,0.04)) !important;
+  border-color: rgba(204,119,0,0.30) !important;
+}
+[data-theme="light"] .tb-streak-num {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .tb-streak-label {
+  color: #cc7700 !important;
+}
+
+/* Welcome screen light */
+[data-theme="light"] .w-card {
+  background: rgba(255,255,255,0.88) !important;
+  border-color: rgba(0,0,0,0.10) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04) !important;
+}
+[data-theme="light"] .w-headline {
+  color: #1d1d1f !important;
+}
+
+/* Refined hover lift values — uniform */
+.glass-card:hover,
+.stat-card:hover,
+.note-card:hover,
+.ref-card:hover,
+.goal-slot.filled:hover {
+  transform: translateY(-2px);
+}
+
+/* Pane eyebrow + card label — uniform color */
+.pane-eyebrow,
+.card-label {
+  color: var(--blue) !important;
+}
+
+/* Scrollbar light */
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15) !important;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.25) !important;
+}
+
+/* Subtle improvements */
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth theme transition */
+.glass-card, .stat-card, .modal, .topbar, .sidebar, .app-footer,
+.btn-primary, .btn-outline, .input-field, .form-input,
+.task-item, .note-card, .ref-card, .pq-item, .journal-entry,
+.goal-slot, .nav-item, .sch-cell, .toast, .tb-streak {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity !important;
+  transition-duration: .3s !important;
+  transition-timing-function: var(--ease-out) !important;
 }
