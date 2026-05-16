@@ -203,8 +203,9 @@ function nav(sec) {
   if (sec === 'papers') { renderSATPapers(); renderRefSheets(); renderPapers(); }
   if (sec === 'practice') { renderPracticeRefs(); }
   if (sec === 'journal') { renderJournal(); renderMoodViz(); }
-  if (sec === 'focus') updatePomoUI();
+  if (sec === 'focus') updatePomoUI();  setTimeout(initMotionLayer, 60);
 }
+
 document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListener('click', () => nav(i.dataset.pane)));
 $('mobToggle').onclick = () => { const o = !$('sidebar').classList.contains('open'); $('sidebar').classList.toggle('open', o); $('mobOverlay').style.display = o ? 'block' : 'none'; };
 $('mobOverlay').onclick = () => { $('sidebar').classList.remove('open'); $('mobOverlay').style.display = 'none'; };
@@ -3045,6 +3046,7 @@ function bootApp(name) {
     const en = $('exName'); if (en) en.value = st.exam.name || '';
   }
   toast(st.streak > 1 ? `Welcome back, ${name}. ${st.streak}-day streak.` : `Welcome, ${name}.`, st.streak > 1 ? 'y' : 'g');
+  setTimeout(initMotionLayer, 200);
 }
 
 function doLaunch(name) {
@@ -3057,8 +3059,138 @@ $('wBtn').addEventListener('click', triggerLaunch);
 $('wName').addEventListener('keydown', e => { if (e.key === 'Enter') triggerLaunch(); });
 
 /* ── AUTO-INIT ───────────────────────────────────── */
+
+function initCursorCompanion() {
+  const CD = document.getElementById('cur-d');
+  const CR = document.getElementById('cur-r');
+  const TC = document.getElementById('trail-cv');
+  if (!CD || !CR) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  const LR = 0.092;
+  const trail = [];
+  const MAX_TRAIL = 22;
+
+  if (TC) {
+    const tCtx = TC.getContext('2d');
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      TC.width = window.innerWidth * dpr;
+      TC.height = window.innerHeight * dpr;
+      TC.style.width = window.innerWidth + 'px';
+      TC.style.height = window.innerHeight + 'px';
+      tCtx.scale(dpr, dpr);
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    (function loop() {
+      rx += (mx - rx) * LR;
+      ry += (my - ry) * LR;
+      CR.style.transform = 'translate3d(' + (rx - 18) + 'px,' + (ry - 18) + 'px,0)';
+      tCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      const now = performance.now();
+      if (trail.length > 1) {
+        for (let i = 1; i < trail.length; i++) {
+          const age = (now - trail[i].t) / 380;
+          if (age > 1) continue;
+          const fade = (1 - age) * (i / trail.length);
+          const a = fade * 0.55;
+          const sz = (i / trail.length) * 2.4;
+          tCtx.beginPath();
+          tCtx.arc(trail[i].x, trail[i].y, sz * 0.42, 0, Math.PI * 2);
+          tCtx.fillStyle = 'rgba(41,151,255,' + a + ')';
+          tCtx.fill();
+          tCtx.beginPath();
+          tCtx.moveTo(trail[i-1].x, trail[i-1].y);
+          tCtx.lineTo(trail[i].x, trail[i].y);
+          tCtx.strokeStyle = 'rgba(41,151,255,' + (fade * 0.22) + ')';
+          tCtx.lineWidth = 0.8;
+          tCtx.stroke();
+        }
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    CD.style.transform = 'translate3d(' + (mx - 3) + 'px,' + (my - 3) + 'px,0)';
+    trail.push({ x: mx, y: my, t: performance.now() });
+    if (trail.length > MAX_TRAIL) trail.shift();
+  }, { passive: true });
+
+  const hoverSel = 'a,button,input,textarea,select,[role="button"],.nav-item,.chip,.glass-card,.stat-card,.note-card,.ref-card,.goal-slot,.task-item,.pq-item,.journal-entry,.sat-row,.paper-item,.sb-mark,.tb-icon-btn,.tb-streak,.tb-avatar,.modal-close,.preset,.pomo-preset-btn,.pomo-btn,.amb-btn,.ref-tab,.mood-btn,.w-btn,.w-input,.ne-tool,.task-mini-item';
+
+  document.addEventListener('mouseover', e => {
+    const hit = e.target.closest ? e.target.closest(hoverSel) : null;
+    if (hit) {
+      document.body.classList.add('ch');
+      if (hit.matches('.w-btn,.btn-primary,.btn-outline,.practice-gen-btn,.pomo-btn-main,.pomo-btn-sec,.f-send,.sat-link,.nav-cta')) {
+        document.body.classList.add('c-btn');
+        document.body.classList.remove('c-link');
+      } else if (hit.matches('a,.nav-item,.ref-card,.clink')) {
+        document.body.classList.add('c-link');
+        document.body.classList.remove('c-btn');
+      } else {
+        document.body.classList.remove('c-btn','c-link');
+      }
+    } else {
+      document.body.classList.remove('ch','c-btn','c-link');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cp'), { passive: true });
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cp'), { passive: true });
+  document.addEventListener('mouseleave', () => {
+    CD.style.opacity = '0';
+    CR.style.opacity = '0';
+    if (TC) TC.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    CD.style.opacity = '';
+    CR.style.opacity = '';
+    if (TC) TC.style.opacity = '';
+  });
+}
+
+function initMotionLayer() {
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('rv-show');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+    document.querySelectorAll('.glass-card,.stat-card,.note-card,.ref-card,.goal-slot,.tstat,.pq-item,.sat-row').forEach((el, i) => {
+      el.classList.add('rv-item');
+      el.style.transitionDelay = (Math.min(i, 6) * 35) + 'ms';
+      obs.observe(el);
+    });
+  }
+  document.querySelectorAll('.glass-card,.stat-card,.note-card,.ref-card,.goal-slot').forEach(card => {
+    let raf = 0;
+    card.addEventListener('mousemove', e => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const mx = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+        const my = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+        card.style.setProperty('--mx', mx + '%');
+        card.style.setProperty('--my', my + '%');
+      });
+    }, { passive: true });
+  });
+}
+
 (function init() {
   initWCanvas();
   applyTheme(st.theme);
+  initCursorCompanion();
   if (st.name) setTimeout(() => doLaunch(st.name), 300);
+  setTimeout(initMotionLayer, 400);
 })();
