@@ -460,7 +460,7 @@ $('logScoreBtn').onclick = () => {
 };
 
 /* ── ML API Configuration ── */
-const ML_API_URL = 'https://studyos-api-k9bz.onrender.com'; 
+const ML_API_URL = 'https://studyos-api-8eli.onrender.com'; 
 
 async function renderAICoach(entry) {
   const card = $('aiCoachContent'); if (!card) return;
@@ -3054,9 +3054,25 @@ function doLaunch(name) {
   checkStreak();
   bootApp(name);
 }
-function triggerLaunch() { doLaunch(($('wName').value.trim()) || 'Student'); }
-$('wBtn').addEventListener('click', triggerLaunch);
-$('wName').addEventListener('keydown', e => { if (e.key === 'Enter') triggerLaunch(); });
+function triggerLaunch() {
+  try {
+    const nameInput = $('wName');
+    const name = (nameInput && nameInput.value && nameInput.value.trim()) || 'Student';
+    doLaunch(name);
+  } catch (err) {
+    console.error('Launch error:', err);
+    doLaunch('Student');
+  }
+}
+const _wBtn = $('wBtn');
+if (_wBtn) {
+  _wBtn.addEventListener('click', triggerLaunch);
+  _wBtn.onclick = triggerLaunch;
+}
+const _wName = $('wName');
+if (_wName) {
+  _wName.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); triggerLaunch(); } });
+}
 
 /* ── AUTO-INIT ───────────────────────────────────── */
 
