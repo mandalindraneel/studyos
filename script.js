@@ -1,6 +1,6 @@
 'use strict';
 /* ══════════════════════════════════════════════════════
-   STUDYOS · MMXXVI
+   STUDYOS
    © Indraneel Mandal
    ML-powered academic workspace
 ══════════════════════════════════════════════════════ */
