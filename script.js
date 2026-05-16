@@ -459,7 +459,7 @@ $('logScoreBtn').onclick = () => {
 };
 
 /* ── ML API Configuration ── */
-const ML_API_URL = 'https://studyos-api-8eli.onrender.com'; 
+const ML_API_URL = 'https://studyos-api-k9bz.onrender.com'; 
 
 async function renderAICoach(entry) {
   const card = $('aiCoachContent'); if (!card) return;
