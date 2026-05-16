@@ -4461,7 +4461,7 @@ body {
     height .25s cubic-bezier(0.16,1,0.3,1),
     opacity .25s,
     background .3s;
-  mix-blend-mode: difference;
+  /* mix-blend-mode removed for compat */
 }
 
 #cur-r {
@@ -4822,4 +4822,12 @@ html {
 .ref-card > * {
   position: relative;
   z-index: 1;
+}
+
+
+/* ─── CURSOR SAFETY: never block clicks ─── */
+#cur-d, #cur-r, #trail-cv {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
