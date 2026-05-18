@@ -7,7 +7,7 @@
 <meta name="author" content="Indraneel Mandal">
 <meta name="theme-color" content="#000008" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-<title>StudyOS — Indraneel Mandal</title>
+<title>StudyOS</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260530">
+<link rel="stylesheet" href="styles.css?v=20260531">
 </head>
 <body>
 
@@ -26,7 +26,14 @@
   <div class="grain" aria-hidden="true"></div>
 
   <div class="w-corner w-corner-tl"><span class="w-corner-line"></span><span class="w-corner-num">01</span></div>
-  <div class="w-corner w-corner-tr"><span class="w-corner-num">MMXXVI</span><span class="w-corner-line"></span></div>
+  <div class="w-corner w-corner-tr">
+    <button type="button" id="welcomeInfoBtn" class="w-info-btn" aria-label="About StudyOS">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+      <span>Info</span>
+    </button>
+    <span class="w-corner-num">MMXXVI</span>
+    <span class="w-corner-line"></span>
+  </div>
 
   <div class="w-center">
     <div class="w-eyebrow">
@@ -576,13 +583,36 @@
           <div class="form-group">
             <label>Class / Level</label>
             <select class="input-field" id="practiceLevel">
-              <option value="9">Class 9</option>
-              <option value="10">Class 10</option>
-              <option value="11">Class 11</option>
-              <option value="12">Class 12</option>
-              <option value="SAT">SAT Prep</option>
-              <option value="AP">AP Level</option>
-              <option value="College">College</option>
+              <optgroup label="Early Years">
+                <option value="UN">Upper Nursery</option>
+                <option value="LN">Lower Nursery</option>
+                <option value="KG">Kindergarten</option>
+              </optgroup>
+              <optgroup label="Primary">
+                <option value="1">Class 1</option>
+                <option value="2">Class 2</option>
+                <option value="3">Class 3</option>
+                <option value="4">Class 4</option>
+                <option value="5">Class 5</option>
+              </optgroup>
+              <optgroup label="Middle">
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+              </optgroup>
+              <optgroup label="Secondary">
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </optgroup>
+              <optgroup label="Senior">
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </optgroup>
+              <optgroup label="Higher">
+                <option value="SAT">SAT Prep</option>
+                <option value="AP">AP Level</option>
+                <option value="College">College</option>
+              </optgroup>
             </select>
           </div>
         </div>
@@ -756,6 +786,68 @@
   </div>
 </div>
 
-<script src="script.js?v=20260530"></script>
+<script src="script.js?v=20260531"></script>
+
+<div class="w-info-modal" id="welcomeInfoModal" role="dialog" aria-modal="true" aria-labelledby="wInfoTitle" hidden>
+  <div class="w-info-backdrop" data-info-close="1"></div>
+  <div class="w-info-panel" role="document">
+    <button type="button" class="w-info-close" aria-label="Close" data-info-close="1">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+
+    <div class="w-info-eyebrow">
+      <span class="w-info-eyebrow-dot"></span>
+      <span>About StudyOS</span>
+    </div>
+    <h2 class="w-info-title" id="wInfoTitle">A workspace for serious study.</h2>
+    <p class="w-info-lede">
+      StudyOS is an AI-powered academic operating system. It tracks your progress,
+      predicts outcomes with machine learning, surfaces weak topics, schedules
+      spaced reviews, and gives you a single calm place to do the work.
+    </p>
+
+    <div class="w-info-grid">
+      <div class="w-info-card">
+        <div class="w-info-card-label">Features</div>
+        <ul class="w-info-list">
+          <li>AI performance coach &amp; predictions</li>
+          <li>Focus timer with ambient sessions</li>
+          <li>Smart study planner &amp; goal tracking</li>
+          <li>Notes &amp; journal with mood analytics</li>
+          <li>Practice question generator (all subjects)</li>
+          <li>Spaced repetition review schedule</li>
+        </ul>
+      </div>
+      <div class="w-info-card">
+        <div class="w-info-card-label">Privacy &amp; Storage</div>
+        <ul class="w-info-list">
+          <li>All your data stays in your browser</li>
+          <li>Nothing is sent to any server (except anonymous AI analysis)</li>
+          <li>Clear your data anytime from settings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="w-info-notice">
+      <div class="w-info-notice-icon">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      </div>
+      <div>
+        <strong>Security notice.</strong> Please do not enter any personal or sensitive information
+        (real passwords, bank details, government IDs, medical records). This is a study tool, not
+        a secure data vault.
+      </div>
+    </div>
+
+    <div class="w-info-foot">
+      <span>Designed &amp; built by <strong>Indraneel Mandal</strong></span>
+      <span class="w-info-foot-dot"></span>
+      <span>StudyOS · MMXXVI</span>
+      <span class="w-info-foot-dot"></span>
+      <span>© 2026 All rights reserved</span>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
