@@ -3047,24 +3047,23 @@ const REFERENCE_LINKS = (function() {
 
 // Map level codes to display labels and difficulty bands
 const LEVEL_INFO = {
-  UN: { label: 'Upper Nursery', band: 'foundation', count: 8 },
-  LN: { label: 'Lower Nursery', band: 'foundation', count: 8 },
-  KG: { label: 'Kindergarten',  band: 'foundation', count: 8 },
-  '1': { label: 'Class 1', band: 'foundation', count: 10 },
-  '2': { label: 'Class 2', band: 'foundation', count: 10 },
-  '3': { label: 'Class 3', band: 'elementary', count: 10 },
-  '4': { label: 'Class 4', band: 'elementary', count: 10 },
-  '5': { label: 'Class 5', band: 'elementary', count: 10 },
-  '6': { label: 'Class 6', band: 'middle', count: 10 },
-  '7': { label: 'Class 7', band: 'middle', count: 10 },
-  '8': { label: 'Class 8', band: 'middle', count: 10 },
-  '9': { label: 'Class 9', band: 'secondary', count: 10 },
-  '10': { label: 'Class 10', band: 'secondary', count: 10 },
-  '11': { label: 'Class 11', band: 'senior', count: 10 },
-  '12': { label: 'Class 12', band: 'senior', count: 10 },
-  SAT: { label: 'SAT Prep', band: 'senior', count: 12 },
-  AP: { label: 'AP Level', band: 'senior', count: 12 },
-  College: { label: 'College', band: 'higher', count: 12 }
+  PreK: { label: 'Pre-Kindergarten', band: 'foundation', count: 8 },
+  K:    { label: 'Kindergarten',     band: 'foundation', count: 8 },
+  '1':  { label: 'Grade 1',  band: 'foundation', count: 10 },
+  '2':  { label: 'Grade 2',  band: 'foundation', count: 10 },
+  '3':  { label: 'Grade 3',  band: 'elementary', count: 10 },
+  '4':  { label: 'Grade 4',  band: 'elementary', count: 10 },
+  '5':  { label: 'Grade 5',  band: 'elementary', count: 10 },
+  '6':  { label: 'Grade 6',  band: 'middle', count: 10 },
+  '7':  { label: 'Grade 7',  band: 'middle', count: 10 },
+  '8':  { label: 'Grade 8',  band: 'middle', count: 10 },
+  '9':  { label: 'Grade 9',  band: 'secondary', count: 10 },
+  '10': { label: 'Grade 10', band: 'secondary', count: 10 },
+  '11': { label: 'Grade 11', band: 'senior', count: 10 },
+  '12': { label: 'Grade 12', band: 'senior', count: 10 },
+  SAT:     { label: 'SAT Prep', band: 'senior', count: 12 },
+  AP:      { label: 'AP Level', band: 'senior', count: 12 },
+  College: { label: 'College',  band: 'higher', count: 12 }
 };
 
 function levelInfo(level) {
@@ -3573,171 +3572,9 @@ function setAmb(type, btn) {
    WELCOME CANVAS — ambient orbs
 ══════════════════════════════════════════════════ */
 function initWCanvas() {
-  const cv = $('wCanvas'); if (!cv) return;
-  const ctx = cv.getContext('2d');
-  let W = 0, H = 0;
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-  const resize = () => {
-    const r = cv.getBoundingClientRect();
-    W = r.width; H = r.height;
-    cv.width = W * dpr; cv.height = H * dpr;
-    cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  };
-  resize();
-  try { new ResizeObserver(resize).observe($('screen-welcome')); } catch {}
-  window.addEventListener('resize', resize, { passive: true });
-
-  // Deep starfield like x.ai / Apple
-  const STAR_COUNT = Math.min(220, Math.floor((window.innerWidth * window.innerHeight) / 9000));
-
-  const stars = Array.from({ length: STAR_COUNT }, () => {
-    const layer = Math.random();
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: layer < 0.6 ? Math.random() * 0.7 + 0.2     // tiny background
-        : layer < 0.9 ? Math.random() * 1.0 + 0.6    // mid
-        : Math.random() * 1.6 + 1.2,                  // bright foreground
-      baseA: layer < 0.6 ? 0.15 + Math.random() * 0.25
-           : layer < 0.9 ? 0.4 + Math.random() * 0.35
-           : 0.75 + Math.random() * 0.25,
-      twinkleSpeed: 0.0006 + Math.random() * 0.0022,
-      twinkleOffset: Math.random() * Math.PI * 2,
-      drift: 0.012 + Math.random() * 0.025,
-      hue: Math.random() < 0.15 ? (180 + Math.random() * 40)  // some blue tint
-                                : 220 + Math.random() * 20
-    };
-  });
-
-  // A few bright "hero" stars with cross flares
-  const heroStars = Array.from({ length: 4 }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: 1.8 + Math.random() * 1.4,
-    twinkleSpeed: 0.0008 + Math.random() * 0.0012,
-    twinkleOffset: Math.random() * Math.PI * 2
-  }));
-
-  // Distant nebula clouds (faint)
-  const clouds = [
-    { x: W * 0.85, y: H * 0.15, r: Math.max(W, H) * 0.55, color: 'rgba(60, 110, 220, 0.10)' },
-    { x: W * 0.15, y: H * 0.92, r: Math.max(W, H) * 0.45, color: 'rgba(40, 90, 200, 0.06)' },
-    { x: W * 0.55, y: H * 0.50, r: Math.max(W, H) * 0.35, color: 'rgba(80, 60, 180, 0.04)' }
-  ];
-
-  // Occasional shooting star
-  let shootingStar = null;
-  function spawnShootingStar() {
-    if (Math.random() < 0.0006 && !shootingStar) {
-      const fromLeft = Math.random() < 0.5;
-      shootingStar = {
-        x: fromLeft ? -20 : W + 20,
-        y: Math.random() * H * 0.6,
-        vx: (fromLeft ? 1 : -1) * (6 + Math.random() * 3),
-        vy: 1 + Math.random() * 1.5,
-        life: 0,
-        maxLife: 70
-      };
-    }
-  }
-
-  let t = 0;
-  (function draw() {
-    t++;
-    ctx.clearRect(0, 0, W, H);
-
-    // Nebula clouds
-    clouds.forEach(c => {
-      const grad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
-      grad.addColorStop(0, c.color);
-      grad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-    });
-
-    // Stars
-    stars.forEach(s => {
-      // Slow drift downward (parallax feel)
-      s.y += s.drift;
-      if (s.y > H + 2) { s.y = -2; s.x = Math.random() * W; }
-
-      const twinkle = Math.sin(t * s.twinkleSpeed + s.twinkleOffset);
-      const alpha = s.baseA * (0.6 + 0.4 * (twinkle * 0.5 + 0.5));
-
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${s.hue}, 60%, 88%, ${alpha})`;
-      ctx.fill();
-
-      // Subtle halo for bigger stars
-      if (s.r > 1.2) {
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${s.hue}, 70%, 80%, ${alpha * 0.12})`;
-        ctx.fill();
-      }
-    });
-
-    // Hero stars with cross flare
-    heroStars.forEach(h => {
-      const tw = Math.sin(t * h.twinkleSpeed + h.twinkleOffset);
-      const intensity = 0.7 + 0.3 * (tw * 0.5 + 0.5);
-      const len = h.r * 5 * intensity;
-
-      // Glow halo
-      const halo = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, h.r * 6);
-      halo.addColorStop(0, `rgba(180, 210, 255, ${0.55 * intensity})`);
-      halo.addColorStop(0.4, `rgba(120, 170, 255, ${0.12 * intensity})`);
-      halo.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = halo;
-      ctx.beginPath();
-      ctx.arc(h.x, h.y, h.r * 6, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Cross flare
-      ctx.strokeStyle = `rgba(220, 230, 255, ${0.55 * intensity})`;
-      ctx.lineWidth = 0.8;
-      ctx.beginPath();
-      ctx.moveTo(h.x - len, h.y); ctx.lineTo(h.x + len, h.y);
-      ctx.moveTo(h.x, h.y - len); ctx.lineTo(h.x, h.y + len);
-      ctx.stroke();
-
-      // Core
-      ctx.beginPath();
-      ctx.arc(h.x, h.y, h.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-      ctx.fill();
-    });
-
-    // Shooting star
-    spawnShootingStar();
-    if (shootingStar) {
-      const s = shootingStar;
-      s.x += s.vx;
-      s.y += s.vy;
-      s.life++;
-
-      const fade = 1 - (s.life / s.maxLife);
-      // Trail
-      ctx.strokeStyle = `rgba(180, 220, 255, ${fade * 0.85})`;
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      ctx.moveTo(s.x - s.vx * 8, s.y - s.vy * 8);
-      ctx.lineTo(s.x, s.y);
-      ctx.stroke();
-      // Head
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, 1.6, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${fade})`;
-      ctx.fill();
-
-      if (s.life > s.maxLife || s.x < -40 || s.x > W + 40) shootingStar = null;
-    }
-
-    requestAnimationFrame(draw);
-  })();
+  // Starfield removed — clean minimal welcome screen
+  const cv = document.getElementById('wCanvas');
+  if (cv) cv.style.display = 'none';
 }
 
 /* ══════════════════════════════════════════════════
