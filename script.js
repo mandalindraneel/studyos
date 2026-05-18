@@ -539,7 +539,7 @@ function renderMLReport(r, entry) {
       d.setDate(d.getDate() + days);
       return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     };
-    let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Based on the SM-2 spaced repetition algorithm, here's when you should revisit each weak topic for maximum retention:</div>`;
+    let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Here's when you should revisit each weak topic for maximum retention, based on proven spaced-repetition timing:</div>`;
     b += `<div style="display:flex;gap:8px;flex-wrap:wrap">${sr.intervals_days.map((d, i) => `
       <div style="text-align:center;padding:14px 12px;border-radius:12px;background:var(--bg3);border:1px solid var(--bd);flex:1;min-width:96px">
         <div style="font-family:var(--mono);font-size:.46rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Review ${i+1}</div>
@@ -737,7 +737,7 @@ function generateDataReport(entry) {
 
   // 2. Optimal Review Schedule
   if (entry.weak?.length) {
-    let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Based on the SM-2 spaced repetition algorithm, here's when you should revisit each weak topic for maximum retention:</div>`;
+    let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Here's when you should revisit each weak topic for maximum retention, based on proven spaced-repetition timing:</div>`;
     b += `<div style="display:flex;gap:8px;flex-wrap:wrap">${intervals.map((d, i) => `
       <div style="text-align:center;padding:14px 12px;border-radius:12px;background:var(--bg3);border:1px solid var(--bd);flex:1;min-width:96px">
         <div style="font-family:var(--mono);font-size:.46rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Review ${i+1}</div>
@@ -3045,6 +3045,66 @@ const REFERENCE_LINKS = (function() {
 })();
 
 
+// Map level codes to display labels and difficulty bands
+const LEVEL_INFO = {
+  UN: { label: 'Upper Nursery', band: 'foundation', count: 8 },
+  LN: { label: 'Lower Nursery', band: 'foundation', count: 8 },
+  KG: { label: 'Kindergarten',  band: 'foundation', count: 8 },
+  '1': { label: 'Class 1', band: 'foundation', count: 10 },
+  '2': { label: 'Class 2', band: 'foundation', count: 10 },
+  '3': { label: 'Class 3', band: 'elementary', count: 10 },
+  '4': { label: 'Class 4', band: 'elementary', count: 10 },
+  '5': { label: 'Class 5', band: 'elementary', count: 10 },
+  '6': { label: 'Class 6', band: 'middle', count: 10 },
+  '7': { label: 'Class 7', band: 'middle', count: 10 },
+  '8': { label: 'Class 8', band: 'middle', count: 10 },
+  '9': { label: 'Class 9', band: 'secondary', count: 10 },
+  '10': { label: 'Class 10', band: 'secondary', count: 10 },
+  '11': { label: 'Class 11', band: 'senior', count: 10 },
+  '12': { label: 'Class 12', band: 'senior', count: 10 },
+  SAT: { label: 'SAT Prep', band: 'senior', count: 12 },
+  AP: { label: 'AP Level', band: 'senior', count: 12 },
+  College: { label: 'College', band: 'higher', count: 12 }
+};
+
+function levelInfo(level) {
+  return LEVEL_INFO[level] || { label: 'Class ' + level, band: 'secondary', count: 10 };
+}
+
+// Filter / curate questions based on band
+function selectByLevel(bank, level) {
+  const info = levelInfo(level);
+  if (!bank || !bank.length) return [];
+
+  // Foundation/elementary bands need simpler content — filter out advanced topics
+  const advancedTopics = ['Calculus','Logarithms','Trigonometry','Linear Systems','Quadratic Equations','Modern Physics','Electromagnetism','Thermodynamics','Oscillations','Organic','Equilibrium','Electrochemistry','Molecular Biology','Biochemistry','AI','OOP','Algorithms','Compilers','Operating Systems','Cold War','World War I','World War II','Renaissance','Existentialism','Metaphysics','Epistemology','Inferential'];
+  const middleTopics = ['Modern Physics','Calculus','Electrochemistry','Equilibrium','Molecular Biology','OOP','Operating Systems','Existentialism'];
+
+  let pool;
+  if (info.band === 'foundation' || info.band === 'elementary') {
+    pool = bank.filter(q => !advancedTopics.includes(q.topic || ''));
+    // For very young classes, even further restrict
+    if (info.band === 'foundation') {
+      pool = pool.filter(q => {
+        const t = (q.topic || '').toLowerCase();
+        return !t.includes('advanced') && !t.includes('logarithm') && !t.includes('trig') && !t.includes('calc');
+      });
+    }
+  } else if (info.band === 'middle') {
+    pool = bank.filter(q => !middleTopics.includes(q.topic || ''));
+  } else if (info.band === 'higher') {
+    // College + AP: prefer advanced topics
+    const advanced = bank.filter(q => advancedTopics.includes(q.topic || ''));
+    pool = advanced.length >= info.count ? advanced : bank;
+  } else {
+    pool = bank;
+  }
+
+  if (!pool.length) pool = bank; // fallback if filter empties it
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, info.count);
+}
+
 $('generatePracticeBtn').onclick = async () => {
   const subj = $('practiceSubject').value;
   const level = $('practiceLevel').value;
@@ -3057,18 +3117,15 @@ $('generatePracticeBtn').onclick = async () => {
   st.perfHist.filter(h => h.subject === subj).forEach(h => { if (h.weak) weakAreas.push(...h.weak); });
   const uniqueWeak = [...new Set(weakAreas)];
 
-  // Pick from local bank: 10 random questions per session
   setTimeout(() => {
     const bank = QUESTION_BANK[subj];
-    if (!bank || !bank.length) {
-      el.innerHTML = `<div class="glass-card"><div style="padding:24px;font-size:.84rem;color:var(--t3)">No questions available for ${esc(subj)} yet.</div></div>`;
+    const selected = selectByLevel(bank, level);
+    if (!selected.length) {
+      el.innerHTML = `<div class="glass-card"><div style="padding:24px;font-size:.84rem;color:var(--t3)">No questions available for ${esc(subj)} at ${esc(levelInfo(level).label)} yet.</div></div>`;
       return;
     }
-    const pool = [...bank];
-    pool.sort(() => Math.random() - 0.5);
-    const selected = pool.slice(0, 10);
-    renderPracticeQuestions(selected, subj, level, uniqueWeak);
-    toast(`${selected.length} questions generated`, 'g');
+    renderPracticeQuestions(selected, subj, levelInfo(level).label, uniqueWeak);
+    toast(`${selected.length} ${levelInfo(level).label} questions generated`, 'g');
     renderPracticeRefs(subj);
   }, 400);
 };
@@ -3870,6 +3927,90 @@ function initMotionLayer() {
     }, { passive: true });
   });
 }
+
+// Welcome info modal
+(function () {
+  const btn = document.getElementById('welcomeInfoBtn');
+  const modal = document.getElementById('welcomeInfoModal');
+  if (!btn || !modal) return;
+  const open = () => { modal.hidden = false; requestAnimationFrame(() => modal.classList.add('on')); document.body.style.overflow = 'hidden'; };
+  const close = () => { modal.classList.remove('on'); document.body.style.overflow = ''; setTimeout(() => { modal.hidden = true; }, 280); };
+  btn.addEventListener('click', open);
+  modal.addEventListener('click', (e) => {
+    if (e.target.matches('[data-info-close]') || e.target.closest('[data-info-close]')) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+})();
+
+// ═══════════════ PREMIUM CURSOR ═══════════════
+(function () {
+  // Only on hover-capable, fine pointer devices
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (document.getElementById('studyos-cursor')) return;
+
+  const dot = document.createElement('div');
+  dot.id = 'studyos-cursor';
+  const ring = document.createElement('div');
+  ring.id = 'studyos-cursor-ring';
+  document.body.appendChild(ring);
+  document.body.appendChild(dot);
+
+  let mx = -100, my = -100;
+  let rx = -100, ry = -100;
+  let visible = false;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    if (!visible) {
+      visible = true;
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+    }
+  }, { passive: true });
+
+  // Smooth follow for ring
+  function loop() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Hover detection
+  const hoverSelectors = 'a, button, [role="button"], input[type="submit"], input[type="button"], .clickable, .nav-item, .ref-card, .note-card, .goal-slot, .task-item, .pq-item, .modal-close, .preset, .pomo-preset-btn, .ref-tab, .mood-btn, .ne-tool, .task-mini-item, .practice-gen-btn, .w-btn, .w-info-btn, .w-info-close, label[for], .tb-icon-btn, .tb-streak, .tb-avatar, .sb-mark, select, .footer-link';
+  const textSelectors = 'input[type="text"], input[type="email"], input[type="search"], input[type="number"], input[type="password"], input:not([type]), textarea, [contenteditable="true"]';
+
+  document.addEventListener('mouseover', (e) => {
+    const t = e.target;
+    if (t.closest && t.closest(textSelectors)) {
+      document.body.classList.remove('cur-hover');
+      document.body.classList.add('cur-text');
+    } else if (t.closest && t.closest(hoverSelectors)) {
+      document.body.classList.remove('cur-text');
+      document.body.classList.add('cur-hover');
+    } else {
+      document.body.classList.remove('cur-hover', 'cur-text');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cur-press'), { passive: true });
+  document.addEventListener('mouseup', () => document.body.classList.remove('cur-press'), { passive: true });
+  document.addEventListener('mouseleave', () => {
+    visible = false;
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    visible = true;
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
+  });
+})();
+
 
 (function init() {
   initWCanvas();
