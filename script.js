@@ -3849,6 +3849,113 @@ function initMotionLayer() {
 })();
 
 
+// ═══════════════ WELCOME SCREEN PREMIUM EFFECTS ═══════════════
+(function welcomeEffects() {
+  const screen = document.getElementById('screen-welcome');
+  if (!screen) return;
+
+  // 1) Live date/time
+  const dtEl = document.getElementById('wTopDateTime');
+  if (dtEl) {
+    const updateDateTime = () => {
+      const d = new Date();
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const hours = d.getHours();
+      const mins = d.getMinutes();
+      const day = d.getDate();
+      const month = months[d.getMonth()];
+      const yr = d.getFullYear();
+      const h12 = hours % 12 || 12;
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      dtEl.textContent = `${month} ${day} · ${h12}:${String(mins).padStart(2,'0')} ${ampm}`;
+    };
+    updateDateTime();
+    setInterval(updateDateTime, 30000);
+  }
+
+  // 2) Mouse-follow spotlight + glass card tilt
+  const spotlight = screen.querySelector('.w-spotlight');
+  const card = screen.querySelector('.w-card');
+  let raf = 0;
+  let mx = 0.5, my = 0.5;
+
+  screen.addEventListener('mousemove', (e) => {
+    const r = screen.getBoundingClientRect();
+    mx = (e.clientX - r.left) / r.width;
+    my = (e.clientY - r.top) / r.height;
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      if (spotlight) {
+        spotlight.style.setProperty('--sx', (mx * 100) + '%');
+        spotlight.style.setProperty('--sy', (my * 100) + '%');
+      }
+      if (card) {
+        const cr = card.getBoundingClientRect();
+        const ccx = cr.left + cr.width / 2;
+        const ccy = cr.top + cr.height / 2;
+        const dx = (e.clientX - ccx) / cr.width;
+        const dy = (e.clientY - ccy) / cr.height;
+        const rotY = Math.max(-4, Math.min(4, dx * 6));
+        const rotX = Math.max(-4, Math.min(4, -dy * 6));
+        card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      }
+    });
+  }, { passive: true });
+
+  screen.addEventListener('mouseleave', () => {
+    if (card) card.style.transform = '';
+    if (spotlight) {
+      spotlight.style.setProperty('--sx', '50%');
+      spotlight.style.setProperty('--sy', '50%');
+    }
+  });
+
+  // 3) Word rotator
+  const rotateInner = screen.querySelector('.w-rotate-inner');
+  if (rotateInner) {
+    const words = ['intention', 'focus', 'purpose', 'clarity', 'mastery', 'depth'];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      rotateInner.style.opacity = '0';
+      rotateInner.style.transform = 'translateY(-8px)';
+      setTimeout(() => {
+        rotateInner.textContent = words[i];
+        rotateInner.style.transform = 'translateY(8px)';
+        requestAnimationFrame(() => {
+          rotateInner.style.opacity = '1';
+          rotateInner.style.transform = 'translateY(0)';
+        });
+      }, 340);
+    }, 2800);
+  }
+
+  // 4) Click ripple
+  const rippleLayer = screen.querySelector('.w-ripple-layer');
+  if (rippleLayer) {
+    screen.addEventListener('click', (e) => {
+      // Don't ripple on input/button to avoid blocking
+      if (e.target.closest('.w-input, .w-btn, button, input')) return;
+      const ripple = document.createElement('span');
+      ripple.className = 'w-ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top = e.clientY + 'px';
+      rippleLayer.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 900);
+    });
+  }
+
+  // 5) Magic glow on input focus (handled via CSS, but add typing pulse)
+  const input = document.getElementById('wName');
+  if (input) {
+    input.addEventListener('input', () => {
+      input.classList.add('w-input-typing');
+      clearTimeout(input._pulseT);
+      input._pulseT = setTimeout(() => input.classList.remove('w-input-typing'), 400);
+    });
+  }
+})();
+
 (function init() {
   initWCanvas();
   applyTheme(st.theme);
