@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260540">
+<link rel="stylesheet" href="styles.css?v=20260541">
 </head>
 <body>
 
@@ -25,11 +25,6 @@
   <canvas id="wCanvas" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <canvas id="wShootingStars" class="w-shooting-canvas" aria-hidden="true"></canvas>
-  <div class="w-stats-counter" aria-hidden="true">
-    <div class="w-stat-item"><span class="w-stat-num" data-target="16">0</span><span class="w-stat-lbl">Subjects</span></div>
-    <div class="w-stat-item"><span class="w-stat-num" data-target="9999" data-symbol="∞">0</span><span class="w-stat-lbl">Questions</span></div>
-    <div class="w-stat-item"><span class="w-stat-num" data-target="0">0</span><span class="w-stat-lbl">Personal Data</span></div>
-  </div>
   <div class="w-aurora" aria-hidden="true">
     <div class="w-aurora-blob w-aurora-1"></div>
     <div class="w-aurora-blob w-aurora-2"></div>
@@ -62,12 +57,14 @@
 
   <div class="w-center">
     <div class="w-eyebrow">
+      <span class="w-eyebrow-line"></span>
       <span class="w-eyebrow-text">ML-Powered Academic Intelligence</span>
     </div>
 
     <h1 class="w-headline">
       <span class="w-h-line w-h-1">Study</span>
-      <span class="w-h-line w-h-3"><span id="wRotateWord" class="w-rotate"><span class="w-rotate-inner">intention</span></span><span class="w-h-period">.</span></span>
+      <span class="w-h-line w-h-2"><em>with</em></span>
+      <span class="w-h-line w-h-3"><span class="w-h-intention">intention</span><span class="w-h-period">.</span></span>
     </h1>
 
     <p class="w-sub">An academic workspace where machine learning meets focused study. Track progress, predict outcomes, and build the habits that compound.</p>
@@ -795,7 +792,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260540"></script>
+<script src="script.js?v=20260541"></script>
 
 </body>
 </html>
