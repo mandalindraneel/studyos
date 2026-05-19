@@ -7,7 +7,7 @@
 <meta name="author" content="Indraneel Mandal">
 <meta name="theme-color" content="#000008" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-<title>StudyOS</title>
+<title>StudyOS — Indraneel Mandal</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260547">
+<link rel="stylesheet" href="styles.css?v=20260548">
 </head>
 <body>
 
@@ -41,17 +41,23 @@
   <div class="w-ripple-layer" aria-hidden="true"></div>
 
   <div class="w-topbar">
-    <div class="w-brand-mark">
-      <span class="w-brand-icon">
+    <div class="w-brand-wrap">
+      <div class="w-mark">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M16 4 L4 10 L16 16 L28 10 Z"/>
           <path d="M4 16 L16 22 L28 16"/>
           <path d="M4 22 L16 28 L28 22"/>
         </svg>
-      </span>
-      <span class="w-brand-text">StudyOS</span>
+      </div>
+      <div class="w-brand-info">
+        <span class="w-brand">StudyOS</span>
+        <span class="w-brand-sub">vol · I</span>
+      </div>
     </div>
-<div class="w-topbar-meta"><svg class="w-clock-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span id="wTopDateTime">Loading...</span></div>
+    <div class="w-clock">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span id="wTopDateTime">Loading...</span>
+    </div>
   </div>
 
   <div class="w-center">
@@ -68,7 +74,7 @@
     <p class="w-sub">An academic workspace where machine learning meets focused study. Track progress, predict outcomes, and build the habits that compound.</p>
 
     <div class="w-card">
-      <div class="w-card-label"><span class="w-dot"></span>Begin</div>
+      <div class="w-card-label"><span>Begin · Identity</span></div>
       <div class="w-form" style="display:flex;flex-direction:column;gap:10px;width:100%;">
         <input
           class="w-input"
@@ -780,7 +786,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260547"></script>
+<script src="script.js?v=20260548"></script>
 
 </body>
 </html>
