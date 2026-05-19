@@ -8641,3 +8641,120 @@ select.input-field {
 #screen-welcome .w-meta-sep {
   background: linear-gradient(180deg, transparent, rgba(41, 151, 255, 0.32), transparent) !important;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   UNIFORM SPACING · v20260543
+   Spread the welcome screen content evenly across viewport
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Center vertically, distribute breathing space evenly */
+#screen-welcome .w-center {
+  padding-top: clamp(80px, 11vh, 130px) !important;
+  padding-bottom: clamp(70px, 9vh, 110px) !important;
+  min-height: 100vh !important;
+  justify-content: center !important;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Generous spacing between elements */
+#screen-welcome .w-eyebrow {
+  margin-bottom: clamp(36px, 5vh, 56px) !important;
+  padding: 11px 22px 11px 18px !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-size: clamp(13.5px, 1.05vw, 15px) !important;
+}
+
+#screen-welcome .w-headline {
+  font-size: clamp(60px, 8.5vw, 104px) !important;
+  line-height: 0.96 !important;
+  margin: 0 0 clamp(32px, 4.5vh, 52px) !important;
+}
+#screen-welcome .w-h-2 {
+  font-size: 0.40em !important;
+  margin: 0.06em 0 0.04em !important;
+}
+
+#screen-welcome .w-sub {
+  font-size: clamp(14.5px, 1.15vw, 16.5px) !important;
+  margin: 0 0 clamp(32px, 4.5vh, 48px) !important;
+  line-height: 1.6 !important;
+  max-width: 500px !important;
+}
+
+#screen-welcome .w-card {
+  padding: 22px !important;
+  max-width: 420px !important;
+}
+
+#screen-welcome .w-meta {
+  margin: clamp(40px, 6vh, 64px) auto 0 !important;
+  gap: clamp(32px, 5vw, 56px) !important;
+}
+#screen-welcome .w-meta-num {
+  font-size: clamp(20px, 2vw, 26px) !important;
+}
+#screen-welcome .w-meta-lbl {
+  font-size: 9px !important;
+  letter-spacing: 0.22em !important;
+}
+#screen-welcome .w-meta-sep {
+  height: 32px !important;
+}
+
+/* Compact mode for shorter laptop screens */
+@media (max-height: 820px) {
+  #screen-welcome .w-center {
+    padding-top: clamp(70px, 9vh, 96px) !important;
+    padding-bottom: clamp(56px, 7vh, 80px) !important;
+  }
+  #screen-welcome .w-eyebrow { margin-bottom: clamp(24px, 3.5vh, 36px) !important; }
+  #screen-welcome .w-headline {
+    font-size: clamp(52px, 7vh, 80px) !important;
+    margin-bottom: clamp(22px, 3vh, 32px) !important;
+  }
+  #screen-welcome .w-sub {
+    margin-bottom: clamp(22px, 3vh, 32px) !important;
+    font-size: 14px !important;
+  }
+  #screen-welcome .w-meta { margin-top: clamp(28px, 4vh, 40px) !important; }
+}
+
+@media (max-height: 720px) {
+  #screen-welcome .w-center {
+    padding-top: 56px !important;
+    padding-bottom: 48px !important;
+  }
+  #screen-welcome .w-eyebrow {
+    margin-bottom: 18px !important;
+    padding: 8px 18px 8px 14px !important;
+  }
+  #screen-welcome .w-eyebrow-text { font-size: 12.5px !important; }
+  #screen-welcome .w-headline {
+    font-size: clamp(40px, 6vh, 62px) !important;
+    margin-bottom: 16px !important;
+  }
+  #screen-welcome .w-sub {
+    margin-bottom: 18px !important;
+    font-size: 13.5px !important;
+  }
+  #screen-welcome .w-card { padding: 18px !important; }
+  #screen-welcome .w-meta {
+    margin-top: 22px !important;
+    gap: 24px !important;
+  }
+  #screen-welcome .w-meta-num { font-size: 18px !important; }
+  #screen-welcome .w-meta-sep { height: 26px !important; }
+}
+
+@media (max-width: 640px) {
+  #screen-welcome .w-center {
+    padding-top: 78px !important;
+    padding-bottom: 56px !important;
+  }
+  #screen-welcome .w-headline { font-size: clamp(46px, 13vw, 70px) !important; }
+  #screen-welcome .w-meta { gap: 22px !important; }
+  #screen-welcome .w-meta-sep { display: none !important; }
+}
