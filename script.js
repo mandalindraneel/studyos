@@ -3626,9 +3626,71 @@ function setAmb(type, btn) {
    WELCOME CANVAS — ambient orbs
 ══════════════════════════════════════════════════ */
 function initWCanvas() {
-  // Starfield removed — clean minimal welcome screen
   const cv = document.getElementById('wCanvas');
-  if (cv) cv.style.display = 'none';
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let W = 0, H = 0;
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
+  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    const r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Ambient floating particles — soft, blue, slow
+  const PCOUNT = isMobile ? 22 : 45;
+  const particles = Array.from({ length: PCOUNT }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: 0.6 + Math.random() * 1.6,
+    vy: 0.04 + Math.random() * 0.10,
+    vx: (Math.random() - 0.5) * 0.05,
+    a: 0.18 + Math.random() * 0.32,
+    twinkle: Math.random() * Math.PI * 2,
+    twinkleSpd: 0.004 + Math.random() * 0.010
+  }));
+
+  let t = 0;
+  function loop() {
+    t++;
+    ctx.clearRect(0, 0, W, H);
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.twinkle += p.twinkleSpd;
+      if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; }
+      if (p.x > W + 4) p.x = -4;
+      if (p.x < -4) p.x = W + 4;
+
+      const alpha = p.a * (0.55 + 0.45 * Math.sin(p.twinkle));
+
+      // Soft glow halo
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      g.addColorStop(0, 'rgba(120, 180, 255, ' + (alpha * 0.5) + ')');
+      g.addColorStop(1, 'rgba(120, 180, 255, 0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core dot
+      ctx.fillStyle = 'rgba(200, 220, 255, ' + alpha + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    if (!isReduced) requestAnimationFrame(loop);
+  }
+  if (!isReduced) requestAnimationFrame(loop);
 }
 
 /* ══════════════════════════════════════════════════
@@ -4032,7 +4094,7 @@ function initMotionLayer() {
         x: fromLeft ? -50 : W + 50,
         y: Math.random() * H * 0.65,
         vx: (fromLeft ? 1 : -1) * (5 + Math.random() * 4),
-        vy: 1.2 + Math.random() * 1.6,
+        vy: 0.8 + Math.random() * 2.2,
         life: 0,
         maxLife: 80 + Math.random() * 30,
         tailLen: 14 + Math.random() * 10
@@ -4043,7 +4105,7 @@ function initMotionLayer() {
     function ssLoop(now) {
       ctx.clearRect(0, 0, W, H);
 
-      if (now - lastSpawn > (900 + Math.random() * 1800) && shootingStars.length < 4) {
+      if (now - lastSpawn > (2800 + Math.random() * 4500) && shootingStars.length < 2) {
         spawnStar();
         lastSpawn = now;
       }
