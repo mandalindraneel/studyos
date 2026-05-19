@@ -331,19 +331,53 @@ function renderTasks(f) {
   }).join('');
 }
 $('taskChips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) renderTasks(c.dataset.f); });
-$('saveTaskBtn').onclick = () => {
-  const text = $('taskText').value.trim();
-  if (!text) { toast('Please enter a task', 'r'); return; }
-  sv('tasks', [...st.tasks, { id: uid(), text, due: $('taskDue').value, priority: $('taskPriority').value, subject: $('taskSubject').value.trim(), done: false }]);
-  closeModal('taskModal');
-  ['taskText', 'taskDue', 'taskSubject'].forEach(id => { const el = $(id); if (el) el.value = ''; });
-  renderTasks(); updateStatsUI(); toast('Task added', 'g');
-};
+function saveTaskHandler() {
+  try {
+    const textEl = $('taskText');
+    if (!textEl) { console.error('taskText input not found'); return; }
+    const text = textEl.value.trim();
+    if (!text) { toast('Please enter a task', 'r'); return; }
+    const dueEl = $('taskDue');
+    const prioEl = $('taskPriority');
+    const subjEl = $('taskSubject');
+    const newTask = {
+      id: uid(),
+      text,
+      due: dueEl ? dueEl.value : '',
+      priority: prioEl ? prioEl.value : 'medium',
+      subject: subjEl ? subjEl.value.trim() : '',
+      done: false
+    };
+    sv('tasks', [...st.tasks, newTask]);
+    closeModal('taskModal');
+    ['taskText', 'taskDue', 'taskSubject'].forEach(id => { const el = $(id); if (el) el.value = ''; });
+    try { renderTasks(); } catch (e) { console.error('renderTasks error:', e); }
+    try { renderDashTasks(); } catch (e) { console.error('renderDashTasks error:', e); }
+    try { updateStatsUI(); } catch (e) { console.error('updateStatsUI error:', e); }
+    toast('Task added', 'g');
+  } catch (err) {
+    console.error('Task save error:', err);
+    toast('Could not save task', 'r');
+  }
+}
+(function bindTaskSave() {
+  const btn = $('saveTaskBtn');
+  if (!btn) { setTimeout(bindTaskSave, 100); return; }
+  btn.onclick = saveTaskHandler;
+  btn.addEventListener('click', saveTaskHandler);
+  // Also allow Enter key in task text input
+  const txt = $('taskText');
+  if (txt) {
+    txt.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); saveTaskHandler(); }
+    });
+  }
+})();
 function toggleTask(id) {
   sv('tasks', st.tasks.map(t => { if (t.id === id) return { ...t, done: !t.done }; return t; }));
   renderTasks(); renderDashTasks(); updateStatsUI();
 }
-function delTask(id) { sv('tasks', st.tasks.filter(t => t.id !== id)); renderTasks(); updateStatsUI(); }
+function delTask(id) { sv('tasks', st.tasks.filter(t => t.id !== id)); renderTasks(); renderDashTasks(); updateStatsUI(); }
 
 /* ── EXAM + CALENDAR ─────────────────────────────── */
 $('saveExamBtn').onclick = () => {
