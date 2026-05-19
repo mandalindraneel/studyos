@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   StudyOS · Premium Design System
+   StudyOS
    By Indraneel Mandal
 ═══════════════════════════════════════════════════════════════ */
 
@@ -8772,4 +8772,510 @@ select.input-field {
 }
 .task-mini-item {
   gap: 10px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   WELCOME · v20260547 · UNIFIED WITH MAIN APP
+   Uses the EXACT same fonts, colors, gradients, and design tokens
+   as the rest of the site (Dashboard, Sidebar, AI panels, etc.)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── BACKGROUND: identical to main app's --bg-glow ── */
+#screen-welcome {
+  background:
+    radial-gradient(ellipse 90% 70% at 75% -20%, rgba(41, 100, 200, 0.40) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 25% 100%, rgba(8, 36, 95, 0.25) 0%, transparent 55%),
+    radial-gradient(circle 50% at 50% 50%, rgba(41, 121, 200, 0.06) 0%, transparent 70%),
+    #000008 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+[data-theme="light"] #screen-welcome {
+  background:
+    radial-gradient(ellipse 90% 70% at 75% -20%, rgba(0, 113, 227, 0.13) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 25% 100%, rgba(0, 113, 227, 0.08) 0%, transparent 55%),
+    radial-gradient(circle 50% at 50% 50%, rgba(0, 113, 227, 0.04) 0%, transparent 70%),
+    #f5f5f7 !important;
+}
+
+/* Subtle nebula motion - keeps the alive feel */
+#screen-welcome::before {
+  animation: nebulaShiftMain 28s ease-in-out infinite alternate !important;
+}
+@keyframes nebulaShiftMain {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg);    opacity: 1; }
+  100% { transform: translate(1.5%, -1%) scale(1.03) rotate(1deg); opacity: 0.92; }
+}
+
+/* Refined grid — matches the subtle texture used elsewhere */
+#screen-welcome::after {
+  background-image:
+    linear-gradient(rgba(41, 151, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 151, 255, 0.04) 1px, transparent 1px) !important;
+  background-size: 80px 80px !important;
+  animation: gridBreatheMain 9s ease-in-out infinite !important;
+}
+@keyframes gridBreatheMain {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+/* Hide overpowered effects - cleaner look */
+#screen-welcome .w-shapes,
+#screen-welcome .w-shooting-canvas,
+#screen-welcome .w-beam {
+  display: none !important;
+}
+
+/* Aurora — subtler, matches main app tone */
+#screen-welcome .w-aurora-blob {
+  opacity: 0.55 !important;
+  filter: blur(80px) !important;
+}
+#screen-welcome .w-aurora-1 {
+  background: radial-gradient(ellipse,
+    rgba(41, 100, 200, 0.55) 0%,
+    rgba(41, 100, 200, 0.20) 35%,
+    transparent 70%) !important;
+  width: 65vw !important;
+  height: 70vh !important;
+  top: -25% !important;
+  right: -15% !important;
+}
+#screen-welcome .w-aurora-2 {
+  background: radial-gradient(ellipse,
+    rgba(8, 36, 95, 0.45) 0%,
+    rgba(8, 36, 95, 0.15) 40%,
+    transparent 75%) !important;
+  width: 60vw !important;
+  height: 60vh !important;
+  bottom: -25% !important;
+  left: -15% !important;
+}
+#screen-welcome .w-aurora-3 {
+  background: radial-gradient(ellipse,
+    rgba(41, 121, 200, 0.30) 0%,
+    rgba(41, 121, 200, 0.10) 45%,
+    transparent 75%) !important;
+  width: 50vw !important;
+  height: 50vh !important;
+  top: 30% !important;
+  left: 25% !important;
+}
+
+[data-theme="light"] #screen-welcome .w-aurora-blob { opacity: 0.30 !important; }
+[data-theme="light"] #screen-welcome .w-aurora-1 {
+  background: radial-gradient(ellipse, rgba(0,113,227,0.32) 0%, transparent 70%) !important;
+}
+[data-theme="light"] #screen-welcome .w-aurora-2 {
+  background: radial-gradient(ellipse, rgba(0,113,227,0.18) 0%, transparent 75%) !important;
+}
+[data-theme="light"] #screen-welcome .w-aurora-3 {
+  background: radial-gradient(ellipse, rgba(0,113,227,0.14) 0%, transparent 75%) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TOPBAR — matches main app's topbar style
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-topbar {
+  padding: 20px clamp(20px, 4vw, 36px) !important;
+}
+
+#screen-welcome .w-brand-mark {
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.030em !important;
+  color: #f5f5f7 !important;
+}
+#screen-welcome .w-brand-text {
+  background: none !important;
+  -webkit-text-fill-color: #f5f5f7 !important;
+  color: #f5f5f7 !important;
+}
+[data-theme="light"] #screen-welcome .w-brand-mark,
+[data-theme="light"] #screen-welcome .w-brand-text {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+
+#screen-welcome .w-brand-icon {
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.18), rgba(41, 100, 200, 0.10)) !important;
+  border: 1px solid rgba(41, 151, 255, 0.32) !important;
+  box-shadow:
+    0 4px 16px rgba(41, 100, 200, 0.28),
+    inset 0 1px 0 rgba(180, 215, 255, 0.08) !important;
+  color: rgba(120, 180, 255, 0.95) !important;
+}
+
+/* Date/time pill — same look as sidebar streak/profile chips */
+#screen-welcome .w-topbar-meta {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  padding: 8px 14px 8px 11px !important;
+  letter-spacing: 0.04em !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(41, 151, 255, 0.22) !important;
+  background: rgba(41, 151, 255, 0.10) !important;
+  color: #f5f5f7 !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: none !important;
+}
+#screen-welcome .w-clock-icon {
+  width: 13px !important;
+  height: 13px !important;
+  color: #2997ff !important;
+  filter: none !important;
+}
+[data-theme="light"] #screen-welcome .w-topbar-meta {
+  background: rgba(0, 113, 227, 0.08) !important;
+  border-color: rgba(0, 113, 227, 0.22) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] #screen-welcome .w-clock-icon { color: #0071e3 !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   EYEBROW — same as main app eyebrow tags
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-eyebrow {
+  padding: 7px 16px 7px 12px !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(41, 151, 255, 0.22) !important;
+  background: rgba(41, 151, 255, 0.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: none !important;
+  margin-bottom: clamp(28px, 4vh, 40px) !important;
+}
+#screen-welcome .w-eyebrow-line {
+  width: 6px !important;
+  height: 6px !important;
+  background: #30d158 !important;
+  box-shadow: 0 0 10px rgba(48, 209, 88, 0.6) !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #f5f5f7 !important;
+  text-shadow: none !important;
+}
+[data-theme="light"] #screen-welcome .w-eyebrow {
+  background: rgba(0, 113, 227, 0.06) !important;
+  border-color: rgba(0, 113, 227, 0.22) !important;
+}
+[data-theme="light"] #screen-welcome .w-eyebrow-text { color: #1d1d1f !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   HEADLINE — Bricolage Grotesque (same as .pane-title)
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-headline {
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  font-size: clamp(56px, 8.4vw, 104px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.048em !important;
+  margin: 0 0 clamp(24px, 3.5vh, 36px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+#screen-welcome .w-h-line {
+  display: block !important;
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-style: normal !important;
+}
+
+#screen-welcome .w-h-1 {
+  font-weight: 800 !important;
+  font-style: normal !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #f5f5f7 !important;
+  color: #f5f5f7 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+#screen-welcome .w-h-intention {
+  display: inline !important;
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  background: linear-gradient(135deg, #2997ff 0%, #0d70d4 60%, #5ac8fa 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+#screen-welcome .w-h-period {
+  display: inline !important;
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  background: linear-gradient(135deg, #2997ff 0%, #0d70d4 60%, #5ac8fa 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  margin-left: -0.02em !important;
+}
+
+#screen-welcome .w-h-2 { display: none !important; }
+
+[data-theme="light"] #screen-welcome .w-h-1 {
+  -webkit-text-fill-color: #1d1d1f !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] #screen-welcome .w-h-intention,
+[data-theme="light"] #screen-welcome .w-h-period {
+  background: linear-gradient(135deg, #0071e3 0%, #005bb5 60%, #0091ff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SUBTITLE — same as .pane-sub
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-sub {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  font-size: clamp(15px, 1.2vw, 17px) !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: -0.012em !important;
+  color: #c7c7cc !important;
+  max-width: 540px !important;
+  margin: 0 0 clamp(32px, 4.5vh, 48px) !important;
+}
+[data-theme="light"] #screen-welcome .w-sub { color: #6e6e73 !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   CARD — same .glass-card style as main app
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-card {
+  width: 100% !important;
+  max-width: 440px !important;
+  padding: 22px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+#screen-welcome .w-card::before {
+  background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.40), transparent) !important;
+}
+[data-theme="light"] #screen-welcome .w-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 24px 60px rgba(0, 30, 80, 0.08) !important;
+}
+
+#screen-welcome .w-card-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.22em !important;
+  color: #8e8e93 !important;
+  margin: 0 0 14px !important;
+}
+#screen-welcome .w-dot {
+  background: #2997ff !important;
+  box-shadow: 0 0 10px rgba(41, 151, 255, 0.6) !important;
+}
+[data-theme="light"] #screen-welcome .w-dot {
+  background: #0071e3 !important;
+  box-shadow: 0 0 10px rgba(0, 113, 227, 0.5) !important;
+}
+
+/* Input — matches .input-field from main app */
+#screen-welcome .w-input {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #f5f5f7 !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+}
+#screen-welcome .w-input::placeholder {
+  color: #636366 !important;
+}
+#screen-welcome .w-input:focus {
+  border-color: rgba(41, 151, 255, 0.55) !important;
+  background: rgba(41, 151, 255, 0.05) !important;
+  box-shadow: 0 0 0 3px rgba(41, 151, 255, 0.14) !important;
+  animation: none !important;
+}
+[data-theme="light"] #screen-welcome .w-input {
+  background: rgba(0, 0, 0, 0.025) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] #screen-welcome .w-input::placeholder {
+  color: rgba(99, 99, 102, 0.55) !important;
+}
+[data-theme="light"] #screen-welcome .w-input:focus {
+  background: rgba(0, 113, 227, 0.04) !important;
+  border-color: rgba(0, 113, 227, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.12) !important;
+}
+
+/* Button — matches .btn-primary from main app */
+#screen-welcome .w-btn {
+  width: 100% !important;
+  padding: 12px 22px !important;
+  border-radius: 12px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: -0.010em !important;
+  background: #f5f5f7 !important;
+  color: #000 !important;
+  border: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+  transition: background .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+              color .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+              transform .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+              box-shadow .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) !important;
+}
+#screen-welcome .w-btn::before {
+  background: linear-gradient(135deg, #2997ff 0%, #0d70d4 100%) !important;
+}
+#screen-welcome .w-btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 12px 32px rgba(41, 151, 255, 0.40),
+    inset 0 1px 0 rgba(180, 215, 255, 0.30) !important;
+}
+#screen-welcome .w-btn:active {
+  transform: scale(0.98) !important;
+}
+[data-theme="light"] #screen-welcome .w-btn {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 6px 18px rgba(0, 113, 227, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+[data-theme="light"] #screen-welcome .w-btn:hover {
+  background: #0077ed !important;
+  box-shadow:
+    0 14px 36px rgba(0, 113, 227, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   META — same as main app's stat tiles
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-meta {
+  margin: clamp(36px, 5vh, 56px) auto 0 !important;
+  gap: clamp(32px, 5vw, 56px) !important;
+}
+#screen-welcome .w-meta-num {
+  font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(22px, 2.1vw, 28px) !important;
+  letter-spacing: -0.040em !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #f5f5f7 !important;
+  color: #f5f5f7 !important;
+}
+#screen-welcome .w-meta-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 9.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.20em !important;
+  text-transform: uppercase !important;
+  color: #8e8e93 !important;
+}
+#screen-welcome .w-meta-sep {
+  background: linear-gradient(180deg, transparent, rgba(41, 151, 255, 0.30), transparent) !important;
+  width: 1px !important;
+  height: 32px !important;
+}
+[data-theme="light"] #screen-welcome .w-meta-num {
+  -webkit-text-fill-color: #1d1d1f !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] #screen-welcome .w-meta-lbl { color: #636366 !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   LAYOUT — proper centering, no scroll
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-center {
+  max-width: 640px !important;
+  padding: clamp(80px, 12vh, 130px) clamp(20px, 4vw, 32px) clamp(60px, 9vh, 110px) !important;
+  justify-content: center !important;
+}
+
+/* Spotlight refined */
+#screen-welcome .w-spotlight {
+  background: radial-gradient(circle 420px at var(--sx, 50%) var(--sy, 50%),
+    rgba(41, 151, 255, 0.08) 0%,
+    rgba(41, 151, 255, 0.03) 40%,
+    transparent 70%) !important;
+}
+
+/* Border glow subtler */
+#screen-welcome .w-border-glow {
+  box-shadow:
+    inset 0 0 0 1px rgba(41, 151, 255, 0.04),
+    inset 0 0 60px rgba(41, 151, 255, 0.04),
+    inset 0 0 160px rgba(41, 151, 255, 0.02) !important;
+  animation: borderGlowPulse 6s ease-in-out infinite !important;
+}
+
+/* Responsive */
+@media (max-height: 820px) {
+  #screen-welcome .w-headline { font-size: clamp(48px, 6.8vh, 80px) !important; }
+  #screen-welcome .w-eyebrow { margin-bottom: 22px !important; }
+  #screen-welcome .w-sub { margin-bottom: 26px !important; font-size: 14px !important; }
+  #screen-welcome .w-center { padding-top: 90px !important; padding-bottom: 70px !important; }
+  #screen-welcome .w-meta { margin-top: 32px !important; }
+}
+@media (max-height: 720px) {
+  #screen-welcome .w-center { padding-top: 60px !important; padding-bottom: 48px !important; }
+  #screen-welcome .w-headline { font-size: clamp(40px, 5.8vh, 64px) !important; margin-bottom: 16px !important; }
+  #screen-welcome .w-eyebrow { margin-bottom: 16px !important; padding: 6px 14px 6px 11px !important; }
+  #screen-welcome .w-eyebrow-text { font-size: 10px !important; letter-spacing: 0.12em !important; }
+  #screen-welcome .w-sub { margin-bottom: 18px !important; font-size: 13.5px !important; }
+  #screen-welcome .w-card { padding: 18px !important; }
+  #screen-welcome .w-meta { margin-top: 24px !important; gap: 26px !important; }
+  #screen-welcome .w-meta-num { font-size: 20px !important; }
+}
+@media (max-width: 640px) {
+  #screen-welcome .w-center { padding: 80px 18px 60px !important; }
+  #screen-welcome .w-headline { font-size: clamp(40px, 11vw, 64px) !important; }
+  #screen-welcome .w-meta-sep { display: none !important; }
 }
