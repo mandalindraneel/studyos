@@ -3954,6 +3954,118 @@ function initMotionLayer() {
       input._pulseT = setTimeout(() => input.classList.remove('w-input-typing'), 400);
     });
   }
+
+  // 6) SHOOTING STARS canvas
+  const ssCanvas = document.getElementById('wShootingStars');
+  if (ssCanvas) {
+    const ctx = ssCanvas.getContext('2d');
+    let W = 0, H = 0;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const resizeSS = () => {
+      const r = ssCanvas.getBoundingClientRect();
+      W = r.width; H = r.height;
+      ssCanvas.width = W * dpr; ssCanvas.height = H * dpr;
+      ssCanvas.style.width = W + 'px'; ssCanvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resizeSS();
+    window.addEventListener('resize', resizeSS, { passive: true });
+
+    const shootingStars = [];
+    function spawnStar() {
+      const fromLeft = Math.random() < 0.5;
+      shootingStars.push({
+        x: fromLeft ? -50 : W + 50,
+        y: Math.random() * H * 0.65,
+        vx: (fromLeft ? 1 : -1) * (5 + Math.random() * 4),
+        vy: 1.2 + Math.random() * 1.6,
+        life: 0,
+        maxLife: 80 + Math.random() * 30,
+        tailLen: 14 + Math.random() * 10
+      });
+    }
+
+    let lastSpawn = 0;
+    function ssLoop(now) {
+      ctx.clearRect(0, 0, W, H);
+
+      if (now - lastSpawn > (3000 + Math.random() * 3500) && shootingStars.length < 2) {
+        spawnStar();
+        lastSpawn = now;
+      }
+
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life++;
+
+        const fade = Math.max(0, 1 - (s.life / s.maxLife));
+        const tailX = s.x - s.vx * s.tailLen;
+        const tailY = s.y - s.vy * s.tailLen;
+
+        // Trail gradient
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, 'rgba(120, 180, 255, 0)');
+        grad.addColorStop(0.5, 'rgba(180, 220, 255, ' + (fade * 0.45) + ')');
+        grad.addColorStop(1, 'rgba(255, 255, 255, ' + (fade * 0.95) + ')');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.stroke();
+
+        // Bright head
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + fade + ')';
+        ctx.fill();
+
+        // Glow halo
+        const halo = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 10);
+        halo.addColorStop(0, 'rgba(180, 220, 255, ' + (fade * 0.55) + ')');
+        halo.addColorStop(1, 'rgba(120, 180, 255, 0)');
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (s.life > s.maxLife || s.x < -100 || s.x > W + 100) {
+          shootingStars.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(ssLoop);
+    }
+    requestAnimationFrame(ssLoop);
+  }
+
+  // 7) STATS COUNTER on load
+  const statNums = document.querySelectorAll('.w-stat-num');
+  statNums.forEach((el, idx) => {
+    const target = parseInt(el.dataset.target, 10);
+    const symbol = el.dataset.symbol;
+    const startDelay = 1100 + idx * 200;
+    setTimeout(() => {
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = Math.round(target * eased);
+        if (symbol && val >= target) {
+          el.textContent = symbol;
+        } else {
+          el.textContent = val.toLocaleString();
+        }
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, startDelay);
+  });
+
 })();
 
 (function init() {
