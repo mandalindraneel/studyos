@@ -8017,3 +8017,132 @@ select.input-field {
   opacity: 0;
   transition: all 0.55s cubic-bezier(0.5, 0, 0.7, 1);
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   FINAL TWEAKS · v20260540
+   - Headline: editorial serif font for Study + rotating word
+   - Eyebrow: bigger & more prominent
+   - Date/time pill cleaned up (clock icon only)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── HEADLINE: editorial serif font ── */
+#screen-welcome .w-headline {
+  font-family: 'Instrument Serif', 'Bricolage Grotesque', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: clamp(72px, 11vw, 144px) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.038em !important;
+  gap: clamp(2px, 0.5vw, 6px) !important;
+  margin: 0 0 clamp(28px, 3.5vh, 40px) !important;
+}
+#screen-welcome .w-h-1,
+#screen-welcome .w-rotate-inner {
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: -0.028em !important;
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    rgba(248, 251, 255, 1) 30%,
+    rgba(220, 232, 250, 0.95) 70%,
+    rgba(180, 200, 235, 0.85) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: 0 0 60px rgba(120, 180, 255, 0.30) !important;
+  filter: drop-shadow(0 6px 32px rgba(120, 180, 255, 0.18));
+}
+#screen-welcome .w-h-period {
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  background: linear-gradient(135deg, #6aa4ff 0%, #4080e0 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  margin-left: -0.02em !important;
+  text-shadow: 0 0 28px rgba(106, 164, 255, 0.6) !important;
+}
+
+[data-theme="light"] #screen-welcome .w-h-1,
+[data-theme="light"] #screen-welcome .w-rotate-inner {
+  background: linear-gradient(180deg, #1d1d1f 0%, #2d2d31 50%, #3a3a3c 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Hide the 'with' line completely if any leftover */
+#screen-welcome .w-h-2 { display: none !important; }
+
+/* ── EYEBROW: bigger and more prominent ── */
+#screen-welcome .w-eyebrow {
+  padding: 11px 22px !important;
+  border: 1px solid rgba(120, 180, 255, 0.38) !important;
+  background:
+    linear-gradient(180deg, rgba(120, 180, 255, 0.16), rgba(40, 100, 220, 0.06)),
+    rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  box-shadow:
+    0 14px 44px rgba(40, 100, 220, 0.25),
+    0 0 40px rgba(80, 150, 255, 0.14),
+    inset 0 1px 0 rgba(200, 230, 255, 0.18) !important;
+  margin-bottom: clamp(36px, 5vh, 56px) !important;
+  gap: 0 !important;
+}
+#screen-welcome .w-eyebrow-line {
+  display: none !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: clamp(13px, 1.05vw, 14.5px) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.005em !important;
+  color: rgba(248, 252, 255, 1) !important;
+  text-shadow: 0 0 14px rgba(180, 220, 255, 0.30);
+}
+
+[data-theme="light"] #screen-welcome .w-eyebrow {
+  background:
+    linear-gradient(180deg, rgba(0,113,227,0.06), transparent),
+    rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0,113,227,0.30) !important;
+}
+[data-theme="light"] #screen-welcome .w-eyebrow-text {
+  color: #1d1d1f !important;
+  text-shadow: none;
+}
+
+/* ── DATE/TIME PILL: clean & contrasting (no green dot, just clock icon) ── */
+#screen-welcome .w-topbar-meta {
+  padding: 9px 16px 9px 13px !important;
+  font-size: 12px !important;
+}
+#screen-welcome .w-clock-icon {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  #screen-welcome .w-headline {
+    font-size: clamp(56px, 16vw, 88px) !important;
+  }
+  #screen-welcome .w-eyebrow {
+    padding: 9px 18px !important;
+  }
+  #screen-welcome .w-eyebrow-text {
+    font-size: 12px !important;
+  }
+}
+@media (max-width: 380px) {
+  #screen-welcome .w-headline {
+    font-size: clamp(48px, 17vw, 72px) !important;
+  }
+}
