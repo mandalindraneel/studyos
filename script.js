@@ -3989,7 +3989,7 @@ function initMotionLayer() {
     function ssLoop(now) {
       ctx.clearRect(0, 0, W, H);
 
-      if (now - lastSpawn > (3000 + Math.random() * 3500) && shootingStars.length < 2) {
+      if (now - lastSpawn > (900 + Math.random() * 1800) && shootingStars.length < 4) {
         spawnStar();
         lastSpawn = now;
       }
