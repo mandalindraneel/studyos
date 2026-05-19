@@ -8399,3 +8399,245 @@ select.input-field {
 #screen-welcome .w-meta {
   margin: clamp(40px, 5.5vh, 60px) auto 0 !important;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   FINAL FIT + PALETTE · v20260542
+   - Fit content in viewport (no cutoff)
+   - Use site palette: --blue #2997ff, --bg #000008
+   - Remove shooting stars
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Ensure no shooting stars canvas remains visible */
+.w-shooting-canvas { display: none !important; }
+
+/* Allow scroll fallback only if viewport too small; otherwise fit */
+#screen-welcome {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Tighter center column for fit */
+#screen-welcome .w-center {
+  padding-top: clamp(64px, 9vh, 100px) !important;
+  padding-bottom: clamp(40px, 6vh, 60px) !important;
+  min-height: 100vh !important;
+  justify-content: flex-start !important;
+}
+
+/* Smaller, tighter eyebrow */
+#screen-welcome .w-eyebrow {
+  padding: 9px 20px 9px 16px !important;
+  margin-bottom: clamp(24px, 3.5vh, 36px) !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-size: clamp(12.5px, 1vw, 14px) !important;
+}
+
+/* Headline: significantly tighter line gaps */
+#screen-welcome .w-headline {
+  font-size: clamp(54px, 8.5vw, 100px) !important;
+  line-height: 0.94 !important;
+  margin: 0 0 clamp(18px, 2.5vh, 26px) !important;
+  gap: 0 !important;
+}
+#screen-welcome .w-h-2 {
+  font-size: 0.36em !important;
+  margin: 0.02em 0 !important;
+  line-height: 1 !important;
+}
+
+/* Subtitle: compact */
+#screen-welcome .w-sub {
+  font-size: clamp(13.5px, 1.1vw, 15.5px) !important;
+  margin: 0 0 clamp(22px, 3vh, 32px) !important;
+  line-height: 1.55 !important;
+}
+
+/* Card: tight */
+#screen-welcome .w-card {
+  padding: 18px !important;
+  max-width: 400px !important;
+}
+
+/* Meta tiles: smaller, less margin so they fit */
+#screen-welcome .w-meta {
+  margin: clamp(28px, 3.5vh, 40px) auto 0 !important;
+  gap: clamp(22px, 3vw, 40px) !important;
+}
+#screen-welcome .w-meta-num {
+  font-size: clamp(18px, 1.8vw, 22px) !important;
+}
+#screen-welcome .w-meta-lbl {
+  font-size: 8.5px !important;
+}
+#screen-welcome .w-meta-sep {
+  height: 28px !important;
+}
+
+/* Compress on shorter screens */
+@media (max-height: 860px) {
+  #screen-welcome .w-headline { font-size: clamp(50px, 7.5vh, 88px) !important; }
+  #screen-welcome .w-eyebrow { margin-bottom: 20px !important; }
+  #screen-welcome .w-sub { margin-bottom: 20px !important; font-size: 13px !important; }
+  #screen-welcome .w-meta { margin-top: 24px !important; }
+}
+@media (max-height: 760px) {
+  #screen-welcome .w-center { padding-top: 50px !important; padding-bottom: 36px !important; }
+  #screen-welcome .w-headline { font-size: clamp(44px, 6.5vh, 70px) !important; margin-bottom: 14px !important; }
+  #screen-welcome .w-eyebrow { margin-bottom: 16px !important; padding: 7px 16px 7px 13px !important; }
+  #screen-welcome .w-eyebrow-text { font-size: 12px !important; }
+  #screen-welcome .w-sub { margin-bottom: 16px !important; }
+  #screen-welcome .w-card { padding: 16px !important; }
+  #screen-welcome .w-meta { margin-top: 20px !important; }
+  #screen-welcome .w-meta-num { font-size: 17px !important; }
+}
+
+/* ── COLOR PALETTE — use the site's --blue (#2997ff) everywhere ── */
+#screen-welcome .w-eyebrow {
+  border-color: rgba(41, 151, 255, 0.32) !important;
+  background:
+    linear-gradient(180deg, rgba(41, 151, 255, 0.14), rgba(41, 151, 255, 0.04)),
+    rgba(255, 255, 255, 0.03) !important;
+  box-shadow:
+    0 12px 40px rgba(41, 151, 255, 0.18),
+    0 0 32px rgba(41, 151, 255, 0.10),
+    inset 0 1px 0 rgba(180, 215, 255, 0.14) !important;
+}
+#screen-welcome .w-topbar-meta {
+  border-color: rgba(41, 151, 255, 0.32) !important;
+  background: linear-gradient(180deg, rgba(41, 151, 255, 0.16), rgba(41, 151, 255, 0.06)) !important;
+  box-shadow:
+    0 8px 24px rgba(41, 151, 255, 0.18),
+    inset 0 1px 0 rgba(180, 215, 255, 0.16) !important;
+}
+#screen-welcome .w-clock-icon {
+  color: rgba(41, 151, 255, 1) !important;
+  filter: drop-shadow(0 0 8px rgba(41, 151, 255, 0.5)) !important;
+}
+
+/* Aurora with site blue */
+#screen-welcome .w-aurora-1 {
+  background: radial-gradient(ellipse,
+    rgba(41, 151, 255, 0.65) 0%,
+    rgba(41, 151, 255, 0.30) 30%,
+    rgba(41, 151, 255, 0.10) 55%,
+    transparent 75%) !important;
+}
+#screen-welcome .w-aurora-2 {
+  background: radial-gradient(ellipse,
+    rgba(41, 151, 255, 0.40) 0%,
+    rgba(41, 151, 255, 0.15) 40%,
+    transparent 75%) !important;
+}
+#screen-welcome .w-aurora-3 {
+  background: radial-gradient(ellipse,
+    rgba(41, 151, 255, 0.35) 0%,
+    rgba(41, 151, 255, 0.12) 45%,
+    transparent 75%) !important;
+}
+
+/* Shapes with site blue (very subtle) */
+#screen-welcome .w-shape-1,
+#screen-welcome .w-shape-2,
+#screen-welcome .w-shape-3,
+#screen-welcome .w-shape-4 {
+  border-color: rgba(41, 151, 255, 0.22) !important;
+}
+#screen-welcome .w-shape-1 {
+  background: radial-gradient(circle at 30% 30%, rgba(41, 151, 255, 0.05), transparent 65%) !important;
+  box-shadow: 0 0 50px rgba(41, 151, 255, 0.08) !important;
+}
+#screen-welcome .w-shape-2 {
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.04), transparent) !important;
+  box-shadow: 0 0 40px rgba(41, 151, 255, 0.06) !important;
+}
+#screen-welcome .w-shape-3 {
+  background: radial-gradient(circle, rgba(41, 151, 255, 0.04), transparent 65%) !important;
+  box-shadow: 0 0 50px rgba(41, 151, 255, 0.08) !important;
+  border-color: rgba(41, 151, 255, 0.18) !important;
+}
+#screen-welcome .w-shape-4 {
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.05), transparent) !important;
+  box-shadow: 0 0 30px rgba(41, 151, 255, 0.06) !important;
+}
+
+/* Beam with site blue */
+#screen-welcome .w-beam {
+  background: linear-gradient(180deg,
+    rgba(41, 151, 255, 0) 0%,
+    rgba(41, 151, 255, 0.20) 30%,
+    rgba(41, 151, 255, 0.32) 50%,
+    rgba(41, 151, 255, 0.12) 75%,
+    rgba(41, 151, 255, 0) 100%) !important;
+}
+
+/* Border glow with site blue */
+#screen-welcome .w-border-glow {
+  box-shadow:
+    inset 0 0 0 1px rgba(41, 151, 255, 0.06),
+    inset 0 0 60px rgba(41, 151, 255, 0.05),
+    inset 0 0 160px rgba(41, 151, 255, 0.025) !important;
+}
+
+/* Spotlight with site blue */
+#screen-welcome .w-spotlight {
+  background: radial-gradient(circle 420px at var(--sx, 50%) var(--sy, 50%),
+    rgba(41, 151, 255, 0.10) 0%,
+    rgba(41, 151, 255, 0.04) 40%,
+    transparent 70%) !important;
+}
+
+/* Input focus & button with site blue */
+#screen-welcome .w-input:focus {
+  border-color: rgba(41, 151, 255, 0.70) !important;
+  box-shadow:
+    0 0 0 4px rgba(41, 151, 255, 0.20),
+    0 0 36px rgba(41, 151, 255, 0.30),
+    0 0 100px rgba(41, 151, 255, 0.16) !important;
+}
+#screen-welcome .w-btn::before {
+  background: linear-gradient(135deg, #2997ff 0%, #0d70d4 100%) !important;
+}
+#screen-welcome .w-btn:hover {
+  box-shadow:
+    0 14px 36px rgba(41, 151, 255, 0.42),
+    0 0 0 1px rgba(180, 215, 255, 0.30) inset !important;
+}
+
+/* Headline glow with site blue */
+#screen-welcome .w-h-1,
+#screen-welcome .w-h-intention {
+  text-shadow: 0 0 60px rgba(41, 151, 255, 0.28) !important;
+  filter: drop-shadow(0 6px 32px rgba(41, 151, 255, 0.16)) !important;
+}
+#screen-welcome .w-h-period {
+  background: linear-gradient(135deg, #2997ff 0%, #0d70d4 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 0 24px rgba(41, 151, 255, 0.55) !important;
+}
+
+/* Click ripple with site blue */
+#screen-welcome .w-ripple {
+  border-color: rgba(41, 151, 255, 0.85) !important;
+  background: radial-gradient(circle, rgba(41, 151, 255, 0.25), transparent 70%) !important;
+  box-shadow: 0 0 20px rgba(41, 151, 255, 0.4) !important;
+}
+
+/* Top brand icon with site blue */
+#screen-welcome .w-brand-icon {
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.20), rgba(41, 151, 255, 0.08)) !important;
+  border-color: rgba(41, 151, 255, 0.35) !important;
+  box-shadow:
+    0 4px 14px rgba(41, 151, 255, 0.30),
+    inset 0 1px 0 rgba(180, 215, 255, 0.10) !important;
+}
+#screen-welcome .w-brand-icon::before {
+  border-color: rgba(41, 151, 255, 0.55) !important;
+}
+
+/* Meta separator with site blue */
+#screen-welcome .w-meta-sep {
+  background: linear-gradient(180deg, transparent, rgba(41, 151, 255, 0.32), transparent) !important;
+}
