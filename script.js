@@ -242,10 +242,30 @@ function renderDashboard() {
 }
 function renderDashTasks() {
   const el = $('dashTasks'); if (!el) return;
-  const today = todayStr();
-  const arr = st.tasks.filter(t => !t.done && (!t.due || new Date(t.due).toDateString() === today || new Date(t.due) < new Date())).slice(0, 4);
-  if (!arr.length) { el.innerHTML = `<div style="font-family:var(--font);font-style:italic;font-size:.85rem;color:var(--t4);padding:10px 0">All clear for today.</div>`; return; }
-  el.innerHTML = arr.map(t => `<div class="task-mini-item"><div class="task-mini-check${t.done ? ' done' : ''}" onclick="toggleTask('${t.id}')"></div><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.text)}</span>${t.subject ? `<span class="tag tag-a">${esc(t.subject)}</span>` : ''}</div>`).join('');
+  // Show ALL pending tasks (high, medium, low) — sorted by priority then due date
+  const prioRank = { high: 0, medium: 1, low: 2 };
+  const arr = [...st.tasks]
+    .filter(t => !t.done)
+    .sort((a, b) => {
+      const pa = prioRank[a.priority] ?? 1;
+      const pb = prioRank[b.priority] ?? 1;
+      if (pa !== pb) return pa - pb;
+      // Same priority: sooner due date first; no-due-date last
+      if (!a.due && b.due) return 1;
+      if (a.due && !b.due) return -1;
+      if (!a.due && !b.due) return 0;
+      return new Date(a.due) - new Date(b.due);
+    })
+    .slice(0, 5);
+  if (!arr.length) {
+    el.innerHTML = `<div style="font-family:var(--font);font-style:italic;font-size:.85rem;color:var(--t4);padding:10px 0">All clear for today.</div>`;
+    return;
+  }
+  el.innerHTML = arr.map(t => {
+    const pc = t.priority === 'high' ? COLORS.red : t.priority === 'low' ? COLORS.green : COLORS.amber;
+    const pl = (t.priority || 'medium').charAt(0).toUpperCase() + (t.priority || 'medium').slice(1);
+    return `<div class="task-mini-item"><div class="task-mini-check${t.done ? ' done' : ''}" onclick="toggleTask('${t.id}')"></div><span class="task-mini-prio" style="background:${pc}" title="${pl} priority"></span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.text)}</span>${t.subject ? `<span class="tag tag-a">${esc(t.subject)}</span>` : ''}</div>`;
+  }).join('');
 }
 function renderDashScores() {
   const el = $('dashScores'); if (!el) return;
