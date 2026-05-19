@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260548">
+<link rel="stylesheet" href="styles.css?v=20260549">
 </head>
 <body>
 
@@ -23,6 +23,7 @@
 <!-- ══════════════════════════ WELCOME ══════════════════════════ -->
 <div class="screen" id="screen-welcome">
   <canvas id="wCanvas" aria-hidden="true"></canvas>
+  <canvas id="wShootingStars" class="w-shooting-canvas" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="w-aurora" aria-hidden="true">
     <div class="w-aurora-blob w-aurora-1"></div>
@@ -83,13 +84,11 @@
           placeholder="What should we call you?"
           maxlength="32"
           autocomplete="given-name"
-          spellcheck="false"
-          style="display:block;width:100%;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);color:#f5f5f7;font-family:'Inter',system-ui,sans-serif;font-size:15px;outline:none;box-sizing:border-box;cursor:text;pointer-events:auto;-webkit-appearance:none;appearance:none;">
+          spellcheck="false">
         <button
           class="w-btn"
           id="wBtn"
-          type="button"
-          style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 22px;border-radius:12px;background:#ffffff;color:#000;font-family:'Bricolage Grotesque','Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-0.014em;border:none;cursor:pointer;pointer-events:auto;-webkit-appearance:none;appearance:none;">
+          type="button">
           <span>Enter Workspace</span>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
@@ -786,7 +785,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260548"></script>
+<script src="script.js?v=20260549"></script>
 
 </body>
 </html>
