@@ -8146,3 +8146,256 @@ select.input-field {
     font-size: clamp(48px, 17vw, 72px) !important;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   FINAL CORRECTIONS · v20260541
+   - Headline: Study / with / intention (intention same as Study)
+   - Eyebrow: bigger + green dot back
+   - Aurora: more visible
+   - Shapes: more subtle
+   - Stats counter removed (clean layout)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── HEADLINE: Study with intention — uniform styling ── */
+#screen-welcome .w-headline {
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: clamp(64px, 10vw, 124px) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.034em !important;
+  gap: clamp(2px, 0.4vw, 6px) !important;
+  margin: 0 0 clamp(28px, 3.5vh, 40px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* "Study" line */
+#screen-welcome .w-h-1 {
+  display: block !important;
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: -0.024em !important;
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    rgba(248, 251, 255, 1) 40%,
+    rgba(225, 235, 250, 0.92) 80%,
+    rgba(195, 215, 240, 0.85) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: 0 0 60px rgba(120, 180, 255, 0.28) !important;
+  filter: drop-shadow(0 6px 32px rgba(120, 180, 255, 0.16));
+}
+
+/* "with" line — visible, restored */
+#screen-welcome .w-h-2 {
+  display: block !important;
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 0.42em !important;
+  color: rgba(195, 215, 240, 0.55) !important;
+  letter-spacing: -0.012em !important;
+  margin: 0.06em 0 0.04em !important;
+  line-height: 1.1 !important;
+}
+#screen-welcome .w-h-2 em {
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+/* "intention" — SAME styling as "Study" (no rotator, no highlight) */
+#screen-welcome .w-h-intention {
+  display: inline !important;
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: -0.024em !important;
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    rgba(248, 251, 255, 1) 40%,
+    rgba(225, 235, 250, 0.92) 80%,
+    rgba(195, 215, 240, 0.85) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: 0 0 60px rgba(120, 180, 255, 0.28) !important;
+}
+
+/* The blue period */
+#screen-welcome .w-h-period {
+  display: inline !important;
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  background: linear-gradient(135deg, #6aa4ff 0%, #4080e0 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  margin-left: -0.01em !important;
+  text-shadow: 0 0 24px rgba(106, 164, 255, 0.55) !important;
+}
+
+/* Hide leftover rotator elements if any */
+#screen-welcome .w-rotate,
+#screen-welcome .w-rotate-inner { display: none !important; }
+
+/* Light theme */
+[data-theme="light"] #screen-welcome .w-h-1,
+[data-theme="light"] #screen-welcome .w-h-intention {
+  background: linear-gradient(180deg, #1d1d1f 0%, #2d2d31 50%, #3a3a3c 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+[data-theme="light"] #screen-welcome .w-h-2 { color: rgba(99, 99, 102, 0.65) !important; }
+
+/* ── EYEBROW: bigger with green dot back ── */
+#screen-welcome .w-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+  padding: 10px 22px 10px 18px !important;
+  border: 1px solid rgba(120, 180, 255, 0.38) !important;
+  background:
+    linear-gradient(180deg, rgba(120, 180, 255, 0.16), rgba(40, 100, 220, 0.06)),
+    rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  box-shadow:
+    0 14px 44px rgba(40, 100, 220, 0.25),
+    0 0 40px rgba(80, 150, 255, 0.14),
+    inset 0 1px 0 rgba(200, 230, 255, 0.18) !important;
+  margin-bottom: clamp(36px, 5vh, 56px) !important;
+}
+#screen-welcome .w-eyebrow-line {
+  display: inline-block !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: rgb(80, 220, 130) !important;
+  border-radius: 50% !important;
+  box-shadow:
+    0 0 14px rgba(80, 220, 130, 0.95),
+    0 0 6px rgba(120, 240, 160, 1) !important;
+  flex-shrink: 0 !important;
+  animation: statusBeat 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: clamp(13.5px, 1.1vw, 15px) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.003em !important;
+  color: rgba(248, 252, 255, 1) !important;
+  text-shadow: 0 0 14px rgba(180, 220, 255, 0.30) !important;
+}
+
+[data-theme="light"] #screen-welcome .w-eyebrow {
+  background:
+    linear-gradient(180deg, rgba(0,113,227,0.06), transparent),
+    rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0,113,227,0.30) !important;
+}
+[data-theme="light"] #screen-welcome .w-eyebrow-text { color: #1d1d1f !important; text-shadow: none !important; }
+[data-theme="light"] #screen-welcome .w-eyebrow-line {
+  background: #1a8a34 !important;
+  box-shadow: 0 0 14px rgba(26, 138, 52, 0.5) !important;
+}
+
+/* ── AURORA: MORE VISIBLE (push past prior !important) ── */
+#screen-welcome .w-aurora {
+  filter: none !important;
+  z-index: 4 !important;
+}
+#screen-welcome .w-aurora-blob {
+  opacity: 1 !important;
+  filter: blur(70px) !important;
+  mix-blend-mode: screen !important;
+}
+#screen-welcome .w-aurora-1 {
+  width: 70vw !important;
+  height: 80vh !important;
+  background: radial-gradient(ellipse,
+    rgba(80, 170, 255, 0.85) 0%,
+    rgba(50, 140, 240, 0.45) 25%,
+    rgba(80, 100, 240, 0.20) 50%,
+    transparent 75%) !important;
+  top: -28% !important;
+  right: -18% !important;
+}
+#screen-welcome .w-aurora-2 {
+  width: 65vw !important;
+  height: 70vh !important;
+  background: radial-gradient(ellipse,
+    rgba(150, 100, 250, 0.60) 0%,
+    rgba(110, 80, 230, 0.30) 35%,
+    rgba(70, 110, 230, 0.12) 60%,
+    transparent 75%) !important;
+  bottom: -28% !important;
+  left: -18% !important;
+}
+#screen-welcome .w-aurora-3 {
+  width: 55vw !important;
+  height: 55vh !important;
+  background: radial-gradient(ellipse,
+    rgba(70, 210, 255, 0.55) 0%,
+    rgba(50, 160, 245, 0.25) 40%,
+    transparent 75%) !important;
+  top: 25% !important;
+  left: 20% !important;
+}
+
+[data-theme="light"] #screen-welcome .w-aurora-blob { opacity: 0.40 !important; }
+
+/* ── SHAPES: MORE SUBTLE ── */
+#screen-welcome .w-shape {
+  opacity: 0.18 !important;
+  filter: blur(0.5px);
+}
+#screen-welcome .w-shape-1 {
+  width: 100px !important;
+  height: 100px !important;
+  border: 1px solid rgba(140, 200, 255, 0.30) !important;
+  background: radial-gradient(circle at 30% 30%, rgba(140, 200, 255, 0.06), transparent 65%) !important;
+  box-shadow: 0 0 50px rgba(80, 150, 255, 0.10) !important;
+}
+#screen-welcome .w-shape-2 {
+  width: 65px !important;
+  height: 65px !important;
+  border: 1px solid rgba(140, 200, 255, 0.25) !important;
+  background: linear-gradient(135deg, rgba(80, 150, 255, 0.05), transparent 70%) !important;
+  box-shadow: 0 0 40px rgba(80, 150, 255, 0.08) !important;
+}
+#screen-welcome .w-shape-3 {
+  width: 130px !important;
+  height: 130px !important;
+  border: 1px solid rgba(180, 130, 240, 0.22) !important;
+  background: radial-gradient(circle, rgba(150, 100, 230, 0.04), transparent 65%) !important;
+  box-shadow: 0 0 60px rgba(150, 100, 230, 0.10) !important;
+}
+#screen-welcome .w-shape-4 {
+  width: 50px !important;
+  height: 50px !important;
+  border: 1px solid rgba(140, 200, 255, 0.30) !important;
+  background: linear-gradient(135deg, rgba(140, 200, 255, 0.05), transparent) !important;
+  box-shadow: 0 0 35px rgba(80, 150, 255, 0.08) !important;
+}
+
+[data-theme="light"] #screen-welcome .w-shape {
+  opacity: 0.10 !important;
+}
+
+/* Stats counter removed — hide if any leftover */
+.w-stats-counter { display: none !important; }
+
+/* Make sure meta tiles (AI/Smart/Free) are clean and don't overlap */
+#screen-welcome .w-meta {
+  margin: clamp(40px, 5.5vh, 60px) auto 0 !important;
+}
