@@ -9740,3 +9740,381 @@ select.input-field {
   #screen-welcome .w-headline { font-size: clamp(36px, 11vw, 56px) !important; }
   #screen-welcome .w-meta-sep { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   WELCOME · v20260549 · CINEMATIC PREMIUM
+   Same palette · live aurora · shooting stars · ambient particles
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Re-enable canvases */
+#screen-welcome #wCanvas {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+#screen-welcome .w-shooting-canvas {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+/* Re-enable atmospheric layers, hide only the busy shapes */
+#screen-welcome .w-aurora { display: block !important; z-index: 3 !important; }
+#screen-welcome .w-shapes { display: none !important; }
+#screen-welcome .w-beam { display: block !important; z-index: 2 !important; }
+#screen-welcome .w-border-glow { display: block !important; z-index: 6 !important; }
+#screen-welcome .w-spotlight { display: block !important; z-index: 7 !important; }
+#screen-welcome .grain { display: block !important; z-index: 8 !important; }
+
+/* ── Base screen: deep cosmic, slowly drifting ── */
+#screen-welcome {
+  background:
+    radial-gradient(ellipse 90% 70% at 75% -20%, rgba(41, 100, 200, 0.34) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 25% 100%, rgba(8, 36, 95, 0.28) 0%, transparent 55%),
+    radial-gradient(circle 50% at 50% 50%, rgba(41, 121, 200, 0.05) 0%, transparent 70%),
+    #000008 !important;
+}
+
+#screen-welcome::before {
+  animation: nebulaDrift 32s ease-in-out infinite alternate !important;
+}
+@keyframes nebulaDrift {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: hue-rotate(0deg); }
+  50%  { transform: translate(-1%, 1%) scale(1.03) rotate(1deg); opacity: 0.94; filter: hue-rotate(-4deg); }
+  100% { transform: translate(1.5%, -0.5%) scale(1.04) rotate(-1deg); opacity: 0.88; filter: hue-rotate(4deg); }
+}
+
+/* Grid breathing — subtle */
+#screen-welcome::after {
+  background-image:
+    linear-gradient(rgba(41, 151, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 151, 255, 0.035) 1px, transparent 1px) !important;
+  background-size: 80px 80px !important;
+  animation: gridPulse 10s ease-in-out infinite !important;
+}
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.40; }
+  50%      { opacity: 0.85; }
+}
+
+/* ── AURORA: slow organic drift with site palette ── */
+#screen-welcome .w-aurora {
+  position: fixed !important;
+  inset: -15% !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+#screen-welcome .w-aurora-blob {
+  position: absolute !important;
+  border-radius: 50% !important;
+  mix-blend-mode: screen !important;
+  filter: blur(90px) !important;
+  will-change: transform, opacity;
+}
+#screen-welcome .w-aurora-1 {
+  width: 70vw !important; height: 75vh !important;
+  background: radial-gradient(ellipse,
+    rgba(41, 151, 255, 0.55) 0%,
+    rgba(41, 100, 200, 0.22) 35%,
+    rgba(41, 100, 200, 0.06) 60%,
+    transparent 78%) !important;
+  top: -25% !important;
+  right: -18% !important;
+  opacity: 0.85 !important;
+  animation: auroraOne 26s ease-in-out infinite alternate !important;
+}
+#screen-welcome .w-aurora-2 {
+  width: 62vw !important; height: 65vh !important;
+  background: radial-gradient(ellipse,
+    rgba(8, 36, 95, 0.65) 0%,
+    rgba(41, 100, 200, 0.20) 40%,
+    transparent 75%) !important;
+  bottom: -30% !important;
+  left: -18% !important;
+  opacity: 0.70 !important;
+  animation: auroraTwo 32s ease-in-out infinite alternate !important;
+}
+#screen-welcome .w-aurora-3 {
+  width: 55vw !important; height: 55vh !important;
+  background: radial-gradient(ellipse,
+    rgba(90, 200, 250, 0.32) 0%,
+    rgba(41, 151, 255, 0.10) 45%,
+    transparent 75%) !important;
+  top: 28% !important;
+  left: 22% !important;
+  opacity: 0.55 !important;
+  animation: auroraThree 38s ease-in-out infinite alternate !important;
+}
+@keyframes auroraOne {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg);     opacity: 0.85; }
+  50%  { transform: translate(-6%, 5%) scale(1.10) rotate(4deg); opacity: 1; }
+  100% { transform: translate(5%, -4%) scale(0.96) rotate(-3deg); opacity: 0.75; }
+}
+@keyframes auroraTwo {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg);     opacity: 0.65; }
+  50%  { transform: translate(10%, -7%) scale(1.12) rotate(-5deg); opacity: 0.85; }
+  100% { transform: translate(-4%, 6%) scale(0.95) rotate(4deg); opacity: 0.70; }
+}
+@keyframes auroraThree {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.45; }
+  50%  { transform: translate(-8%, 10%) scale(1.15); opacity: 0.65; }
+  100% { transform: translate(6%, -5%) scale(0.92); opacity: 0.50; }
+}
+
+/* ── BEAM OF LIGHT (Apple Vision Pro style) ── */
+#screen-welcome .w-beam {
+  position: fixed !important;
+  top: -50vh !important;
+  right: -25vw !important;
+  width: 65vw !important;
+  height: 200vh !important;
+  pointer-events: none !important;
+  background: linear-gradient(180deg,
+    rgba(41, 151, 255, 0) 0%,
+    rgba(41, 151, 255, 0.16) 30%,
+    rgba(41, 151, 255, 0.26) 50%,
+    rgba(41, 151, 255, 0.10) 72%,
+    rgba(41, 151, 255, 0) 100%) !important;
+  transform: rotate(28deg) !important;
+  transform-origin: top right !important;
+  filter: blur(38px) !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.85 !important;
+  animation: beamSweepGentle 18s ease-in-out infinite alternate !important;
+}
+@keyframes beamSweepGentle {
+  0%   { transform: rotate(28deg) translateX(0);     opacity: 0.70; }
+  100% { transform: rotate(31deg) translateX(-3vw);  opacity: 1; }
+}
+
+/* ── Border glow (subtle) ── */
+#screen-welcome .w-border-glow {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(41, 151, 255, 0.05),
+    inset 0 0 80px rgba(41, 151, 255, 0.05),
+    inset 0 0 200px rgba(41, 151, 255, 0.025) !important;
+  animation: borderGlowSubtle 6s ease-in-out infinite !important;
+}
+@keyframes borderGlowSubtle {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(41,151,255,0.05),  inset 0 0 80px rgba(41,151,255,0.05),  inset 0 0 200px rgba(41,151,255,0.025); }
+  50%      { box-shadow: inset 0 0 0 1px rgba(41,151,255,0.10),  inset 0 0 100px rgba(41,151,255,0.10), inset 0 0 240px rgba(41,151,255,0.05); }
+}
+
+/* ── Mouse-follow spotlight (parallax glow) ── */
+#screen-welcome .w-spotlight {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  --sx: 50%;
+  --sy: 50%;
+  background: radial-gradient(circle 460px at var(--sx) var(--sy),
+    rgba(41, 151, 255, 0.10) 0%,
+    rgba(41, 151, 255, 0.04) 40%,
+    transparent 70%) !important;
+  transition: background 0.6s ease-out !important;
+}
+
+/* ── Faint glowing dust/noise texture ── */
+#screen-welcome .grain {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  opacity: 0.020 !important;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") !important;
+  background-size: 220px !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PREMIUM CARD: glassmorphism with refined border glow
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-card {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 440px !important;
+  padding: 24px !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.018) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(32px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.50),
+    0 0 0 1px rgba(255, 255, 255, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+  z-index: 50 !important;
+  animation: wCardRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.78s both !important;
+}
+#screen-welcome .w-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 24px !important;
+  right: 24px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.55), transparent) !important;
+}
+@keyframes wCardRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Input — refined with glow on focus */
+#screen-welcome .w-input {
+  width: 100% !important;
+  padding: 14px 18px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  background: rgba(0, 0, 0, 0.28) !important;
+  color: rgba(255, 255, 255, 0.96) !important;
+  font-family: var(--f-body, 'Inter', system-ui, sans-serif) !important;
+  font-size: 14.5px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  cursor: text !important;
+  pointer-events: auto !important;
+  transition: border-color .25s, background .25s, box-shadow .4s cubic-bezier(0.16,1,0.3,1) !important;
+}
+#screen-welcome .w-input::placeholder { color: rgba(220, 230, 250, 0.36) !important; }
+#screen-welcome .w-input:focus {
+  border-color: rgba(41, 151, 255, 0.65) !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  box-shadow:
+    0 0 0 3px rgba(41, 151, 255, 0.16),
+    0 0 28px rgba(41, 151, 255, 0.18),
+    0 0 70px rgba(41, 151, 255, 0.08) !important;
+  animation: inputGlowSubtle 2.6s ease-in-out infinite !important;
+}
+@keyframes inputGlowSubtle {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(41,151,255,0.16), 0 0 28px rgba(41,151,255,0.18), 0 0 70px rgba(41,151,255,0.08); }
+  50%      { box-shadow: 0 0 0 3px rgba(41,151,255,0.22), 0 0 36px rgba(41,151,255,0.24), 0 0 90px rgba(41,151,255,0.12); }
+}
+
+/* Button — premium with blue gradient on hover */
+#screen-welcome .w-btn {
+  width: 100% !important;
+  padding: 14px 22px !important;
+  border-radius: 12px !important;
+  font-family: var(--f-body, 'Inter', system-ui, sans-serif) !important;
+  font-weight: 600 !important;
+  font-size: 14.5px !important;
+  letter-spacing: -0.014em !important;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(240, 245, 255, 0.96) 100%) !important;
+  color: #000 !important;
+  border: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  pointer-events: auto !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+  transition:
+    color .3s cubic-bezier(0.16,1,0.3,1),
+    transform .25s cubic-bezier(0.16,1,0.3,1),
+    box-shadow .3s cubic-bezier(0.16,1,0.3,1) !important;
+}
+#screen-welcome .w-btn::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(135deg, rgba(41, 151, 255, 1) 0%, rgba(13, 112, 212, 1) 100%) !important;
+  opacity: 0 !important;
+  transition: opacity .35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 1 !important;
+}
+#screen-welcome .w-btn::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 60% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent) !important;
+  z-index: 1 !important;
+  transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+#screen-welcome .w-btn span,
+#screen-welcome .w-btn svg {
+  position: relative !important;
+  z-index: 2 !important;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+#screen-welcome .w-btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 14px 36px rgba(41, 151, 255, 0.45),
+    inset 0 1px 0 rgba(180, 215, 255, 0.30) !important;
+}
+#screen-welcome .w-btn:hover::before { opacity: 1 !important; }
+#screen-welcome .w-btn:hover::after { left: 130% !important; }
+#screen-welcome .w-btn:hover svg { transform: translateX(4px) !important; }
+#screen-welcome .w-btn:active { transform: scale(0.98) !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   STAGGER ENTRANCE — premium motion design
+   ════════════════════════════════════════════════════════════════ */
+#screen-welcome .w-eyebrow  { animation: wRise 0.70s cubic-bezier(0.16,1,0.3,1) 0.30s both !important; }
+#screen-welcome .w-headline { animation: wRise 0.85s cubic-bezier(0.16,1,0.3,1) 0.45s both !important; }
+#screen-welcome .w-sub      { animation: wRise 0.75s cubic-bezier(0.16,1,0.3,1) 0.62s both !important; }
+#screen-welcome .w-meta     { animation: wRise 0.70s cubic-bezier(0.16,1,0.3,1) 0.95s both !important; }
+@keyframes wRise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CINEMATIC EXIT
+   ════════════════════════════════════════════════════════════════ */
+#screen-welcome.hidden {
+  opacity: 0 !important;
+  transform: scale(1.08) !important;
+  filter: blur(18px) !important;
+  transition:
+    opacity 0.75s cubic-bezier(0.6, 0, 0.4, 1) !important,
+    transform 0.85s cubic-bezier(0.5, 0, 0.5, 1) !important,
+    filter 0.75s cubic-bezier(0.6, 0, 0.4, 1) !important;
+}
+#screen-welcome.hidden .w-center {
+  transform: scale(0.94) !important;
+  filter: blur(4px) !important;
+  opacity: 0 !important;
+  transition: all 0.55s cubic-bezier(0.5, 0, 0.7, 1) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE — simplified for performance
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  #screen-welcome .w-aurora-3 { display: none !important; }
+  #screen-welcome .w-beam { opacity: 0.5 !important; }
+  #screen-welcome::after { background-size: 60px 60px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #screen-welcome::before,
+  #screen-welcome::after,
+  #screen-welcome .w-aurora-blob,
+  #screen-welcome .w-beam,
+  #screen-welcome .w-border-glow,
+  #screen-welcome .w-eyebrow,
+  #screen-welcome .w-headline,
+  #screen-welcome .w-sub,
+  #screen-welcome .w-card,
+  #screen-welcome .w-meta,
+  #screen-welcome .w-input:focus {
+    animation: none !important;
+  }
+  #screen-welcome .w-spotlight { transition: none !important; }
+}
