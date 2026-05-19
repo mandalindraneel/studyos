@@ -8758,3 +8758,18 @@ select.input-field {
   #screen-welcome .w-meta { gap: 22px !important; }
   #screen-welcome .w-meta-sep { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   DASHBOARD TASK PRIORITY DOT · v20260546
+   ════════════════════════════════════════════════════════════════ */
+.task-mini-prio {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+.task-mini-item {
+  gap: 10px;
+}
