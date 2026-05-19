@@ -9279,3 +9279,464 @@ select.input-field {
   #screen-welcome .w-headline { font-size: clamp(40px, 11vw, 64px) !important; }
   #screen-welcome .w-meta-sep { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   WELCOME · v20260548 · EXACT MAIN APP DESIGN
+   Uses the literal same CSS variables, fonts, and patterns as
+   sidebar, dashboard, and other panes
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Background: literal copy of main app's body bg ── */
+#screen-welcome {
+  background: var(--bg) !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+#screen-welcome::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  background: var(--bg-glow) !important;
+  animation: nebulaShiftMain 28s ease-in-out infinite alternate !important;
+}
+@keyframes nebulaShiftMain {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(1%, -0.5%) scale(1.02); opacity: 0.92; }
+}
+
+/* Subtle grid like .pane-bg patterns */
+#screen-welcome::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+  background-image:
+    linear-gradient(rgba(41, 151, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 151, 255, 0.04) 1px, transparent 1px) !important;
+  background-size: 80px 80px !important;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(0,0,0,1) 0%, transparent 80%) !important;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(0,0,0,1) 0%, transparent 80%) !important;
+  animation: gridBreatheMain 9s ease-in-out infinite !important;
+}
+@keyframes gridBreatheMain {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+/* Hide all the extra effects - the main app doesn't have them */
+#screen-welcome .w-aurora,
+#screen-welcome .w-shapes,
+#screen-welcome .w-shooting-canvas,
+#screen-welcome .w-beam,
+#screen-welcome .w-border-glow,
+#screen-welcome .w-spotlight,
+#screen-welcome .grain {
+  display: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TOPBAR — mirrors .sidebar header structure
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-topbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: var(--topbar-h, 64px) !important;
+  background: var(--topbar-bg, rgba(0, 0, 8, 0.72)) !important;
+  backdrop-filter: saturate(180%) blur(40px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(40px) !important;
+  border-bottom: 1px solid var(--bd-1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 clamp(20px, 3vw, 36px) !important;
+  z-index: 30 !important;
+}
+#screen-welcome .w-topbar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bd-2), transparent);
+  pointer-events: none;
+}
+
+/* Brand mark — copies .sb-head structure */
+#screen-welcome .w-brand-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+#screen-welcome .w-mark {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 11px !important;
+  background: var(--tx-1) !important;
+  color: var(--bg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  transition: transform .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) !important;
+}
+#screen-welcome .w-mark:hover { transform: rotate(-8deg) scale(1.05) !important; }
+#screen-welcome .w-mark svg { width: 18px !important; height: 18px !important; }
+
+#screen-welcome .w-brand-info {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+}
+#screen-welcome .w-brand {
+  font-family: var(--f-display) !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  color: var(--tx-1) !important;
+  letter-spacing: -0.028em !important;
+  line-height: 1.1 !important;
+}
+#screen-welcome .w-brand-sub {
+  font-family: var(--f-mono) !important;
+  font-size: 9.5px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--tx-4) !important;
+  margin-top: 3px !important;
+}
+
+/* Clock pill — same as topbar .tb-clock pattern */
+#screen-welcome .w-clock {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 14px !important;
+  border-radius: 100px !important;
+  border: 1px solid var(--bd-2) !important;
+  background: var(--bg-elev-2) !important;
+  font-family: var(--f-mono) !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--tx-2) !important;
+}
+#screen-welcome .w-clock svg {
+  color: var(--blue) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CENTER CONTENT
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-center {
+  position: relative !important;
+  z-index: 10 !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  padding: clamp(110px, 14vh, 160px) clamp(20px, 4vw, 32px) clamp(60px, 8vh, 100px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-height: 100vh !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   EYEBROW — same pattern as .card-label-meta and AI badges
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 7px 14px 7px 11px !important;
+  border-radius: 100px !important;
+  border: 1px solid var(--blue-bd) !important;
+  background: var(--blue-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  margin-bottom: clamp(32px, 4.5vh, 48px) !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+#screen-welcome .w-eyebrow::before { display: none !important; }
+#screen-welcome .w-eyebrow-line {
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--green) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 10px rgba(48, 209, 88, 0.6) !important;
+  flex-shrink: 0 !important;
+}
+#screen-welcome .w-eyebrow-text {
+  font-family: var(--f-mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--tx-1) !important;
+  text-shadow: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HEADLINE — identical to .pane-title
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-headline {
+  font-family: var(--f-display) !important;
+  font-size: clamp(48px, 6.5vw, 84px) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  letter-spacing: -0.045em !important;
+  color: var(--tx-1) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 clamp(16px, 2.5vh, 24px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+#screen-welcome .w-h-line {
+  display: block !important;
+  font-family: var(--f-display) !important;
+  font-style: normal !important;
+}
+#screen-welcome .w-h-1 {
+  font-weight: 700 !important;
+  font-style: normal !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--tx-1) !important;
+  color: var(--tx-1) !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+#screen-welcome .w-h-intention {
+  display: inline !important;
+  font-family: var(--f-display) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  background: linear-gradient(135deg, var(--blue) 0%, #5ac8fa 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+#screen-welcome .w-h-period {
+  display: inline !important;
+  font-family: var(--f-display) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  background: linear-gradient(135deg, var(--blue) 0%, #5ac8fa 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+#screen-welcome .w-h-2 { display: none !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   SUBTITLE — identical to .pane-sub
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-sub {
+  font-family: var(--f-body) !important;
+  font-size: clamp(14.5px, 1.15vw, 16px) !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: -0.010em !important;
+  color: var(--tx-2) !important;
+  max-width: 540px !important;
+  margin: 0 0 clamp(32px, 4.5vh, 44px) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CARD — identical .glass-card
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-card {
+  width: 100% !important;
+  max-width: 440px !important;
+  padding: var(--sp-7, 24px) !important;
+  border-radius: var(--r-7, 16px) !important;
+  background: var(--bg-elev-1) !important;
+  border: 1px solid var(--bd-1) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  transform: none !important;
+  animation: none !important;
+  position: relative !important;
+}
+#screen-welcome .w-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, var(--blue-bd), transparent) !important;
+}
+
+/* Card label same as .card-label */
+#screen-welcome .w-card-label {
+  display: flex !important;
+  align-items: center !important;
+  font-family: var(--f-mono) !important;
+  font-size: 10.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--tx-3) !important;
+  margin: 0 0 var(--sp-5, 16px) !important;
+  padding-bottom: var(--sp-4, 12px) !important;
+  border-bottom: 1px solid var(--bd-1) !important;
+}
+
+/* Input — identical to .input-field */
+#screen-welcome .w-input {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border-radius: var(--r-6, 12px) !important;
+  border: 1px solid var(--bd-2) !important;
+  background: var(--bg-elev-2) !important;
+  color: var(--tx-1) !important;
+  font-family: var(--f-body) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  cursor: text !important;
+  pointer-events: auto !important;
+  transition: border-color .22s, background .22s, box-shadow .22s !important;
+  animation: none !important;
+}
+#screen-welcome .w-input::placeholder {
+  color: var(--tx-4) !important;
+}
+#screen-welcome .w-input:focus {
+  border-color: var(--blue) !important;
+  background: var(--bg-elev-3) !important;
+  box-shadow: 0 0 0 3px rgba(41, 151, 255, 0.14) !important;
+  animation: none !important;
+}
+
+/* Button — identical to .btn-primary */
+#screen-welcome .w-btn {
+  width: 100% !important;
+  padding: 12px 22px !important;
+  border-radius: var(--r-6, 12px) !important;
+  font-family: var(--f-body) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: -0.010em !important;
+  background: var(--tx-1) !important;
+  color: var(--bg) !important;
+  border: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+  transition:
+    background .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+    color .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+    transform .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+    box-shadow .25s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) !important;
+}
+#screen-welcome .w-btn::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(135deg, var(--blue) 0%, #0d70d4 100%) !important;
+  opacity: 0 !important;
+  transition: opacity .25s ease !important;
+  z-index: 1 !important;
+}
+#screen-welcome .w-btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 12px 32px rgba(41, 151, 255, 0.40),
+    inset 0 1px 0 rgba(180, 215, 255, 0.30) !important;
+}
+#screen-welcome .w-btn:hover::before { opacity: 1 !important; }
+#screen-welcome .w-btn:active { transform: scale(0.98) !important; }
+#screen-welcome .w-btn span,
+#screen-welcome .w-btn svg {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   META — uses same .stat-num / .stat-label tokens
+   ════════════════════════════════════════════════════════════════ */
+
+#screen-welcome .w-meta {
+  margin: clamp(36px, 5vh, 56px) auto 0 !important;
+  gap: clamp(32px, 5vw, 56px) !important;
+}
+#screen-welcome .w-meta-num {
+  font-family: var(--f-display) !important;
+  font-weight: 700 !important;
+  font-size: clamp(22px, 2.2vw, 28px) !important;
+  letter-spacing: -0.040em !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--tx-1) !important;
+  color: var(--tx-1) !important;
+}
+#screen-welcome .w-meta-lbl {
+  font-family: var(--f-mono) !important;
+  font-size: 9.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.20em !important;
+  text-transform: uppercase !important;
+  color: var(--tx-3) !important;
+}
+#screen-welcome .w-meta-sep {
+  background: linear-gradient(180deg, transparent, var(--bd-2), transparent) !important;
+  width: 1px !important;
+  height: 32px !important;
+}
+
+/* ── Responsive ── */
+@media (max-height: 800px) {
+  #screen-welcome .w-headline { font-size: clamp(40px, 6.4vh, 70px) !important; }
+  #screen-welcome .w-sub { margin-bottom: 26px !important; }
+  #screen-welcome .w-meta { margin-top: 32px !important; }
+  #screen-welcome .w-center { padding-top: 110px !important; padding-bottom: 70px !important; }
+}
+@media (max-height: 700px) {
+  #screen-welcome .w-headline { font-size: clamp(34px, 5.5vh, 56px) !important; margin-bottom: 14px !important; }
+  #screen-welcome .w-eyebrow { margin-bottom: 18px !important; }
+  #screen-welcome .w-sub { margin-bottom: 18px !important; font-size: 13.5px !important; }
+  #screen-welcome .w-meta { margin-top: 22px !important; }
+}
+@media (max-width: 640px) {
+  #screen-welcome .w-topbar { padding: 0 16px !important; height: 56px !important; }
+  #screen-welcome .w-mark { width: 32px !important; height: 32px !important; border-radius: 9px !important; }
+  #screen-welcome .w-mark svg { width: 16px !important; height: 16px !important; }
+  #screen-welcome .w-brand { font-size: 16px !important; }
+  #screen-welcome .w-brand-sub { font-size: 8.5px !important; }
+  #screen-welcome .w-clock { padding: 6px 12px !important; font-size: 10.5px !important; }
+  #screen-welcome .w-center { padding: 90px 18px 60px !important; }
+  #screen-welcome .w-headline { font-size: clamp(36px, 11vw, 56px) !important; }
+  #screen-welcome .w-meta-sep { display: none !important; }
+}
