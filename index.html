@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260550">
+<link rel="stylesheet" href="styles.css?v=20260551">
 </head>
 <body>
 
@@ -23,85 +23,85 @@
 <!-- ══════════════════════════ WELCOME ══════════════════════════ -->
 <div class="screen" id="screen-welcome">
 
-  <!-- Atmospheric layers -->
+  <!-- Atmospheric background: aurora lights + mesh -->
   <div class="lo-bg" aria-hidden="true">
-    <div class="lo-bg-aurora lo-bg-aurora-1"></div>
-    <div class="lo-bg-aurora lo-bg-aurora-2"></div>
-    <div class="lo-bg-grid"></div>
-    <div class="lo-bg-grain"></div>
+    <div class="lo-aurora lo-aurora-1"></div>
+    <div class="lo-aurora lo-aurora-2"></div>
+    <div class="lo-aurora lo-aurora-3"></div>
+    <div class="lo-mesh"></div>
+    <div class="lo-grid"></div>
+    <div class="lo-grain"></div>
   </div>
   <div class="lo-spotlight" aria-hidden="true"></div>
 
-  <!-- Single centered card -->
+  <!-- Top-left logo (no header bar) -->
+  <div class="lo-logo" aria-label="StudyOS">
+    <div class="lo-logo-mark">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 4 L4 10 L16 16 L28 10 Z"/>
+        <path d="M4 16 L16 22 L28 16"/>
+        <path d="M4 22 L16 28 L28 22"/>
+      </svg>
+    </div>
+    <div class="lo-logo-text">
+      <span class="lo-logo-name">StudyOS</span>
+      <span class="lo-logo-sub">Academic Workspace</span>
+    </div>
+  </div>
+
+  <!-- Centered content (no card wrapper) -->
   <main class="lo-stage" role="main">
-    <article class="lo-card glass-card">
 
-      <header class="lo-card-head">
-        <div class="lo-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 4 L4 10 L16 16 L28 10 Z"/>
-            <path d="M4 16 L16 22 L28 16"/>
-            <path d="M4 22 L16 28 L28 22"/>
-          </svg>
-        </div>
-        <div class="lo-brand">
-          <span class="lo-brand-name">StudyOS</span>
-          <span class="lo-brand-sub">Academic Workspace</span>
-        </div>
-      </header>
+    <span class="lo-eyebrow">
+      <span class="lo-eyebrow-dot"></span>
+      <span class="lo-eyebrow-text">ML-Powered Academic Intelligence</span>
+    </span>
 
-      <div class="lo-hero">
-        <span class="lo-eyebrow">
-          <span class="lo-eyebrow-dot"></span>
-          <span>ML-Powered Academic Intelligence</span>
-        </span>
-        <h1 class="lo-title">Study with <span class="lo-title-accent">intention</span>.</h1>
-        <p class="lo-sub">A focused workspace where machine learning meets deep study. Track progress, predict outcomes, build the habits that compound.</p>
+    <h1 class="lo-title">Study with <span class="lo-title-accent">intention</span><span class="lo-title-period">.</span></h1>
+
+    <p class="lo-sub">An academic workspace where machine learning meets focused study. Track progress, predict outcomes, and build the habits that compound.</p>
+
+    <form class="lo-form" id="loForm" autocomplete="off" novalidate>
+      <div class="lo-input-wrap">
+        <input
+          class="lo-input"
+          id="wName"
+          type="text"
+          placeholder="What should we call you?"
+          maxlength="32"
+          autocomplete="given-name"
+          spellcheck="false"
+          aria-label="Your name"
+        >
       </div>
+      <button type="button" class="lo-cta" id="wBtn" aria-label="Enter Workspace">
+        <span>Enter Workspace</span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </button>
+    </form>
 
-      <form class="lo-form" id="loForm" autocomplete="off" novalidate>
-        <label class="lo-field">
-          <span class="lo-field-label">Your name</span>
-          <input
-            class="lo-input input-field"
-            id="wName"
-            type="text"
-            placeholder="What should we call you?"
-            maxlength="32"
-            autocomplete="given-name"
-            spellcheck="false"
-            aria-label="Your name"
-          >
-        </label>
-
-        <button type="button" class="lo-cta btn-primary" id="wBtn" aria-label="Enter Workspace">
-          <span class="lo-cta-text">Enter Workspace</span>
-          <svg class="lo-cta-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
-        </button>
-      </form>
-
-      <div class="lo-foot">
-        <div class="lo-stat">
-          <span class="lo-stat-num">16</span>
-          <span class="lo-stat-lbl">Subjects</span>
-        </div>
-        <div class="lo-foot-sep"></div>
-        <div class="lo-stat">
-          <span class="lo-stat-num">∞</span>
-          <span class="lo-stat-lbl">Questions</span>
-        </div>
-        <div class="lo-foot-sep"></div>
-        <div class="lo-stat">
-          <span class="lo-stat-num">100%</span>
-          <span class="lo-stat-lbl">Private</span>
-        </div>
-      </div>
-
-    </article>
   </main>
+
+  <!-- Bottom stats: AI · Private · Free -->
+  <div class="lo-stats" aria-hidden="true">
+    <div class="lo-stat">
+      <span class="lo-stat-num">AI</span>
+      <span class="lo-stat-lbl">Integrated</span>
+    </div>
+    <div class="lo-stat-sep"></div>
+    <div class="lo-stat">
+      <span class="lo-stat-num">100%</span>
+      <span class="lo-stat-lbl">Private</span>
+    </div>
+    <div class="lo-stat-sep"></div>
+    <div class="lo-stat">
+      <span class="lo-stat-num">Free</span>
+      <span class="lo-stat-lbl">To Use</span>
+    </div>
+  </div>
 
 </div>
 
@@ -785,7 +785,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260550"></script>
+<script src="script.js?v=20260551"></script>
 
 </body>
 </html>
