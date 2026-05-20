@@ -8433,3 +8433,56 @@ select.input-field {
 @media (max-height: 720px) {
   .lo-title { font-size: clamp(34px, 6.5vh, 54px); }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   SELECT DROPDOWN FIX · v20260553
+   - Force no-repeat chevron
+   - Light theme: proper dark text on white background
+   - Override any stray repeating pattern
+   ════════════════════════════════════════════════════════════════════ */
+
+select.input-field,
+select.select-sm,
+select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+  background-size: 12px 8px !important;
+  padding-right: 40px !important;
+}
+
+/* Dark theme chevron */
+select.input-field,
+select.select-sm {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23a8b8d8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-color: var(--input-bg) !important;
+  color: var(--tx-1) !important;
+}
+
+/* Light theme — dark chevron + dark text + light bg */
+[data-theme="light"] select.input-field,
+[data-theme="light"] select.select-sm,
+[data-theme="light"] select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23636366' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-color: rgba(0, 0, 0, 0.025) !important;
+  color: #1d1d1f !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+}
+
+[data-theme="light"] select.input-field:focus,
+[data-theme="light"] select.select-sm:focus {
+  background-color: rgba(0, 113, 227, 0.04) !important;
+  border-color: var(--blue) !important;
+}
+
+/* Options inside the dropdown */
+select option {
+  background-color: #0a0e1c !important;
+  color: #f5f5f7 !important;
+}
+[data-theme="light"] select option {
+  background-color: #ffffff !important;
+  color: #1d1d1f !important;
+}
