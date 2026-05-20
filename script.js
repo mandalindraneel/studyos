@@ -1,6 +1,6 @@
 'use strict';
 /* ══════════════════════════════════════════════════════
-   STUDYOS · MMXXVI
+   STUDYOS
    © Indraneel Mandal
    ML-powered academic workspace
 ══════════════════════════════════════════════════════ */
@@ -210,7 +210,7 @@ function nav(sec) {
     }
   } catch (e) { /* no-op */ }
 
-  if (window.innerWidth <= 700) { $('sidebar').classList.remove('open'); $('mobOverlay').style.display = 'none'; }
+  if (window.innerWidth <= 700) { $('sidebar').classList.remove('open'); $('mobOverlay').style.display = 'none'; document.body.classList.remove('sidebar-open'); }
   if (sec === 'dashboard') renderDashboard();
   if (sec === 'studyplan') { renderTasks(); renderSchedule(); }
   if (sec === 'goals') { renderGoals(); renderPerfDashboard(); }
@@ -222,8 +222,59 @@ function nav(sec) {
 }
 
 document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListener('click', () => nav(i.dataset.pane)));
-$('mobToggle').onclick = () => { const o = !$('sidebar').classList.contains('open'); $('sidebar').classList.toggle('open', o); $('mobOverlay').style.display = o ? 'block' : 'none'; };
-$('mobOverlay').onclick = () => { $('sidebar').classList.remove('open'); $('mobOverlay').style.display = 'none'; };
+// ── Mobile sidebar — bulletproof handlers ──
+(function mobileSidebar() {
+  const toggle = document.getElementById('mobToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('mobOverlay');
+  if (!toggle || !sidebar || !overlay) return;
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.style.display = 'block';
+    document.body.classList.add('sidebar-open');
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.style.display = 'none';
+    document.body.classList.remove('sidebar-open');
+  }
+  function toggleSidebar(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (sidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+  }
+
+  // Bind both click and touchend for max compatibility
+  toggle.addEventListener('click', toggleSidebar);
+  toggle.addEventListener('touchend', toggleSidebar, { passive: false });
+  // Also expose as .onclick fallback
+  toggle.onclick = toggleSidebar;
+
+  // Close on overlay tap
+  overlay.addEventListener('click', closeSidebar);
+  overlay.addEventListener('touchend', closeSidebar, { passive: true });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+  });
+
+  // Close when any nav item is tapped
+  sidebar.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 700) setTimeout(closeSidebar, 50);
+    });
+  });
+
+  // Close on window resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 700 && sidebar.classList.contains('open')) closeSidebar();
+  });
+
+  // Make sure starting state is closed on mobile
+  if (window.innerWidth <= 700) closeSidebar();
+})();
 
 /* ── MODALS ──────────────────────────────────────── */
 function openModal(id) { $(id).classList.add('on'); }
@@ -488,18 +539,73 @@ function renderGoals() {
 }
 function openGoal(slot) { editGoalSlot = slot; $('goalModalTitle').textContent = `New Goal — Slot ${slot + 1}`; $('goalName').value = ''; $('goalCurrent').value = ''; $('goalTarget').value = '100'; $('goalColor').value = 'blue'; openModal('goalModal'); }
 function editGoal(slot) { editGoalSlot = slot; const g = st.goals[slot]; $('goalModalTitle').textContent = `Edit — ${g.subject}`; $('goalName').value = g.subject; $('goalCurrent').value = g.current; $('goalTarget').value = g.target; $('goalColor').value = g.color || 'blue'; openModal('goalModal'); }
-function pinGoal(slot) { if (st.pinnedGoal === slot) { sv('pinnedGoal', null); toast('Goal unpinned', 'y'); } else { sv('pinnedGoal', slot); toast(`${st.goals[slot].subject} pinned`, 'g'); } renderGoals(); }
+function pinGoal(slot) {
+  const arr = [...(st.goals || [])];
+  while (arr.length < 4) arr.push(null);
+  if (st.pinnedGoal === slot) {
+    // Unpinning
+    sv('pinnedGoal', null);
+    toast('Goal unpinned', 'y');
+  } else {
+    // Pinning: move goal to slot 0 and track new pinned index
+    if (slot !== 0 && arr[slot]) {
+      const pinnedGoal = arr[slot];
+      const displaced = arr[0];
+      arr[0] = pinnedGoal;
+      arr[slot] = displaced;
+      sv('goals', arr);
+      sv('pinnedGoal', 0);
+    } else {
+      sv('pinnedGoal', slot);
+    }
+    toast(`${arr[0].subject} pinned to top`, 'g');
+  }
+  renderGoals();
+  updateStatsUI();
+}
 function delGoal(slot) { const arr = [...(st.goals || [])]; while (arr.length < 4) arr.push(null); arr[slot] = null; sv('goals', arr); if (st.pinnedGoal === slot) sv('pinnedGoal', null); renderGoals(); updateStatsUI(); toast('Goal removed', 'y'); }
-$('saveGoalBtn').onclick = () => {
-  const name = $('goalName').value.trim();
-  if (!name) { toast('Please enter a name', 'r'); return; }
-  const arr = [...(st.goals || [])]; while (arr.length < 4) arr.push(null);
-  const isNew = !arr[editGoalSlot];
-  arr[editGoalSlot] = { id: arr[editGoalSlot]?.id || uid(), subject: name, current: +$('goalCurrent').value || 0, target: +$('goalTarget').value || 100, color: $('goalColor').value };
-  sv('goals', arr); closeModal('goalModal'); renderGoals(); updateStatsUI();
-  if (Math.round(arr[editGoalSlot].current / arr[editGoalSlot].target * 100) >= 100) { confetti(); toast('Goal achieved', 'g'); }
-  else toast(isNew ? 'Goal added' : 'Goal updated', 'g');
-};
+(function bindGoalSave() {
+  const btn = $('saveGoalBtn');
+  if (!btn) { setTimeout(bindGoalSave, 100); return; }
+  let saving = false;
+  function handler(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (saving) return;
+    saving = true;
+    try {
+      const name = ($('goalName')?.value || '').trim();
+      if (!name) { toast('Please enter a name', 'r'); saving = false; return; }
+      if (editGoalSlot < 0) { saving = false; return; }
+      const arr = [...(st.goals || [])];
+      while (arr.length < 4) arr.push(null);
+      const isNew = !arr[editGoalSlot];
+      arr[editGoalSlot] = {
+        id: arr[editGoalSlot]?.id || uid(),
+        subject: name,
+        current: +($('goalCurrent')?.value || 0),
+        target: +($('goalTarget')?.value || 100),
+        color: $('goalColor')?.value || 'blue'
+      };
+      sv('goals', arr);
+      closeModal('goalModal');
+      renderGoals();
+      updateStatsUI();
+      const pct = Math.round(arr[editGoalSlot].current / arr[editGoalSlot].target * 100);
+      if (pct >= 100) { try { confetti(); } catch {} toast('Goal achieved', 'g'); }
+      else toast(isNew ? 'Goal added' : 'Goal updated', 'g');
+    } catch (err) {
+      console.error('Goal save error:', err);
+      toast('Could not save goal', 'r');
+    }
+    setTimeout(() => { saving = false; }, 300);
+  }
+  btn.onclick = handler;
+  btn.addEventListener('click', handler);
+  const goalNameInp = $('goalName');
+  if (goalNameInp) {
+    goalNameInp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); handler(); } });
+  }
+})();
 
 /* ══════════════════════════════════════════════════
    PERFORMANCE BREAKDOWN
@@ -1100,14 +1206,31 @@ function initNoteEditor() {
     setTimeout(() => $('neBody').focus(), 100);
   };
   $('neCancelBtn').onclick = e => { e.preventDefault(); $('noteEditorWrap').style.display = 'none'; noteEditIdx = -1; };
-  $('neToolbar').addEventListener('mousedown', e => e.preventDefault());
+  // Prevent toolbar mousedown from stealing selection
+  $('neToolbar').addEventListener('mousedown', e => { e.preventDefault(); e.stopPropagation(); });
+  // Also force all toolbar buttons to type="button" (so they don't submit forms)
+  $('neToolbar').querySelectorAll('button').forEach(b => { if (!b.type) b.type = 'button'; });
+
   $('neToolbar').addEventListener('click', e => {
     e.preventDefault();
+    e.stopPropagation();
     const btn = e.target.closest('.ne-tool[data-cmd]');
     const sw = e.target.closest('.ne-swatch');
-    $('neBody').focus();
-    if (btn) { document.execCommand(btn.dataset.cmd, false, btn.dataset.val || null); updateNeToolbar(); }
-    if (sw) { document.execCommand('foreColor', false, sw.dataset.color); }
+    if (!btn && !sw) return;
+    // Ensure the editor has focus AND retain current selection
+    const body = $('neBody');
+    if (document.activeElement !== body) body.focus();
+    try {
+      if (btn) {
+        document.execCommand(btn.dataset.cmd, false, btn.dataset.val || null);
+        updateNeToolbar();
+      }
+      if (sw) {
+        document.execCommand('foreColor', false, sw.dataset.color);
+      }
+    } catch (err) {
+      console.error('Note toolbar error:', err);
+    }
   });
   $('neBody').addEventListener('keyup', updateNeToolbar);
   $('neBody').addEventListener('mouseup', updateNeToolbar);
@@ -1165,6 +1288,8 @@ function renderNotes(f) {
   if (noteSortMode === 'newest') arr.sort((a, b) => new Date(b.date) - new Date(a.date));
   else if (noteSortMode === 'oldest') arr.sort((a, b) => new Date(a.date) - new Date(b.date));
   else if (noteSortMode === 'az') arr.sort((a, b) => (a.title || a.subject || '').localeCompare(b.title || b.subject || ''));
+  // Pinned notes always at top
+  arr.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
   if (!arr.length) {
     el.innerHTML = `<div style="column-span:all;text-align:center;padding:44px 20px;color:var(--t4);font-family:var(--font);font-style:italic;font-size:.88rem">${noteSearchQ ? 'No results found.' : 'No notes yet. Click "New Note" to begin.'}</div>`;
     return;
@@ -1197,6 +1322,27 @@ function renderNotes(f) {
 function pinNote(i) { const arr = [...st.notes]; arr[i] = { ...arr[i], pinned: !arr[i].pinned }; sv('notes', arr); toast(arr[i].pinned ? 'Pinned' : 'Unpinned', 'y'); renderNotes(); }
 function editNote(i) { const n = st.notes[i]; if (!n) return; noteEditIdx = i; $('neSubject').value = n.subject || ''; $('neTitle').value = n.title || ''; $('neBody').innerHTML = n.content || ''; $('noteEditorWrap').style.display = 'block'; $('neBody').focus(); }
 function delNote(i) { if (!confirm('Delete this note?')) return; sv('notes', st.notes.filter((_, j) => j !== i)); renderNotes(); updateStatsUI(); }
+
+function delPerf(id) {
+  if (!confirm('Delete this performance entry?')) return;
+  sv('perfHist', st.perfHist.filter(h => h.id !== id));
+  if (typeof renderDashScores === 'function') renderDashScores();
+  if (typeof renderScoreList === 'function') renderScoreList();
+  if (typeof renderGoals === 'function') renderGoals();
+  if (typeof renderPerfReport === 'function') renderPerfReport();
+  if (typeof updateStatsUI === 'function') updateStatsUI();
+  toast('Entry deleted', 'y');
+}
+window.delPerf = delPerf;
+window.pinNote = pinNote;
+window.delNote = delNote;
+window.editNote = editNote;
+window.viewNote = (typeof viewNote === 'function' ? viewNote : function(){});
+window.exportNote = (typeof exportNote === 'function' ? exportNote : function(){});
+window.pinGoal = pinGoal;
+window.delGoal = delGoal;
+window.editGoal = editGoal;
+window.openGoal = openGoal;
 function exportNote(i) {
   const n = st.notes[i]; if (!n) return;
   const text = `${n.title || '(Untitled)'}\n${n.subject || 'General'} · ${new Date(n.date).toLocaleDateString()}\n${'─'.repeat(40)}\n\n${(n.content || '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')}`;
@@ -3115,60 +3261,91 @@ const REFERENCE_LINKS = (function() {
 
 
 // Map level codes to display labels and difficulty bands
-const LEVEL_INFO = {
-  PreK: { label: 'Pre-Kindergarten', band: 'foundation', count: 8 },
-  K:    { label: 'Kindergarten',     band: 'foundation', count: 8 },
-  '1':  { label: 'Grade 1',  band: 'foundation', count: 10 },
-  '2':  { label: 'Grade 2',  band: 'foundation', count: 10 },
-  '3':  { label: 'Grade 3',  band: 'elementary', count: 10 },
-  '4':  { label: 'Grade 4',  band: 'elementary', count: 10 },
-  '5':  { label: 'Grade 5',  band: 'elementary', count: 10 },
-  '6':  { label: 'Grade 6',  band: 'middle', count: 10 },
-  '7':  { label: 'Grade 7',  band: 'middle', count: 10 },
-  '8':  { label: 'Grade 8',  band: 'middle', count: 10 },
-  '9':  { label: 'Grade 9',  band: 'secondary', count: 10 },
-  '10': { label: 'Grade 10', band: 'secondary', count: 10 },
-  '11': { label: 'Grade 11', band: 'senior', count: 10 },
-  '12': { label: 'Grade 12', band: 'senior', count: 10 },
-  SAT:     { label: 'SAT Prep', band: 'senior', count: 12 },
-  AP:      { label: 'AP Level', band: 'senior', count: 12 },
-  College: { label: 'College',  band: 'higher', count: 12 }
+// ── DIFFICULTY MAPPING ──
+// Topics tagged by difficulty. Anything not listed defaults to 'medium'.
+const DIFFICULTY_MAP = {
+  easy: new Set([
+    // Math
+    'Arithmetic','Basic Operations','Fractions','Decimals','Percentages',
+    'Ratios','Number Patterns','Place Value','Simple Geometry','Perimeter',
+    'Area Basics','Time','Money','Linear Equations','Mean Median Mode',
+    // Physics
+    'Units','Measurement','Forces Basic','Simple Machines','States of Matter',
+    'Reflection','Sound Basics','Heat Basics','Energy Forms',
+    // Chemistry
+    'Elements','Mixtures','Acids and Bases','Periodic Table Basics',
+    'Physical Changes','Chemical Symbols',
+    // Biology
+    'Cell Basics','Plant Parts','Body Systems Basic','Food Chain',
+    'Habitats','Classification Basics','Plant Growth',
+    // English
+    'Parts of Speech','Vocabulary','Synonyms','Antonyms','Spelling',
+    'Punctuation','Sentence Structure','Reading Basic',
+    // CS
+    'Variables','Data Types','Print Statements','Comments','Basic Loops',
+    // History/Geography
+    'Continents','Oceans','Capitals','Famous People','Time Periods',
+    'Maps Basic','Climate Basics'
+  ]),
+  hard: new Set([
+    // Math
+    'Calculus','Differentiation','Integration','Logarithms','Trigonometry',
+    'Linear Systems','Matrices','Complex Numbers','Vectors',
+    'Probability Advanced','Statistics Advanced','Sequences and Series',
+    'Limits','Derivatives','Integrals','Differential Equations',
+    // Physics
+    'Modern Physics','Quantum','Relativity','Electromagnetism',
+    'Thermodynamics','Oscillations','Waves Advanced','Optics Advanced',
+    'Nuclear Physics','Particle Physics',
+    // Chemistry
+    'Organic','Equilibrium','Electrochemistry','Thermochemistry',
+    'Kinetics','Coordination Chemistry','Spectroscopy','Polymers',
+    // Biology
+    'Molecular Biology','Biochemistry','Genetics Advanced','Biotechnology',
+    'Evolution Advanced','Immunology','Neurobiology',
+    // CS
+    'AI','OOP','Algorithms','Compilers','Operating Systems',
+    'Data Structures Advanced','Computational Complexity','Cryptography',
+    'Machine Learning','Distributed Systems',
+    // History/Philosophy/Econ
+    'Cold War','World War I','World War II','Renaissance',
+    'Existentialism','Metaphysics','Epistemology','Inferential',
+    'Macroeconomics Advanced','Game Theory','Econometrics',
+    'Postmodernism','Phenomenology'
+  ])
 };
 
-function levelInfo(level) {
-  return LEVEL_INFO[level] || { label: 'Class ' + level, band: 'secondary', count: 10 };
+function classifyDifficulty(topic) {
+  if (!topic) return 'medium';
+  if (DIFFICULTY_MAP.easy.has(topic)) return 'easy';
+  if (DIFFICULTY_MAP.hard.has(topic)) return 'hard';
+  // Heuristic checks for compound topics
+  const t = topic.toLowerCase();
+  if (t.includes('advanced') || t.includes('calc') || t.includes('quantum') ||
+      t.includes('molecular') || t.includes('logarithm') || t.includes('trig')) return 'hard';
+  if (t.includes('basic') || t.includes('introduction') || t.includes('beginner')) return 'easy';
+  return 'medium';
 }
 
-// Filter / curate questions based on band
+function levelInfo(level) {
+  const labels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+  const counts = { easy: 12, medium: 12, hard: 12 };
+  return { label: labels[level] || 'Medium', difficulty: level || 'medium', count: counts[level] || 12 };
+}
+
+// Strict difficulty filter: easy → only easy, medium → only medium, hard → only hard
 function selectByLevel(bank, level) {
   const info = levelInfo(level);
   if (!bank || !bank.length) return [];
-
-  // Foundation/elementary bands need simpler content — filter out advanced topics
-  const advancedTopics = ['Calculus','Logarithms','Trigonometry','Linear Systems','Quadratic Equations','Modern Physics','Electromagnetism','Thermodynamics','Oscillations','Organic','Equilibrium','Electrochemistry','Molecular Biology','Biochemistry','AI','OOP','Algorithms','Compilers','Operating Systems','Cold War','World War I','World War II','Renaissance','Existentialism','Metaphysics','Epistemology','Inferential'];
-  const middleTopics = ['Modern Physics','Calculus','Electrochemistry','Equilibrium','Molecular Biology','OOP','Operating Systems','Existentialism'];
-
-  let pool;
-  if (info.band === 'foundation' || info.band === 'elementary') {
-    pool = bank.filter(q => !advancedTopics.includes(q.topic || ''));
-    // For very young classes, even further restrict
-    if (info.band === 'foundation') {
-      pool = pool.filter(q => {
-        const t = (q.topic || '').toLowerCase();
-        return !t.includes('advanced') && !t.includes('logarithm') && !t.includes('trig') && !t.includes('calc');
-      });
-    }
-  } else if (info.band === 'middle') {
-    pool = bank.filter(q => !middleTopics.includes(q.topic || ''));
-  } else if (info.band === 'higher') {
-    // College + AP: prefer advanced topics
-    const advanced = bank.filter(q => advancedTopics.includes(q.topic || ''));
-    pool = advanced.length >= info.count ? advanced : bank;
-  } else {
-    pool = bank;
+  const want = info.difficulty;
+  let pool = bank.filter(q => classifyDifficulty(q.topic) === want);
+  // Safety: if no exact-difficulty questions exist in bank, fallback to widest matching pool
+  if (!pool.length) {
+    if (want === 'easy') pool = bank.filter(q => classifyDifficulty(q.topic) !== 'hard');
+    else if (want === 'hard') pool = bank.filter(q => classifyDifficulty(q.topic) !== 'easy');
+    else pool = bank;
   }
-
-  if (!pool.length) pool = bank; // fallback if filter empties it
+  if (!pool.length) pool = bank;
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, info.count);
 }
