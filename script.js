@@ -3625,73 +3625,7 @@ function setAmb(type, btn) {
 /* ══════════════════════════════════════════════════
    WELCOME CANVAS — ambient orbs
 ══════════════════════════════════════════════════ */
-function initWCanvas() {
-  const cv = document.getElementById('wCanvas');
-  if (!cv) return;
-  const ctx = cv.getContext('2d');
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let W = 0, H = 0;
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function resize() {
-    const r = cv.getBoundingClientRect();
-    W = r.width; H = r.height;
-    cv.width = W * dpr; cv.height = H * dpr;
-    cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-
-  // Ambient floating particles — soft, blue, slow
-  const PCOUNT = isMobile ? 22 : 45;
-  const particles = Array.from({ length: PCOUNT }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: 0.6 + Math.random() * 1.6,
-    vy: 0.04 + Math.random() * 0.10,
-    vx: (Math.random() - 0.5) * 0.05,
-    a: 0.18 + Math.random() * 0.32,
-    twinkle: Math.random() * Math.PI * 2,
-    twinkleSpd: 0.004 + Math.random() * 0.010
-  }));
-
-  let t = 0;
-  function loop() {
-    t++;
-    ctx.clearRect(0, 0, W, H);
-
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      p.twinkle += p.twinkleSpd;
-      if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; }
-      if (p.x > W + 4) p.x = -4;
-      if (p.x < -4) p.x = W + 4;
-
-      const alpha = p.a * (0.55 + 0.45 * Math.sin(p.twinkle));
-
-      // Soft glow halo
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
-      g.addColorStop(0, 'rgba(120, 180, 255, ' + (alpha * 0.5) + ')');
-      g.addColorStop(1, 'rgba(120, 180, 255, 0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Core dot
-      ctx.fillStyle = 'rgba(200, 220, 255, ' + alpha + ')';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    if (!isReduced) requestAnimationFrame(loop);
-  }
-  if (!isReduced) requestAnimationFrame(loop);
-}
+function initWCanvas() { /* canvas removed */ }
 
 /* ══════════════════════════════════════════════════
    BOOT
@@ -3965,223 +3899,38 @@ function initMotionLayer() {
 })();
 
 
-// ═══════════════ WELCOME SCREEN PREMIUM EFFECTS ═══════════════
-(function welcomeEffects() {
+// ═══════════════ LOGIN SCREEN EFFECTS ═══════════════
+(function loginEffects() {
   const screen = document.getElementById('screen-welcome');
   if (!screen) return;
 
-  // 1) Live date/time
-  const dtEl = document.getElementById('wTopDateTime');
-  if (dtEl) {
-    const updateDateTime = () => {
-      const d = new Date();
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const hours = d.getHours();
-      const mins = d.getMinutes();
-      const day = d.getDate();
-      const month = months[d.getMonth()];
-      const yr = d.getFullYear();
-      const h12 = hours % 12 || 12;
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      dtEl.textContent = `${month} ${day} · ${h12}:${String(mins).padStart(2,'0')} ${ampm}`;
-    };
-    updateDateTime();
-    setInterval(updateDateTime, 30000);
-  }
-
-  // 2) Mouse-follow spotlight + glass card tilt
-  const spotlight = screen.querySelector('.w-spotlight');
-  const card = screen.querySelector('.w-card');
-  let raf = 0;
-  let mx = 0.5, my = 0.5;
-
-  screen.addEventListener('mousemove', (e) => {
-    const r = screen.getBoundingClientRect();
-    mx = (e.clientX - r.left) / r.width;
-    my = (e.clientY - r.top) / r.height;
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      if (spotlight) {
-        spotlight.style.setProperty('--sx', (mx * 100) + '%');
-        spotlight.style.setProperty('--sy', (my * 100) + '%');
-      }
-      if (card) {
-        const cr = card.getBoundingClientRect();
-        const ccx = cr.left + cr.width / 2;
-        const ccy = cr.top + cr.height / 2;
-        const dx = (e.clientX - ccx) / cr.width;
-        const dy = (e.clientY - ccy) / cr.height;
-        const rotY = Math.max(-4, Math.min(4, dx * 6));
-        const rotX = Math.max(-4, Math.min(4, -dy * 6));
-        card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      }
-    });
-  }, { passive: true });
-
-  screen.addEventListener('mouseleave', () => {
-    if (card) card.style.transform = '';
-    if (spotlight) {
-      spotlight.style.setProperty('--sx', '50%');
-      spotlight.style.setProperty('--sy', '50%');
-    }
-  });
-
-  // 3) Word rotator
-  const rotateInner = screen.querySelector('.w-rotate-inner');
-  if (rotateInner) {
-    const words = ['intention', 'focus', 'purpose', 'clarity', 'mastery', 'depth'];
-    let i = 0;
-    setInterval(() => {
-      i = (i + 1) % words.length;
-      rotateInner.style.opacity = '0';
-      rotateInner.style.transform = 'translateY(-8px)';
-      setTimeout(() => {
-        rotateInner.textContent = words[i];
-        rotateInner.style.transform = 'translateY(8px)';
-        requestAnimationFrame(() => {
-          rotateInner.style.opacity = '1';
-          rotateInner.style.transform = 'translateY(0)';
-        });
-      }, 340);
-    }, 2800);
-  }
-
-  // 4) Click ripple
-  const rippleLayer = screen.querySelector('.w-ripple-layer');
-  if (rippleLayer) {
-    screen.addEventListener('click', (e) => {
-      // Don't ripple on input/button to avoid blocking
-      if (e.target.closest('.w-input, .w-btn, button, input')) return;
-      const ripple = document.createElement('span');
-      ripple.className = 'w-ripple';
-      ripple.style.left = e.clientX + 'px';
-      ripple.style.top = e.clientY + 'px';
-      rippleLayer.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 900);
-    });
-  }
-
-  // 5) Magic glow on input focus (handled via CSS, but add typing pulse)
-  const input = document.getElementById('wName');
-  if (input) {
-    input.addEventListener('input', () => {
-      input.classList.add('w-input-typing');
-      clearTimeout(input._pulseT);
-      input._pulseT = setTimeout(() => input.classList.remove('w-input-typing'), 400);
-    });
-  }
-
-  // 6) SHOOTING STARS canvas
-  const ssCanvas = document.getElementById('wShootingStars');
-  if (ssCanvas) {
-    const ctx = ssCanvas.getContext('2d');
-    let W = 0, H = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const resizeSS = () => {
-      const r = ssCanvas.getBoundingClientRect();
-      W = r.width; H = r.height;
-      ssCanvas.width = W * dpr; ssCanvas.height = H * dpr;
-      ssCanvas.style.width = W + 'px'; ssCanvas.style.height = H + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resizeSS();
-    window.addEventListener('resize', resizeSS, { passive: true });
-
-    const shootingStars = [];
-    function spawnStar() {
-      const fromLeft = Math.random() < 0.5;
-      shootingStars.push({
-        x: fromLeft ? -50 : W + 50,
-        y: Math.random() * H * 0.65,
-        vx: (fromLeft ? 1 : -1) * (5 + Math.random() * 4),
-        vy: 0.8 + Math.random() * 2.2,
-        life: 0,
-        maxLife: 80 + Math.random() * 30,
-        tailLen: 14 + Math.random() * 10
+  // Mouse-follow spotlight (subtle parallax)
+  const spotlight = screen.querySelector('.lo-spotlight');
+  if (spotlight) {
+    let raf = 0;
+    screen.addEventListener('mousemove', (e) => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = screen.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        spotlight.style.setProperty('--sx', x + '%');
+        spotlight.style.setProperty('--sy', y + '%');
       });
-    }
-
-    let lastSpawn = 0;
-    function ssLoop(now) {
-      ctx.clearRect(0, 0, W, H);
-
-      if (now - lastSpawn > (2800 + Math.random() * 4500) && shootingStars.length < 2) {
-        spawnStar();
-        lastSpawn = now;
-      }
-
-      for (let i = shootingStars.length - 1; i >= 0; i--) {
-        const s = shootingStars[i];
-        s.x += s.vx;
-        s.y += s.vy;
-        s.life++;
-
-        const fade = Math.max(0, 1 - (s.life / s.maxLife));
-        const tailX = s.x - s.vx * s.tailLen;
-        const tailY = s.y - s.vy * s.tailLen;
-
-        // Trail gradient
-        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
-        grad.addColorStop(0, 'rgba(120, 180, 255, 0)');
-        grad.addColorStop(0.5, 'rgba(180, 220, 255, ' + (fade * 0.45) + ')');
-        grad.addColorStop(1, 'rgba(255, 255, 255, ' + (fade * 0.95) + ')');
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.6;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(s.x, s.y);
-        ctx.stroke();
-
-        // Bright head
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, ' + fade + ')';
-        ctx.fill();
-
-        // Glow halo
-        const halo = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 10);
-        halo.addColorStop(0, 'rgba(180, 220, 255, ' + (fade * 0.55) + ')');
-        halo.addColorStop(1, 'rgba(120, 180, 255, 0)');
-        ctx.fillStyle = halo;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, 10, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (s.life > s.maxLife || s.x < -100 || s.x > W + 100) {
-          shootingStars.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(ssLoop);
-    }
-    requestAnimationFrame(ssLoop);
+    }, { passive: true });
   }
 
-  // 7) STATS COUNTER on load
-  const statNums = document.querySelectorAll('.w-stat-num');
-  statNums.forEach((el, idx) => {
-    const target = parseInt(el.dataset.target, 10);
-    const symbol = el.dataset.symbol;
-    const startDelay = 1100 + idx * 200;
-    setTimeout(() => {
-      const duration = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const t = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        const val = Math.round(target * eased);
-        if (symbol && val >= target) {
-          el.textContent = symbol;
-        } else {
-          el.textContent = val.toLocaleString();
-        }
-        if (t < 1) requestAnimationFrame(tick);
+  // Enter key on input → submit
+  const input = document.getElementById('wName');
+  const btn = document.getElementById('wBtn');
+  if (input && btn) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btn.click();
       }
-      requestAnimationFrame(tick);
-    }, startDelay);
-  });
-
+    });
+  }
 })();
 
 (function init() {
