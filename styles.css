@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   StudyOS · Premium Design System
+   StudyOS
    By Indraneel Mandal
 ═══════════════════════════════════════════════════════════════ */
 
@@ -8518,4 +8518,273 @@ select option {
   color: #0071e3;
   border-color: rgba(0, 113, 227, 0.32);
   background: rgba(0, 113, 227, 0.06);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE SIDEBAR FIX · v20260555
+   - Solid background (no backdrop-filter dependency)
+   - Forced visibility & z-index above overlay
+   - Body scroll-lock when open
+   - iOS-Safari safe
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+  /* Sidebar: solid bg, on top of everything when open */
+  .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 280px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #08080f !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 1200 !important;
+    transform: translateX(-100%) !important;
+    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.6) !important;
+    will-change: transform !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  [data-theme="light"] .sidebar {
+    background: #ffffff !important;
+    border-right-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  /* Overlay sits BELOW the sidebar */
+  .mob-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.55) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    z-index: 1100 !important;
+  }
+
+  /* Make sure hamburger button is visible & tappable */
+  .mob-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+    background: var(--bg-elev-2) !important;
+    border: 1px solid var(--bd-1) !important;
+    color: var(--tx-1) !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 100 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+  .mob-toggle svg {
+    width: 18px !important;
+    height: 18px !important;
+    pointer-events: none !important;
+  }
+  .mob-toggle:active {
+    background: var(--bg-elev-3) !important;
+    transform: scale(0.96) !important;
+  }
+
+  /* Lock body scroll when sidebar is open */
+  body.sidebar-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+  }
+
+  /* Make sure main content stays in place */
+  .main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Sidebar internals should always be visible */
+  .sidebar > * {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .sidebar .nav-item,
+  .sidebar .sb-head,
+  .sidebar .sb-nav,
+  .sidebar .sb-footer {
+    color: var(--tx-1) !important;
+  }
+}
+
+/* Bigger touch targets for nav items on mobile */
+@media (max-width: 700px) {
+  .nav-item {
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    min-height: 48px !important;
+  }
+  .sb-head { padding: 20px 16px !important; }
+  .sb-nav { padding: 8px 12px !important; }
+  .sb-footer { padding: 16px !important; }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FIX PASS · v20260556
+   - Pinned goal highlight refined
+   - Light theme 30-day trend + report colors
+   - Note hover render bug (sub-pixel artifacts on saves)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Pinned goal — clean amber accent (not overpowering) ── */
+.goal-slot.filled[style*="amber"],
+.goal-slot.filled:has(.goal-pinned-badge) {
+  position: relative;
+}
+.goal-pinned-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(255, 159, 10, 0.14);
+  border: 1px solid rgba(255, 159, 10, 0.40);
+  color: rgb(255, 180, 60);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 12px rgba(255, 159, 10, 0.18);
+}
+.goal-pinned-badge::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: rgb(255, 180, 60);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 180, 60, 0.8);
+}
+[data-theme="light"] .goal-pinned-badge {
+  background: rgba(204, 119, 0, 0.10);
+  border-color: rgba(204, 119, 0, 0.45);
+  color: #cc7700;
+}
+[data-theme="light"] .goal-pinned-badge::before {
+  background: #cc7700;
+  box-shadow: 0 0 6px rgba(204, 119, 0, 0.6);
+}
+
+/* ── Notes: prevent hover-reveal render bug + smooth painting ── */
+.note-card {
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Notes pinned state — clean badge */
+.note-card.pinned {
+  border-color: rgba(255, 159, 10, 0.30);
+  background: linear-gradient(180deg, rgba(255, 159, 10, 0.03), transparent);
+}
+[data-theme="light"] .note-card.pinned {
+  border-color: rgba(204, 119, 0, 0.32);
+  background: linear-gradient(180deg, rgba(204, 119, 0, 0.04), transparent);
+}
+
+/* ── 30-day trend + AI report: light theme color parity ── */
+[data-theme="light"] .trend-row,
+[data-theme="light"] .trend-bar,
+[data-theme="light"] .perf-report-row,
+[data-theme="light"] .subject-perf-row,
+[data-theme="light"] .perf-subj-bar {
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] .trend-label,
+[data-theme="light"] .trend-date,
+[data-theme="light"] .perf-subj-name,
+[data-theme="light"] .perf-subj-label,
+[data-theme="light"] .report-subj-name,
+[data-theme="light"] .stat-card-num,
+[data-theme="light"] .stat-card-label,
+[data-theme="light"] .progress-num,
+[data-theme="light"] .progress-label {
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] .trend-value,
+[data-theme="light"] .perf-subj-value,
+[data-theme="light"] .report-subj-pct {
+  color: #3a3a3c !important;
+}
+
+/* Any white-text on white-bg in light theme — force dark */
+[data-theme="light"] .glass-card *[style*="color:#fff"],
+[data-theme="light"] .glass-card *[style*="color: #fff"],
+[data-theme="light"] .glass-card *[style*="color:white"],
+[data-theme="light"] .glass-card *[style*="color: white"] {
+  color: #1d1d1f !important;
+}
+
+/* AI report card delete button visibility */
+.score-del,
+.report-del,
+.perf-del {
+  background: rgba(255, 69, 58, 0.10) !important;
+  border: 1px solid rgba(255, 69, 58, 0.32) !important;
+  color: rgb(255, 100, 90) !important;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.score-del:hover,
+.report-del:hover,
+.perf-del:hover {
+  background: rgba(255, 69, 58, 0.20) !important;
+  border-color: rgba(255, 69, 58, 0.50) !important;
+  transform: scale(1.05);
+}
+.score-del svg,
+.report-del svg,
+.perf-del svg {
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+[data-theme="light"] .score-del,
+[data-theme="light"] .report-del,
+[data-theme="light"] .perf-del {
+  background: rgba(214, 56, 49, 0.06) !important;
+  border-color: rgba(214, 56, 49, 0.32) !important;
+  color: #d63831 !important;
+}
+[data-theme="light"] .score-del:hover,
+[data-theme="light"] .report-del:hover,
+[data-theme="light"] .perf-del:hover {
+  background: rgba(214, 56, 49, 0.12) !important;
+}
+
+/* Practice difficulty dropdown — clean look */
+@media (max-width: 640px) {
+  #practiceLevel { font-size: 14px; }
 }
