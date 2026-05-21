@@ -222,57 +222,92 @@ function nav(sec) {
 }
 
 document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListener('click', () => nav(i.dataset.pane)));
-// ── Mobile sidebar — bulletproof handlers ──
+// ── Mobile sidebar — cross-platform (iOS + Android) ──
 (function mobileSidebar() {
   const toggle = document.getElementById('mobToggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('mobOverlay');
   if (!toggle || !sidebar || !overlay) return;
 
+  // Debounce timer — prevents double-fire on Android (touchend+click)
+  let lockUntil = 0;
+  const LOCK_MS = 350;
+
   function openSidebar() {
     sidebar.classList.add('open');
+    overlay.classList.add('on');
     overlay.style.display = 'block';
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'auto';
     document.body.classList.add('sidebar-open');
   }
   function closeSidebar() {
     sidebar.classList.remove('open');
-    overlay.style.display = 'none';
+    overlay.classList.remove('on');
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    setTimeout(() => {
+      if (!sidebar.classList.contains('open')) overlay.style.display = 'none';
+    }, 200);
     document.body.classList.remove('sidebar-open');
   }
   function toggleSidebar(e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
+    const now = Date.now();
+    if (now < lockUntil) return; // debounce
+    lockUntil = now + LOCK_MS;
     if (sidebar.classList.contains('open')) closeSidebar();
     else openSidebar();
   }
 
-  // Bind both click and touchend for max compatibility
-  toggle.addEventListener('click', toggleSidebar);
-  toggle.addEventListener('touchend', toggleSidebar, { passive: false });
-  // Also expose as .onclick fallback
-  toggle.onclick = toggleSidebar;
+  // Use pointerup (modern, works on both iOS & Android), with click as fallback
+  // pointerup fires once regardless of device — solves the double-fire issue
+  if (window.PointerEvent) {
+    toggle.addEventListener('pointerup', toggleSidebar);
+  } else {
+    // Fallback for ancient browsers: bind click only
+    toggle.addEventListener('click', toggleSidebar);
+  }
+  // Always expose .onclick as a last-resort fallback
+  toggle.onclick = function(e) {
+    // Only fire if pointerup didn't already handle it
+    const now = Date.now();
+    if (now < lockUntil) return;
+    toggleSidebar(e);
+  };
 
-  // Close on overlay tap
-  overlay.addEventListener('click', closeSidebar);
-  overlay.addEventListener('touchend', closeSidebar, { passive: true });
+  // Overlay: close on tap (single event)
+  function closeFromOverlay(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const now = Date.now();
+    if (now < lockUntil) return;
+    lockUntil = now + LOCK_MS;
+    closeSidebar();
+  }
+  if (window.PointerEvent) {
+    overlay.addEventListener('pointerup', closeFromOverlay);
+  } else {
+    overlay.addEventListener('click', closeFromOverlay);
+  }
 
-  // Close on Escape
+  // Escape closes (desktop)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
   });
 
-  // Close when any nav item is tapped
+  // Nav item tap → close sidebar on mobile
   sidebar.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
-      if (window.innerWidth <= 700) setTimeout(closeSidebar, 50);
+      if (window.innerWidth <= 700) setTimeout(closeSidebar, 60);
     });
   });
 
-  // Close on window resize to desktop
+  // Resize to desktop closes the open sidebar
   window.addEventListener('resize', () => {
     if (window.innerWidth > 700 && sidebar.classList.contains('open')) closeSidebar();
   });
 
-  // Make sure starting state is closed on mobile
+  // Initial state on mobile
   if (window.innerWidth <= 700) closeSidebar();
 })();
 
