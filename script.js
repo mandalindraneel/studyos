@@ -1,6 +1,6 @@
 'use strict';
 /* ══════════════════════════════════════════════════════
-   STUDYOS
+   STUDYOS · MMXXVI
    © Indraneel Mandal
    ML-powered academic workspace
 ══════════════════════════════════════════════════════ */
@@ -3329,7 +3329,7 @@ function classifyDifficulty(topic) {
 
 function levelInfo(level) {
   const labels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
-  const counts = { easy: 12, medium: 12, hard: 12 };
+  const counts = { easy: 10, medium: 10, hard: 10 };
   return { label: labels[level] || 'Medium', difficulty: level || 'medium', count: counts[level] || 12 };
 }
 
@@ -3396,11 +3396,13 @@ function renderPracticeQuestions(questions, subj, level, weakAreas) {
 
 function renderPracticeRefs(subj) {
   const el = $('practiceRefs'); if (!el) return;
-  const refs = REFERENCE_LINKS[subj || ''] || [];
-  if (!refs.length) {
+  const allRefs = REFERENCE_LINKS[subj || ''] || [];
+  if (!allRefs.length) {
     el.innerHTML = `<div style="font-size:.84rem;color:var(--t3);padding:8px 0;font-style:italic">No references available for this subject.</div>`;
     return;
   }
+  // Cap to top 20 references
+  const refs = allRefs.slice(0, 20);
   el.innerHTML = refs.map(r => `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:6px">
     <span style="flex:1;font-size:.84rem;font-weight:600;color:var(--t1)">${esc(r.name)}</span>
     <span class="tag tag-a">${esc(r.type)}</span>
