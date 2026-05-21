@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   StudyOS
+   StudyOS · Premium Design System
    By Indraneel Mandal
 ═══════════════════════════════════════════════════════════════ */
 
@@ -8787,4 +8787,64 @@ select option {
 /* Practice difficulty dropdown — clean look */
 @media (max-width: 640px) {
   #practiceLevel { font-size: 14px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIXES · v20260557
+   - Goal pinned badge moves to top-LEFT to not overlap actions
+   - Goal-head needs top padding when pinned (badge sits above)
+   ════════════════════════════════════════════════════════════════ */
+
+/* Move pinned badge to top-LEFT corner (clear of action buttons on right) */
+.goal-slot.filled .goal-pinned-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: auto;
+  padding: 4px 10px 4px 9px;
+  border-radius: 100px;
+  background: rgba(255, 159, 10, 0.16);
+  border: 1px solid rgba(255, 159, 10, 0.42);
+  color: rgb(255, 180, 60);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 12px rgba(255, 159, 10, 0.18);
+  pointer-events: none;
+}
+.goal-slot.filled .goal-pinned-badge::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: rgb(255, 180, 60);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 180, 60, 0.8);
+  flex-shrink: 0;
+}
+
+/* When pinned, push content down so badge has room */
+.goal-slot.filled:has(.goal-pinned-badge) .goal-head {
+  margin-top: 22px;
+}
+
+/* Ensure goal-actions sit cleanly on the right */
+.goal-slot.filled .goal-actions {
+  position: relative;
+  z-index: 3;
+}
+
+[data-theme="light"] .goal-slot.filled .goal-pinned-badge {
+  background: rgba(204, 119, 0, 0.10);
+  border-color: rgba(204, 119, 0, 0.45);
+  color: #cc7700;
+}
+[data-theme="light"] .goal-slot.filled .goal-pinned-badge::before {
+  background: #cc7700;
+  box-shadow: 0 0 6px rgba(204, 119, 0, 0.6);
 }
