@@ -8960,3 +8960,439 @@ select option {
   .mob-toggle { display: none !important; }
   .mob-overlay { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE SIDEBAR · v20260560 · FINAL FIX
+   Root cause: backdrop-filter: blur(48px) on a transform:translateX'd
+   element causes iOS Safari to blur the sidebar's OWN content.
+   Fix: kill backdrop-filter on mobile, use solid bg, force opaque text.
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+  /* Kill ALL backdrop-filter on sidebar AND children on mobile */
+  html body nav#sidebar,
+  html body nav#sidebar *,
+  html body nav#sidebar.sidebar,
+  html body nav#sidebar.sidebar * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+  }
+
+  /* Sidebar itself: solid opaque background, max z-index */
+  html body nav#sidebar.sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 280px !important;
+    max-width: 86vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #0a0a14 !important;
+    background-color: #0a0a14 !important;
+    z-index: 99999 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 4px 0 60px rgba(0, 0, 0, 0.7) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* Critical: isolate creates a new stacking context so filters from elsewhere can't bleed in */
+    isolation: isolate !important;
+    /* Critical: prevent iOS from compositing this as a sub-layer that inherits filter from below */
+    -webkit-transform: translateX(-100%) translateZ(0) !important;
+    will-change: transform !important;
+  }
+  html body nav#sidebar.sidebar.open {
+    transform: translateX(0) !important;
+    -webkit-transform: translateX(0) translateZ(0) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border-right-color: rgba(0, 0, 0, 0.10) !important;
+    box-shadow: 4px 0 60px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* Sidebar children: force visible + opaque text */
+  html body nav#sidebar.sidebar > *,
+  html body nav#sidebar.sidebar .sb-head,
+  html body nav#sidebar.sidebar .sb-nav,
+  html body nav#sidebar.sidebar .sb-footer,
+  html body nav#sidebar.sidebar .nav-item,
+  html body nav#sidebar.sidebar .sb-brand,
+  html body nav#sidebar.sidebar .sb-brand-sub,
+  html body nav#sidebar.sidebar .sb-mark,
+  html body nav#sidebar.sidebar .sb-section-label,
+  html body nav#sidebar.sidebar span,
+  html body nav#sidebar.sidebar svg {
+    visibility: visible !important;
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Force readable text colors */
+  html body nav#sidebar.sidebar .sb-brand {
+    color: #f5f5f7 !important;
+    -webkit-text-fill-color: #f5f5f7 !important;
+  }
+  html body nav#sidebar.sidebar .sb-brand-sub {
+    color: rgba(245, 245, 247, 0.6) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.6) !important;
+  }
+  html body nav#sidebar.sidebar .sb-section-label {
+    color: rgba(245, 245, 247, 0.5) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.5) !important;
+  }
+  html body nav#sidebar.sidebar .nav-item {
+    color: rgba(245, 245, 247, 0.85) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.85) !important;
+    padding: 14px 16px !important;
+    min-height: 48px !important;
+    font-size: 15px !important;
+    -webkit-tap-highlight-color: transparent !important;
+    background: transparent !important;
+  }
+  html body nav#sidebar.sidebar .nav-item.active {
+    color: #2997ff !important;
+    -webkit-text-fill-color: #2997ff !important;
+    background: rgba(41, 151, 255, 0.16) !important;
+  }
+  html body nav#sidebar.sidebar .nav-item:active {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+  html body nav#sidebar.sidebar .sb-mark {
+    background: #f5f5f7 !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  html body nav#sidebar.sidebar svg {
+    stroke: currentColor !important;
+    opacity: 0.85 !important;
+  }
+  html body nav#sidebar.sidebar .nav-item.active svg {
+    opacity: 1 !important;
+  }
+
+  /* Light theme overrides */
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-brand {
+    color: #1d1d1f !important;
+    -webkit-text-fill-color: #1d1d1f !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-brand-sub {
+    color: rgba(29, 29, 31, 0.55) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.55) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-section-label {
+    color: rgba(29, 29, 31, 0.50) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.50) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .nav-item {
+    color: rgba(29, 29, 31, 0.85) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.85) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .nav-item.active {
+    color: #0071e3 !important;
+    -webkit-text-fill-color: #0071e3 !important;
+    background: rgba(0, 113, 227, 0.10) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-mark {
+    background: #1d1d1f !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+
+  /* Overlay sits BELOW sidebar */
+  html body .mob-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.55) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    z-index: 99998 !important;
+    cursor: pointer !important;
+  }
+  html body[data-theme="light"] .mob-overlay {
+    background: rgba(0, 0, 0, 0.32) !important;
+  }
+
+  /* Hamburger button stays accessible */
+  html body .mob-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 10px !important;
+    background: var(--bg-elev-2) !important;
+    border: 1px solid var(--bd-1) !important;
+    color: var(--tx-1) !important;
+    cursor: pointer !important;
+    z-index: 50 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    user-select: none !important;
+  }
+  html body .mob-toggle svg {
+    width: 20px !important;
+    height: 20px !important;
+    pointer-events: none !important;
+    stroke: currentColor !important;
+  }
+}
+
+@media (min-width: 701px) {
+  .mob-toggle { display: none !important; }
+  .mob-overlay { display: none !important; }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE SIDEBAR · v20260561 · iOS + ANDROID UNIFIED
+   - No display:none transitions (Android can't transition display)
+   - No backdrop-filter on sidebar (iOS Safari bug with transform)
+   - Solid opaque backgrounds (works everywhere)
+   - Opacity-based overlay (smooth on both platforms)
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+  /* ── Kill ALL backdrop filters on sidebar and its children ── */
+  html body nav#sidebar,
+  html body nav#sidebar *,
+  html body nav#sidebar.sidebar,
+  html body nav#sidebar.sidebar * {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-filter: none !important;
+    filter: none !important;
+  }
+
+  /* ── The sidebar: solid, slide-in from left ── */
+  html body nav#sidebar.sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 280px !important;
+    max-width: 86vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #0a0a14 !important;
+    background-color: #0a0a14 !important;
+    z-index: 99999 !important;
+    transform: translateX(-100%) !important;
+    -webkit-transform: translateX(-100%) translateZ(0) !important;
+    transition: transform 0.30s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    -webkit-transition: -webkit-transform 0.30s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 4px 0 60px rgba(0, 0, 0, 0.7) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    isolation: isolate !important;
+    will-change: transform !important;
+    -webkit-transform-style: flat !important;
+    transform-style: flat !important;
+  }
+  html body nav#sidebar.sidebar.open {
+    transform: translateX(0) !important;
+    -webkit-transform: translateX(0) translateZ(0) !important;
+  }
+
+  /* Light theme sidebar */
+  html body[data-theme="light"] nav#sidebar.sidebar {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border-right-color: rgba(0, 0, 0, 0.10) !important;
+    box-shadow: 4px 0 60px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* ── Force visibility on EVERY child element ── */
+  html body nav#sidebar.sidebar > *,
+  html body nav#sidebar.sidebar .sb-head,
+  html body nav#sidebar.sidebar .sb-nav,
+  html body nav#sidebar.sidebar .sb-footer,
+  html body nav#sidebar.sidebar .sb-mark,
+  html body nav#sidebar.sidebar .sb-brand,
+  html body nav#sidebar.sidebar .sb-brand-sub,
+  html body nav#sidebar.sidebar .sb-brand-wrap,
+  html body nav#sidebar.sidebar .sb-section-label,
+  html body nav#sidebar.sidebar .sb-section-num,
+  html body nav#sidebar.sidebar .nav-item,
+  html body nav#sidebar.sidebar .nav-badge,
+  html body nav#sidebar.sidebar span,
+  html body nav#sidebar.sidebar div,
+  html body nav#sidebar.sidebar svg,
+  html body nav#sidebar.sidebar path,
+  html body nav#sidebar.sidebar polyline,
+  html body nav#sidebar.sidebar rect,
+  html body nav#sidebar.sidebar circle,
+  html body nav#sidebar.sidebar line {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    -webkit-text-fill-color: inherit !important;
+  }
+
+  /* ── Dark theme text colors (forced) ── */
+  html body nav#sidebar.sidebar .sb-brand {
+    color: #f5f5f7 !important;
+    -webkit-text-fill-color: #f5f5f7 !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+  }
+  html body nav#sidebar.sidebar .sb-brand-sub {
+    color: rgba(245, 245, 247, 0.6) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.6) !important;
+  }
+  html body nav#sidebar.sidebar .sb-section-label {
+    color: rgba(245, 245, 247, 0.50) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.50) !important;
+  }
+  html body nav#sidebar.sidebar .sb-section-num {
+    color: rgba(41, 151, 255, 0.85) !important;
+    -webkit-text-fill-color: rgba(41, 151, 255, 0.85) !important;
+  }
+  html body nav#sidebar.sidebar .nav-item {
+    color: rgba(245, 245, 247, 0.85) !important;
+    -webkit-text-fill-color: rgba(245, 245, 247, 0.85) !important;
+    padding: 14px 16px !important;
+    min-height: 48px !important;
+    font-size: 15px !important;
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+  html body nav#sidebar.sidebar .nav-item.active {
+    color: #2997ff !important;
+    -webkit-text-fill-color: #2997ff !important;
+    background: rgba(41, 151, 255, 0.16) !important;
+  }
+  html body nav#sidebar.sidebar .nav-item:active {
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+  html body nav#sidebar.sidebar .sb-mark {
+    background: #f5f5f7 !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  html body nav#sidebar.sidebar svg {
+    stroke: currentColor !important;
+    opacity: 0.85 !important;
+  }
+  html body nav#sidebar.sidebar .nav-item.active svg {
+    opacity: 1 !important;
+  }
+
+  /* ── Light theme text colors (forced) ── */
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-brand {
+    color: #1d1d1f !important;
+    -webkit-text-fill-color: #1d1d1f !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-brand-sub {
+    color: rgba(29, 29, 31, 0.55) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.55) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-section-label {
+    color: rgba(29, 29, 31, 0.50) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.50) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-section-num {
+    color: #0071e3 !important;
+    -webkit-text-fill-color: #0071e3 !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .nav-item {
+    color: rgba(29, 29, 31, 0.85) !important;
+    -webkit-text-fill-color: rgba(29, 29, 31, 0.85) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .nav-item.active {
+    color: #0071e3 !important;
+    -webkit-text-fill-color: #0071e3 !important;
+    background: rgba(0, 113, 227, 0.10) !important;
+  }
+  html body[data-theme="light"] nav#sidebar.sidebar .sb-mark {
+    background: #1d1d1f !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+
+  /* ── Overlay: opacity-based (no display:none transitions) ── */
+  html body .mob-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.55) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 99998 !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.25s ease-out !important;
+    touch-action: manipulation !important;
+  }
+  html body .mob-overlay.on {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  html body[data-theme="light"] .mob-overlay {
+    background: rgba(0, 0, 0, 0.32) !important;
+  }
+
+  /* ── Hamburger button ── */
+  html body .mob-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 10px !important;
+    background: var(--bg-elev-2) !important;
+    border: 1px solid var(--bd-1) !important;
+    color: var(--tx-1) !important;
+    cursor: pointer !important;
+    z-index: 50 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+  html body .mob-toggle svg {
+    width: 20px !important;
+    height: 20px !important;
+    pointer-events: none !important;
+    stroke: currentColor !important;
+  }
+  html body .mob-toggle:active {
+    background: var(--bg-elev-3) !important;
+    transform: scale(0.95) !important;
+  }
+
+  /* ── Body scroll-lock when sidebar open (Android safe) ── */
+  html body.sidebar-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+  }
+}
+
+/* Desktop: hide mobile elements */
+@media (min-width: 701px) {
+  .mob-toggle { display: none !important; }
+  .mob-overlay { display: none !important; }
+}
