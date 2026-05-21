@@ -1420,7 +1420,8 @@ const REFERENCE_SHEETS = [
 
 function renderRefSheets() {
   const el = $('refSheetsGrid'); if (!el) return;
-  el.innerHTML = REFERENCE_SHEETS.map(s => `<div class="sat-row"><div class="sat-num" style="background:var(--blue);color:#fff">${pad(s.n)}</div><div class="sat-info"><div class="sat-title">${esc(s.label)}</div><div class="sat-meta">${esc(s.sub)}</div></div><a class="sat-link" href="${s.url}" target="_blank" rel="noopener">Open</a></div>`).join('');
+  const sheets = REFERENCE_SHEETS.slice(0, 20);
+  el.innerHTML = sheets.map(s => `<div class="sat-row"><div class="sat-num" style="background:var(--blue);color:#fff">${pad(s.n)}</div><div class="sat-info"><div class="sat-title">${esc(s.label)}</div><div class="sat-meta">${esc(s.sub)}</div></div><a class="sat-link" href="${s.url}" target="_blank" rel="noopener">Open</a></div>`).join('');
 }
 
 
