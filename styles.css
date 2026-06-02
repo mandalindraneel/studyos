@@ -1,35 +1,26 @@
-/* ═══════════════════════════════════════════════════════════════
-   StudyOS
-   By Indraneel Mandal
-═══════════════════════════════════════════════════════════════ */
+/* StudyOS — © Indraneel Mandal · MMXXVI */
 
-/* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
-  /* Spacing scale (4px base) */
+  
   --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
   --sp-5: 20px;  --sp-6: 24px;  --sp-7: 32px;  --sp-8: 40px;
   --sp-9: 48px;  --sp-10: 64px; --sp-11: 80px; --sp-12: 96px;
 
-  /* Radii */
   --r-1: 6px;   --r-2: 8px;   --r-3: 10px;  --r-4: 12px;
   --r-5: 14px;  --r-6: 16px;  --r-7: 20px;  --r-8: 24px;
   --r-pill: 100px;
 
-  /* Type */
   --f-display: 'Bricolage Grotesque', 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --f-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --f-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
-  /* Easing */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Layout */
   --sidebar-w: 248px;
   --topbar-h: 64px;
 
-  /* Brand colors (semantic) */
   --blue: #2997ff;
   --green: #30d158;
   --amber: #ffd60a;
@@ -38,7 +29,6 @@
   --cyan: #5ac8fa;
 }
 
-/* ─── Dark theme (default) ───────────────────────────────────── */
 :root,
 [data-theme="dark"] {
   --bg: #000008;
@@ -86,7 +76,6 @@
 
   --hollow: rgba(245, 245, 247, 0.30);
 
-  /* Aliases */
   --accent: var(--blue);
   --accent-bg: var(--blue-bg);
   --accent-bd: var(--blue-bd);
@@ -107,7 +96,6 @@
   --ease: var(--ease-smooth); --expo: var(--ease-out); --spring: var(--ease-spring);
 }
 
-/* ─── Light theme ────────────────────────────────────────────── */
 [data-theme="light"] {
   --bg: #fbfbfd;
   --bg-elev-1: #ffffff;
@@ -160,7 +148,6 @@
   --hollow: rgba(29, 29, 31, 0.28);
 }
 
-/* ─── Reset ──────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
   font-size: 15px;
@@ -180,15 +167,14 @@ body {
   font-weight: 400;
   letter-spacing: -0.005em;
   transition: background .35s var(--ease-out), color .25s var(--ease-out);
-  /* soothing custom cursor - small soft circle with blue accent dot */
-  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='8.5' fill='rgba(255,255,255,0.06)' stroke='rgba(245,245,247,0.78)' stroke-width='1.2'/%3E%3Ccircle cx='11' cy='11' r='2.5' fill='%232997ff'/%3E%3C/svg%3E") 11 11, default;
+  cursor: default;
 }
 [data-theme="light"] body {
-  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='8.5' fill='rgba(0,0,8,0.04)' stroke='rgba(35,40,80,0.65)' stroke-width='1.2'/%3E%3Ccircle cx='11' cy='11' r='2.5' fill='%230071e3'/%3E%3C/svg%3E") 11 11, default;
+  cursor: pointer;
 }
-/* clicky cursor for interactive elements */
+
 button, a, .nav-item, .chip, .card-clickable, [onclick], summary, label, input[type="checkbox"], input[type="radio"], select {
-  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='rgba(41,151,255,0.10)' stroke='rgba(41,151,255,0.85)' stroke-width='1.3'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%232997ff'/%3E%3C/svg%3E") 12 12, pointer;
+  cursor: pointer;
 }
 [data-theme="light"] button,
 [data-theme="light"] a,
@@ -201,9 +187,9 @@ button, a, .nav-item, .chip, .card-clickable, [onclick], summary, label, input[t
 [data-theme="light"] input[type="checkbox"],
 [data-theme="light"] input[type="radio"],
 [data-theme="light"] select {
-  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='rgba(0,113,227,0.10)' stroke='rgba(0,113,227,0.85)' stroke-width='1.3'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%230071e3'/%3E%3C/svg%3E") 12 12, pointer;
+  cursor: pointer;
 }
-/* text-selection cursor for inputs */
+
 input[type="text"], input[type="number"], input[type="email"], input[type="search"], input[type="password"], input[type="url"], textarea {
   cursor: text;
 }
@@ -229,30 +215,10 @@ body::before {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--bd-3); background-clip: content-box; }
 
-/* ═══ WELCOME SCREEN ═══ */
-
-
-
-
-
-
-
 @keyframes ambientShift {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-2%, 1%) scale(1.04); }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 @keyframes pulseDotGreen {
   0% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.5); }
@@ -260,46 +226,14 @@ body::before {
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-
-
-
-
-
-
 @keyframes lineUp { from { transform: translateY(110%); } to { transform: translateY(0); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-
-
-
-
-
-
 
 @keyframes pulseDotBlue {
   0%, 100% { opacity: 1; box-shadow: 0 0 14px rgba(41, 151, 255, 0.6); }
   50% { opacity: 0.6; box-shadow: 0 0 6px rgba(41, 151, 255, 0.3); }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ═══ APP SHELL ═══ */
 #app { display: none; }
 #app.on {
   display: flex;
@@ -309,7 +243,6 @@ body::before {
   z-index: 1;
 }
 
-/* ─── Sidebar ─── */
 .sidebar {
   width: var(--sidebar-w);
   height: 100vh;
@@ -478,7 +411,6 @@ body::before {
   letter-spacing: 0.04em;
 }
 
-/* ─── Topbar ─── */
 .topbar {
   position: sticky; top: 0; z-index: 100;
   height: var(--topbar-h);
@@ -624,7 +556,6 @@ body::before {
 }
 .tb-icon-btn svg { width: 15px; height: 15px; }
 
-/* ─── Main + Panes ─── */
 .main {
   margin-left: var(--sidebar-w);
   flex: 1;
@@ -701,7 +632,6 @@ body::before {
   flex-wrap: wrap;
 }
 
-/* ─── Cards ─── */
 .glass-card {
   width: 100%;
   background: var(--bg-elev-1);
@@ -770,7 +700,6 @@ body::before {
   border-bottom: 1px solid var(--bd-1);
 }
 
-/* ─── Buttons ─── */
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center;
   gap: var(--sp-2);
@@ -847,18 +776,17 @@ body::before {
 
 .btn-sm { padding: 8px 16px; font-size: 12.5px; }
 
-/* ─── Forms ─── */
 .form-group {
   display: flex; flex-direction: column; gap: var(--sp-2);
   margin-bottom: var(--sp-5);
 }
 .form-group:last-of-type { margin-bottom: 0; }
-/* Ensure buttons after form-groups have proper top margin */
+
 .form-group + .btn-primary,
 .form-group + .btn-outline {
   margin-top: var(--sp-5);
 }
-/* Inside modals, give bottom buttons even more breathing room */
+
 .modal .btn-primary,
 .modal .btn-outline {
   margin-top: var(--sp-6);
@@ -951,7 +879,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 2px 8px rgba(41, 151, 255, 0.4);
 }
 
-/* ─── Chips & Tags ─── */
 .chip-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-4); }
 .chip {
   padding: 7px 15px;
@@ -1004,7 +931,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: 0.06em;
 }
 
-/* ═══ DASHBOARD ═══ */
 .dash-stats {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
@@ -1074,7 +1000,6 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: 0;
 }
 
-/* Countdown */
 .cd-units { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3); }
 .cd-unit {
   display: flex; flex-direction: column; align-items: center;
@@ -1102,7 +1027,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: 0.16em; text-transform: uppercase;
 }
 
-/* Mini tasks */
 .task-mini-list { display: flex; flex-direction: column; gap: var(--sp-2); }
 .task-mini-item {
   display: flex; align-items: center; gap: var(--sp-3);
@@ -1138,7 +1062,6 @@ input[type="range"]::-webkit-slider-thumb {
   transform: rotate(-45deg) translate(1px, -1px);
 }
 
-/* Quote */
 .quote-card { display: flex; flex-direction: column; height: 100%; }
 .quote-mark {
   font-family: var(--f-display);
@@ -1168,7 +1091,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: 0.14em; text-transform: uppercase;
 }
 
-/* Recent scores */
 .recent-scores-list { display: flex; flex-direction: column; gap: var(--sp-2); }
 .score-item {
   display: flex; align-items: center; gap: var(--sp-3);
@@ -1214,7 +1136,6 @@ input[type="range"]::-webkit-slider-thumb {
 .score-del svg { width: 13px; height: 13px; stroke: currentColor; pointer-events: none; }
 .score-del:hover { background: var(--rose-bg); color: var(--rose); }
 
-/* ═══ STUDY PLAN ═══ */
 .plan-top-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: var(--sp-4);
@@ -1296,7 +1217,6 @@ input[type="range"]::-webkit-slider-thumb {
 .task-item:hover .task-del { opacity: 1; }
 .task-del:hover { background: var(--rose-bg); color: var(--rose); }
 
-/* Calendar */
 .cal-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 22px 28px 14px;
@@ -1393,7 +1313,6 @@ input[type="range"]::-webkit-slider-thumb {
   opacity: 1 !important;
 }
 
-/* ═══ FOCUS ═══ */
 .focus-layout {
   width: 100%;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -1523,7 +1442,6 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--blue);
 }
 
-/* ═══ GOALS ═══ */
 .goals-grid {
   width: 100%;
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -1694,7 +1612,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .perf-layout > .glass-card { margin-top: 0; }
 
-/* ═══ AI REPORTS ═══ */
 .ai-empty {
   display: flex; flex-direction: column;
   align-items: center; gap: var(--sp-4);
@@ -1774,7 +1691,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.05em;
 }
 
-/* Tracker */
 .tracker-stats {
   width: 100%;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -1846,7 +1762,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .charts-2col > .chart-card { margin-top: 0; }
 
-/* ═══ NOTES ═══ */
 .note-editor-card { margin-bottom: var(--sp-5); }
 .ne-topbar {
   display: flex; align-items: center;
@@ -2063,7 +1978,6 @@ input[type="range"]::-webkit-slider-thumb {
 .note-act-btn:hover { background: var(--bg-elev-3); color: var(--tx-1); }
 .note-act-btn.del:hover { background: var(--rose-bg); color: var(--rose); }
 
-/* ═══ PAPERS / LIBRARY ═══ */
 .sat-papers-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: var(--sp-2);
@@ -2161,7 +2075,6 @@ input[type="range"]::-webkit-slider-thumb {
 .ai-result-card, .ai-result-title, .ai-result-desc, .ai-result-foot, .ai-result-meta,
 .ai-loading, .ai-loading-dots, .ai-loading-dot, .ai-badge { display: none; }
 
-/* ═══ JOURNAL ═══ */
 .journal-layout {
   width: 100%;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -2320,7 +2233,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: 0.12em; text-transform: uppercase;
 }
 
-/* ═══ MODALS + TOASTS + FOOTER ═══ */
 .modal-overlay {
   position: fixed; inset: 0;
   z-index: 800;
@@ -2550,7 +2462,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--bg-elev-2);
   border: 1px solid var(--bd-1);
 }
-/* Keep legacy compatibility for old refs */
+
 .footer-sep {
   width: 3px; height: 3px;
   border-radius: 50%;
@@ -2578,7 +2490,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.005em;
 }
 
-/* ═══ RESPONSIVE ═══ */
 @media (max-width: 1100px) {
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .charts-2col { grid-template-columns: 1fr; }
@@ -2652,13 +2563,11 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media (max-width: 520px) {
   .dash-stats { grid-template-columns: 1fr 1fr; }
-  
-  
+
   .tb-streak { display: none; }
   .cd-unit span { font-size: 22px; }
   .cd-unit { padding: var(--sp-4) var(--sp-2); }
-  
-  
+
   .pane-title { font-size: clamp(24px, 6vw, 32px); }
   .modal { padding: var(--sp-6); border-radius: var(--r-7); }
   .tracker-stats { grid-template-columns: repeat(2, 1fr); }
@@ -2684,7 +2593,6 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
-/* ═══ LIGHT THEME REFINEMENTS ═══ */
 [data-theme="light"] .pomo-track { stroke: rgba(0, 0, 0, 0.08); }
 [data-theme="light"] .quote-mark { opacity: 0.15; }
 [data-theme="light"] .ne-body blockquote { background: var(--blue-bg); }
@@ -2710,18 +2618,8 @@ input[type="range"]::-webkit-slider-thumb {
 [data-theme="light"] .note-card:hover,
 [data-theme="light"] .goal-slot.filled:hover { box-shadow: var(--sh-md); }
 
-/* ═══════════════════════════════════════════════════════════════
-   PREMIUM POLISH LAYER · Cinematic Quality Pass
-   These are additive refinements — they enhance without replacing
-═══════════════════════════════════════════════════════════════ */
-
-/* ─── Display typography upgrade ─── */
-
-
 .pane-title { line-height: 0.96; letter-spacing: -0.052em; }
 
-
-/* ─── Premium nebula background (dark) ─── */
 [data-theme="dark"] {
   --bg-glow:
     radial-gradient(ellipse 160% 130% at 3% -20%, rgba(5,35,120,0.85) 0%, transparent 46%),
@@ -2730,7 +2628,6 @@ input[type="range"]::-webkit-slider-thumb {
     radial-gradient(ellipse 80% 70% at 20% 80%, rgba(60,10,120,0.12) 0%, transparent 55%) !important;
 }
 
-/* ─── Premium nebula background (light) ─── */
 [data-theme="light"] {
   --bg-glow:
     radial-gradient(ellipse 130% 100% at 8% -10%, rgba(0,113,227,0.12) 0%, transparent 50%),
@@ -2738,7 +2635,6 @@ input[type="range"]::-webkit-slider-thumb {
     radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255,255,255,0.6) 0%, transparent 70%) !important;
 }
 
-/* ─── Glass card refinement (premium shimmer) ─── */
 .glass-card {
   border-radius: 24px !important;
   transition: background .35s var(--ease-out), border-color .35s, transform .4s var(--ease-out), box-shadow .35s !important;
@@ -2766,7 +2662,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: var(--sh-lg);
 }
 
-/* ─── Premium button refinement ─── */
 .btn-primary {
   font-family: var(--f-display) !important;
   font-weight: 600 !important;
@@ -2803,7 +2698,6 @@ input[type="range"]::-webkit-slider-thumb {
   transform: translateY(-1px) scale(1.025) !important;
 }
 
-/* ─── Sidebar premium polish ─── */
 .sidebar {
   background: rgba(0,0,10,0.90) !important;
   backdrop-filter: saturate(180%) blur(48px) !important;
@@ -2836,7 +2730,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 10px rgba(41,151,255,0.5) !important;
 }
 
-/* ─── Topbar premium glass ─── */
 .topbar {
   background: rgba(0,0,10,0.82) !important;
   backdrop-filter: saturate(180%) blur(32px) !important;
@@ -2856,7 +2749,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.028em !important;
 }
 
-/* ─── Modals — premium glass treatment ─── */
 .modal {
   background: rgba(4,4,18,0.97) !important;
   backdrop-filter: blur(48px) saturate(180%) !important;
@@ -2886,7 +2778,6 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
 }
 
-/* ─── Toasts — pill-shaped premium ─── */
 .toast {
   border-radius: 100px !important;
   background: rgba(0,0,10,0.92) !important;
@@ -2908,7 +2799,6 @@ input[type="range"]::-webkit-slider-thumb {
   to { opacity: 1; transform: none; }
 }
 
-/* ─── Inputs — premium focus rings ─── */
 .input-field,
 .form-input,
 .cell {
@@ -2923,7 +2813,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 0 3px rgba(0,113,227,0.13), 0 0 20px rgba(0,113,227,0.06) !important;
 }
 
-/* ─── Pane eyebrow — line prefix style ─── */
 .pane-eyebrow {
   font-family: var(--f-mono) !important;
   font-size: 11.5px !important;
@@ -2932,7 +2821,6 @@ input[type="range"]::-webkit-slider-thumb {
   opacity: 0.92;
 }
 
-/* ─── Card label — line prefix ─── */
 .card-label {
   font-family: var(--f-mono) !important;
   font-size: 11px !important;
@@ -2941,7 +2829,6 @@ input[type="range"]::-webkit-slider-thumb {
   opacity: 0.92;
 }
 
-/* ─── Stat cards — premium HUD look ─── */
 .stat-card,
 .tstat {
   border-radius: 20px !important;
@@ -2959,7 +2846,6 @@ input[type="range"]::-webkit-slider-thumb {
   font-variant-numeric: tabular-nums;
 }
 
-/* ─── Task items — premium hover ─── */
 .task-item {
   transition: background .22s var(--ease-out), border-color .22s, transform .25s var(--ease-out) !important;
   border-radius: 14px !important;
@@ -2968,7 +2854,6 @@ input[type="range"]::-webkit-slider-thumb {
   transform: translateX(4px);
 }
 
-/* ─── Reference cards — premium shimmer ─── */
 .ref-card {
   border-radius: 16px !important;
   transition: background .3s var(--ease-out), border-color .3s, transform .4s var(--ease-out), box-shadow .3s !important;
@@ -2978,7 +2863,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: var(--sh-md);
 }
 
-/* ─── Notes — premium card style ─── */
 .note-card {
   border-radius: 16px !important;
   transition: background .3s var(--ease-out), border-color .3s, transform .4s var(--ease-out), box-shadow .3s !important;
@@ -2988,7 +2872,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: var(--sh-lg);
 }
 
-/* ─── Practice question cards — left accent bar ─── */
 .pq-item {
   border-radius: 16px !important;
   position: relative;
@@ -3012,7 +2895,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.018em;
 }
 
-/* ─── Goal cards — premium hover ─── */
 .goal-slot {
   border-radius: 20px !important;
   transition: background .3s var(--ease-out), border-color .3s, transform .4s var(--ease-out), box-shadow .3s !important;
@@ -3027,7 +2909,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.024em !important;
 }
 
-/* ─── Schedule cells — premium ─── */
 .sch-cell {
   border-radius: 12px !important;
   transition: all .25s var(--ease-out) !important;
@@ -3036,7 +2917,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 0 3px rgba(41,151,255,0.13) !important;
 }
 
-/* ─── Journal entries — left accent ─── */
 .journal-entry {
   border-radius: 16px !important;
   position: relative;
@@ -3058,10 +2938,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .journal-entry:hover::before { transform: scaleY(1); }
 
-/* ─── Welcome screen polish ─── */
-
-
-/* ─── Streak tile flicker ─── */
 .tb-streak {
   border-radius: 100px !important;
   transition: all .35s var(--ease-out) !important;
@@ -3076,12 +2952,10 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.042em !important;
 }
 
-/* ─── Pomo timer premium ─── */
 .pomo-time {
   font-variant-numeric: tabular-nums;
 }
 
-/* ─── Footer brand ─── */
 .footer-brand,
 .app-footer .footer-brand {
   font-family: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif !important;
@@ -3089,7 +2963,6 @@ input[type="range"]::-webkit-slider-thumb {
   letter-spacing: -0.040em !important;
 }
 
-/* ─── Premium scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb {
   background: var(--bd-2) !important;
@@ -3100,7 +2973,6 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--bd-3) !important;
 }
 
-/* ─── Focus visible — accessibility ─── */
 :focus-visible {
   outline: 2px solid var(--blue) !important;
   outline-offset: 3px !important;
@@ -3111,7 +2983,6 @@ a:focus-visible {
   outline-offset: 3px !important;
 }
 
-/* ─── Reduced motion — accessibility ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -3121,7 +2992,6 @@ a:focus-visible {
   
 }
 
-/* ─── Premium animations ─── */
 @keyframes premiumFadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
@@ -3132,7 +3002,6 @@ a:focus-visible {
   to { opacity: 1; transform: none; }
 }
 
-/* ─── Responsive refinements ─── */
 @media (max-width: 1200px) {
   .pane { padding: 28px 32px !important; }
 }
@@ -3168,17 +3037,11 @@ a:focus-visible {
   .tb-streak-label { display: none; }
 }
 
-/* ─── Print ─── */
 @media print {
   
   .main { margin-left: 0 !important; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FINAL POLISH · Light/Dark Uniformity Pass
-═══════════════════════════════════════════════════════════════ */
-
-/* ─── Footer 2-column layout (mid removed) ─── */
 .app-footer {
   justify-content: space-between !important;
   align-items: center !important;
@@ -3241,9 +3104,6 @@ a:focus-visible {
   }
 }
 
-/* ─── LIGHT/DARK THEME UNIFORMITY ─── */
-
-/* Glass cards — matched elevation in both themes */
 [data-theme="light"] .glass-card {
   background: rgba(255,255,255,0.78) !important;
   border-color: rgba(0,0,0,0.08) !important;
@@ -3266,7 +3126,6 @@ a:focus-visible {
   border-color: rgba(255,255,255,0.10) !important;
 }
 
-/* Stat cards — uniform light/dark */
 [data-theme="light"] .stat-card,
 [data-theme="light"] .tstat {
   background: rgba(255,255,255,0.92) !important;
@@ -3279,7 +3138,6 @@ a:focus-visible {
   box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
 }
 
-/* Modal — uniform glass treatment */
 [data-theme="light"] .modal {
   background: rgba(255,255,255,0.98) !important;
   border-color: rgba(0,0,0,0.08) !important;
@@ -3290,7 +3148,6 @@ a:focus-visible {
   opacity: 0.55 !important;
 }
 
-/* Sidebar — uniform glass */
 [data-theme="light"] .sidebar {
   background: rgba(255,255,255,0.88) !important;
   border-right-color: rgba(0,0,0,0.06) !important;
@@ -3312,13 +3169,11 @@ a:focus-visible {
   box-shadow: 0 0 10px rgba(0,113,227,0.45) !important;
 }
 
-/* Topbar — uniform glass */
 [data-theme="light"] .topbar {
   background: rgba(245,245,247,0.86) !important;
   border-bottom-color: rgba(0,0,0,0.06) !important;
 }
 
-/* Footer — uniform glass */
 [data-theme="light"] .app-footer {
   background: rgba(245,245,247,0.86) !important;
   border-top: 1px solid rgba(0,0,0,0.06) !important;
@@ -3333,7 +3188,6 @@ a:focus-visible {
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
 }
 
-/* Buttons — match in both themes */
 [data-theme="light"] .btn-primary {
   background: #1d1d1f !important;
   color: #ffffff !important;
@@ -3352,7 +3206,6 @@ a:focus-visible {
   border-color: rgba(0,0,0,0.16) !important;
 }
 
-/* Inputs — uniform feel */
 [data-theme="light"] .input-field,
 [data-theme="light"] .form-input,
 [data-theme="light"] .cell {
@@ -3371,7 +3224,6 @@ a:focus-visible {
   color: rgba(99,99,102,0.7) !important;
 }
 
-/* Task / note / goal / ref cards — uniform light theme */
 [data-theme="light"] .task-item,
 [data-theme="light"] .note-card,
 [data-theme="light"] .ref-card,
@@ -3398,14 +3250,12 @@ a:focus-visible {
   box-shadow: 0 6px 20px rgba(0,0,0,0.05) !important;
 }
 
-/* Toasts — uniform in light */
 [data-theme="light"] .toast {
   background: rgba(29,29,31,0.96) !important;
   color: #ffffff !important;
   box-shadow: 0 12px 32px rgba(0,0,0,0.20), 0 0 0 1px rgba(0,0,0,0.04) !important;
 }
 
-/* Pomo presets / chips / tabs — uniform */
 [data-theme="light"] .ref-tab.active,
 [data-theme="light"] .preset.on,
 [data-theme="light"] .pomo-preset-btn.on {
@@ -3418,7 +3268,6 @@ a:focus-visible {
   border-color: rgba(0,0,0,0.08) !important;
 }
 
-/* Schedule cells light theme */
 [data-theme="light"] .sch-cell {
   background: rgba(255,255,255,0.85) !important;
   border-color: rgba(0,0,0,0.07) !important;
@@ -3429,7 +3278,6 @@ a:focus-visible {
   color: var(--blue) !important;
 }
 
-/* Pane title contrast in light */
 [data-theme="light"] .pane-title {
   color: #1d1d1f !important;
 }
@@ -3440,7 +3288,6 @@ a:focus-visible {
   color: rgba(58,58,60,0.85) !important;
 }
 
-/* Streak tile — matched both themes */
 [data-theme="light"] .tb-streak {
   background: linear-gradient(135deg, rgba(255,159,10,0.10), rgba(255,159,10,0.04)) !important;
   border-color: rgba(204,119,0,0.30) !important;
@@ -3452,11 +3299,6 @@ a:focus-visible {
   color: #cc7700 !important;
 }
 
-/* Welcome screen light */
-
-
-
-/* Refined hover lift values — uniform */
 .glass-card:hover,
 .stat-card:hover,
 .note-card:hover,
@@ -3465,13 +3307,11 @@ a:focus-visible {
   transform: translateY(-2px);
 }
 
-/* Pane eyebrow + card label — uniform color */
 .pane-eyebrow,
 .card-label {
   color: var(--blue) !important;
 }
 
-/* Scrollbar light */
 [data-theme="light"] ::-webkit-scrollbar-thumb {
   background: rgba(0,0,0,0.15) !important;
 }
@@ -3479,12 +3319,10 @@ a:focus-visible {
   background: rgba(0,0,0,0.25) !important;
 }
 
-/* Subtle improvements */
 body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Smooth theme transition */
 .glass-card, .stat-card, .modal, .topbar, .sidebar, .app-footer,
 .btn-primary, .btn-outline, .input-field, .form-input,
 .task-item, .note-card, .ref-card, .pq-item, .journal-entry,
@@ -3494,11 +3332,6 @@ body {
   transition-timing-function: var(--ease-out) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER + PREMIUM UNIFORMITY · v20260518
-═══════════════════════════════════════════════════════════════ */
-
-/* ── FOOTER: enforce 2-column, right-aligned copy + version ── */
 .app-footer {
   display: flex !important;
   align-items: center !important;
@@ -3621,10 +3454,8 @@ body {
   background: var(--blue-bg);
 }
 
-/* hide middle nav if any leftover */
 .footer-mid, .footer-link, .footer-dot { display: none !important; }
 
-/* ── FOOTER LIGHT THEME ── */
 [data-theme="light"] .app-footer {
   background: rgba(255,255,255,0.92) !important;
   border-top-color: rgba(0,0,0,0.07) !important;
@@ -3655,14 +3486,12 @@ body {
   color: #0071e3 !important;
 }
 
-/* ── FOOTER DARK THEME ── */
 [data-theme="dark"] .app-footer,
 :root:not([data-theme="light"]) .app-footer {
   background: rgba(0,0,10,0.86) !important;
   border-top-color: rgba(255,255,255,0.06) !important;
 }
 
-/* ── FOOTER RESPONSIVE ── */
 @media (max-width: 900px) {
   .app-footer { padding: 20px 24px !important; gap: 16px !important; }
   .footer-tagline { font-size: 12px !important; }
@@ -3693,11 +3522,6 @@ body {
   .footer-copy { font-size: 10.5px !important; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PREMIUM UNIFORMITY ENHANCEMENTS
-═══════════════════════════════════════════════════════════════ */
-
-/* Smoother typography rendering */
 body {
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
@@ -3705,7 +3529,6 @@ body {
   font-feature-settings: 'cv11', 'ss01', 'ss03';
 }
 
-/* Premium card hover — unified across both themes */
 .glass-card,
 .stat-card,
 .note-card,
@@ -3721,7 +3544,6 @@ body {
   will-change: transform;
 }
 
-/* Refined hover lift — subtle but premium */
 .note-card:hover,
 .ref-card:hover {
   transform: translateY(-3px) !important;
@@ -3732,7 +3554,6 @@ body {
   transform: translateY(-2px) !important;
 }
 
-/* Premium light theme card depth */
 [data-theme="light"] .stat-card,
 [data-theme="light"] .tstat,
 [data-theme="light"] .glass-card,
@@ -3756,7 +3577,6 @@ body {
     0 0 0 1px rgba(0,0,0,0.04) !important;
 }
 
-/* Dark theme card depth */
 [data-theme="dark"] .stat-card,
 [data-theme="dark"] .tstat,
 [data-theme="dark"] .glass-card,
@@ -3792,12 +3612,10 @@ body {
     inset 0 1px 0 rgba(255,255,255,0.05) !important;
 }
 
-/* Smoother edge on all rounded elements */
 .glass-card, .stat-card, .modal, .note-card, .ref-card, .goal-slot, .pq-item, .journal-entry {
   isolation: isolate;
 }
 
-/* Premium text selection */
 ::selection {
   background: var(--blue);
   color: #ffffff;
@@ -3807,7 +3625,6 @@ body {
   color: #1d1d1f;
 }
 
-/* Loading skeleton uniformity */
 .skeleton, [data-loading] {
   background: linear-gradient(
     90deg,
@@ -3822,13 +3639,6 @@ body {
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER FINAL FIX · v20260519
-   Original CSS uses grid 1fr|auto|1fr expecting 3 columns.
-   We removed .footer-mid, so right column collapses to center.
-   Solution: switch to 2-column grid with right-justified right side.
-═══════════════════════════════════════════════════════════════ */
 
 .app-footer {
   display: grid !important;
@@ -3856,7 +3666,6 @@ body {
   margin-left: 0 !important;
 }
 
-/* Re-enforce mobile stacking */
 @media (max-width: 720px) {
   .app-footer {
     grid-template-columns: 1fr !important;
@@ -3875,111 +3684,18 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   WELCOME SCREEN FINAL POLISH · v20260520
-   Fix: line overlap, footer overlap, premium typography
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Welcome center container ── */
-
-
-/* ── Eyebrow badge — pill-shaped, centered ── */
-
-
-
-
 @keyframes wDotPulse {
   0%,100% { opacity:1; transform: scale(1); }
   50%     { opacity:.65; transform: scale(0.9); }
 }
 
-
-
-
-
-/* ── HEADLINE: Study / with / intention — fix overlap ── */
-
-
-
-
-
-
-
-
-
-
-/* ── Sub-paragraph spacing ── */
-
-
-/* ── Begin card ── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ── Meta strip (AI · Smart · Free) — fix overlap with footer ── */
-
-
-
-
-
-
-
-
-
-
-
-/* ── W footer ── */
-
-
-
-
-
-/* ── Corner markers (top) ── */
-
-
-
-
-
-
-
-/* ── Responsive welcome ── */
 @media (max-width: 720px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-width: 480px) {
-  
-  
-  
-  
-  
+
 }
 
-/* ── Smooth canvas ── */
-
-
-
-/* ═══════════════════════════════════════════════════════════════
-   PREMIUM CURSOR + GLOBAL MOTION POLISH · v20260521
-═══════════════════════════════════════════════════════════════ */
-
-/* ── CURSOR SYSTEM ── */
 #cur-d, #cur-r {
   position: fixed;
   top: 0; left: 0;
@@ -3999,7 +3715,7 @@ body {
     height .25s cubic-bezier(0.16,1,0.3,1),
     opacity .25s,
     background .3s;
-  /* mix-blend-mode removed for compat */
+  
 }
 
 #cur-r {
@@ -4029,7 +3745,6 @@ body {
   transition: opacity .3s;
 }
 
-/* Hover states */
 body.ch #cur-d {
   width: 0;
   height: 0;
@@ -4046,7 +3761,6 @@ body.ch #cur-r {
   border-color: rgba(0,0,0,0.45);
 }
 
-/* Link */
 body.c-link #cur-d {
   width: 8px;
   height: 8px;
@@ -4062,7 +3776,6 @@ body.c-link #cur-r {
   border-color: rgba(41,151,255,0.55);
 }
 
-/* Button */
 body.c-btn #cur-d {
   width: 0;
   height: 0;
@@ -4075,14 +3788,12 @@ body.c-btn #cur-r {
   border-color: rgba(41,151,255,0.5);
 }
 
-/* Press */
 body.cp #cur-r {
   width: 30px;
   height: 30px;
   transition-duration: 0.12s !important;
 }
 
-/* Hide native cursor only when our cursor is active */
 @media (hover: hover) and (pointer: fine) {
   
   input[type="text"], input[type="email"], input[type="number"],
@@ -4091,7 +3802,6 @@ body.cp #cur-r {
   }
 }
 
-/* ── SCROLL REVEAL ── */
 .rv-item {
   opacity: 0;
   transform: translateY(20px);
@@ -4105,14 +3815,10 @@ body.cp #cur-r {
   transform: none;
 }
 
-/* ── GLOBAL TRANSITION POLISH ── */
-
-/* Premium easing on every interactive element */
 *, *::before, *::after {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Force smooth, GPU-accelerated transitions on cards */
 .glass-card, .stat-card, .note-card, .ref-card, .goal-slot,
 .task-item, .pq-item, .journal-entry, .sat-row, .paper-item,
 .score-item, .tstat, .practice-refs-group {
@@ -4127,10 +3833,6 @@ body.cp #cur-r {
   transform: translateZ(0);
 }
 
-/* Buttons get spring */
-
-
-/* Nav items smooth */
 .nav-item, .tb-icon-btn, .tb-streak, .tb-avatar,
 .note-act-btn, .goal-action-btn, .modal-close, .ne-tool,
 .task-mini-item {
@@ -4142,10 +3844,6 @@ body.cp #cur-r {
     box-shadow .25s !important;
 }
 
-/* Inputs smooth */
-
-
-/* Theme switch smoothness */
 body, .sidebar, .topbar, .app-footer, .modal, .toast,
 .glass-card, .stat-card, .nav-item, .input-field {
   transition-property: background-color, border-color, color, box-shadow, opacity;
@@ -4153,17 +3851,12 @@ body, .sidebar, .topbar, .app-footer, .modal, .toast,
   transition-timing-function: cubic-bezier(0.16,1,0.3,1);
 }
 
-/* Refined hover for nav items */
 .nav-item:hover {
   transform: translateX(2px);
 }
 .nav-item.active {
   transform: translateX(0) !important;
 }
-
-/* Refined hover for buttons */
-
-
 
 .btn-outline:hover {
   transform: translateY(-1px) scale(1.02) !important;
@@ -4172,7 +3865,6 @@ body, .sidebar, .topbar, .app-footer, .modal, .toast,
   transform: scale(0.98) !important;
 }
 
-/* Icon button micro-interactions */
 .tb-icon-btn:hover {
   transform: scale(1.08);
 }
@@ -4180,7 +3872,6 @@ body, .sidebar, .topbar, .app-footer, .modal, .toast,
   transform: scale(0.92);
 }
 
-/* Modal entrance refined */
 .modal {
   animation: modalEntrance .5s cubic-bezier(0.16,1,0.3,1) !important;
 }
@@ -4201,7 +3892,6 @@ body, .sidebar, .topbar, .app-footer, .modal, .toast,
   transition: opacity .3s cubic-bezier(0.16,1,0.3,1), backdrop-filter .3s !important;
 }
 
-/* Toast slide */
 .toast {
   animation: toastSlide .5s cubic-bezier(0.34,1.56,0.64,1) both !important;
 }
@@ -4216,12 +3906,10 @@ body, .sidebar, .topbar, .app-footer, .modal, .toast,
   }
 }
 
-/* Sidebar mobile slide */
 .sidebar {
   transition: transform .45s cubic-bezier(0.16,1,0.3,1) !important;
 }
 
-/* Pane fade-in when switching sections */
 section[id^="p-"] {
   animation: paneFade .55s cubic-bezier(0.16,1,0.3,1);
 }
@@ -4236,7 +3924,6 @@ section[id^="p-"] {
   }
 }
 
-/* Page entry shimmer */
 .pane-title,
 .pane-eyebrow,
 .pane-sub {
@@ -4250,25 +3937,21 @@ section[id^="p-"] {
   to { opacity: 1; transform: none; }
 }
 
-/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Premium focus ring with smoothness */
 :focus-visible {
   outline: 2px solid var(--blue) !important;
   outline-offset: 3px !important;
   transition: outline-offset .2s, outline-color .2s !important;
 }
 
-/* Disable cursor system on touch */
 @media (hover: none), (pointer: coarse) {
   #cur-d, #cur-r, #trail-cv { display: none !important; }
   body, button, a { cursor: auto !important; }
 }
 
-/* Disable cursor for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   #cur-d, #cur-r, #trail-cv { display: none !important; }
   *, *::before, *::after {
@@ -4279,7 +3962,6 @@ html {
   }
 }
 
-/* Card holographic shimmer using --mx/--my */
 .glass-card,
 .stat-card,
 .note-card,
@@ -4328,191 +4010,59 @@ html {
   z-index: 1;
 }
 
-
-/* ─── CURSOR SAFETY: never block clicks ─── */
 #cur-d, #cur-r, #trail-cv {
   pointer-events: none !important;
   user-select: none !important;
   -webkit-user-select: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   WELCOME SCREEN — FINAL CLEAN RESPONSIVE FIX · v20260523
-   This overrides all previous welcome screen rules with a clean,
-   bulletproof layout that works on every screen size.
-═══════════════════════════════════════════════════════════════ */
-
-/* Welcome screen container — scrollable, never clipped */
-
-
-/* Centered content wrapper */
-
-
-/* Eyebrow badge — green dot + text in a pill */
-
-
-/* Show only the FIRST line span, hide the second */
-
-
-
-
 @keyframes wDotPulse {
   0%,100% { opacity:1; transform: scale(1); }
   50%     { opacity:.55; transform: scale(0.85); }
 }
 
-
-
-
-
-/* Headline: Study / with / intention. — proper stacked layout */
-
-
-
-
-
-
-
-
-
-
-
-
-/* Sub-paragraph */
-
-
-/* Begin card */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* AI · Smart · Free meta strip — properly contained */
-
-
-
-
-
-
-
-
-
-
-
-/* Welcome footer — properly contained, never cut off */
-
-
-
-
-
-
-/* Corner markers — small, fixed, never overlap */
-
-
-
-
-
-
-
-/* ─── RESPONSIVE BREAKPOINTS ─── */
-
-/* Tablet & smaller laptops */
 @media (max-width: 900px) {
-  
-  
-  
+
 }
 
-/* Mobile */
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 
-/* Very small screens */
 @media (max-width: 380px) {
-  
-  
-  
-  
+
 }
 
-/* Very tall screens (avoid stretching content) */
 @media (min-height: 1000px) {
   
 }
 
-/* Short screens — compress vertical spacing */
 @media (max-height: 700px) {
-  
-  
-  
-  
-  
+
 }
 
-/* Background must scroll with content — canvas/grain stays fixed */
-
-
-
-/* ═══════════════════════════════════════════════════════════════
-   MAIN APP — COMPLETE RESPONSIVE OVERRIDE · v20260523
-   Ensures the entire app works perfectly at every screen size
-═══════════════════════════════════════════════════════════════ */
-
-/* Base — never allow horizontal scroll */
 html, body {
   max-width: 100vw !important;
   overflow-x: hidden !important;
 }
 
-/* App container */
 #app {
   min-height: 100vh !important;
   width: 100% !important;
   position: relative !important;
 }
 
-/* ── MOBILE: ≤900px ── */
 @media (max-width: 900px) {
-  /* Sidebar collapses, appears as overlay */
-  
-  
 
-  /* Main content takes full width */
   .main {
     margin-left: 0 !important;
     width: 100% !important;
   }
 
-  /* Mobile toggle visible */
   .mob-toggle, .mob-menu-btn {
     display: inline-flex !important;
   }
 
-  /* Topbar tighter */
   .topbar {
     padding: 0 16px !important;
     gap: 12px !important;
@@ -4525,16 +4075,13 @@ html, body {
     text-overflow: ellipsis !important;
   }
 
-  /* Panes tighter padding */
   .pane, section.pane {
     padding: 24px 20px !important;
   }
 
-  /* Headers responsive */
   .pane-title { font-size: clamp(28px, 7vw, 44px) !important; }
   .pane-sub { font-size: 14px !important; }
 
-  /* Stats grid 2-up */
   .dash-stats,
   .stat-grid,
   .tracker-stats {
@@ -4542,7 +4089,6 @@ html, body {
     gap: 12px !important;
   }
 
-  /* Two-column layouts stack */
   .focus-layout,
   .perf-layout,
   .journal-layout,
@@ -4554,10 +4100,8 @@ html, body {
     gap: 20px !important;
   }
 
-  /* Goals grid */
   .goals-grid { grid-template-columns: 1fr !important; }
 
-  /* Footer stacks */
   .app-footer {
     grid-template-columns: 1fr !important;
     padding: 20px !important;
@@ -4574,7 +4118,6 @@ html, body {
     padding-left: 0 !important;
   }
 
-  /* Modal full-width */
   .modal {
     margin: 16px !important;
     width: calc(100% - 32px) !important;
@@ -4582,14 +4125,12 @@ html, body {
   }
 }
 
-/* ── SMALL TABLET / LARGE PHONE: ≤640px ── */
 @media (max-width: 640px) {
   .pane, section.pane {
     padding: 20px 16px !important;
   }
   .pane-title { font-size: clamp(24px, 8vw, 36px) !important; }
 
-  /* All grids single column */
   .ref-grid,
   .notes-grid,
   .notes-masonry,
@@ -4597,37 +4138,31 @@ html, body {
     grid-template-columns: 1fr !important;
   }
 
-  /* Stat numbers smaller */
   .stat-num,
   .tstat-val {
     font-size: clamp(28px, 8vw, 40px) !important;
   }
 
-  /* Topbar minimal */
   .topbar { padding: 0 14px !important; gap: 8px !important; }
   .tb-greeting { font-size: 13px !important; max-width: 30vw !important; }
   .tb-clock { font-size: 11px !important; }
   .tb-icon-btn { width: 32px !important; height: 32px !important; }
   .tb-avatar { width: 30px !important; height: 30px !important; font-size: 12px !important; }
 
-  /* Streak compact */
   .tb-streak { padding: 6px 12px 6px 8px !important; gap: 8px !important; }
   .tb-streak-icon { width: 16px !important; height: 16px !important; }
   .tb-streak-icon svg { width: 13px !important; height: 13px !important; }
   .tb-streak-num { font-size: 14px !important; }
   .tb-streak-label { font-size: 7.5px !important; }
 
-  /* Buttons tighter */
   .btn-primary, .btn-outline {
     padding: 11px 22px !important;
     font-size: 13.5px !important;
   }
 
-  /* Footer */
   .footer-tagline { display: none !important; }
   .footer-copy { font-size: 10px !important; }
 
-  /* Schedule horizontal scroll smooth */
   .cal-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
   .schedule-grid {
     grid-template-columns: 52px repeat(7, minmax(80px, 1fr)) !important;
@@ -4635,19 +4170,16 @@ html, body {
   }
   .sch-cell { font-size: 11.5px !important; min-height: 40px !important; padding: 8px 10px !important; }
 
-  /* Pomodoro tight */
   .pomo-ring-wrap { width: 180px !important; height: 180px !important; }
   .pomo-svg { width: 180px !important; height: 180px !important; }
   .pomo-time { font-size: 36px !important; }
 }
 
-/* ── SMALL PHONE: ≤420px ── */
 @media (max-width: 420px) {
   .pane, section.pane { padding: 16px 14px !important; }
   .pane-title { font-size: clamp(22px, 9vw, 30px) !important; }
   .pane-sub { font-size: 13px !important; }
 
-  /* Stats — 1 column on tiny */
   .dash-stats,
   .stat-grid {
     grid-template-columns: 1fr 1fr !important;
@@ -4658,13 +4190,10 @@ html, body {
   }
   .stat-num, .tstat-val { font-size: clamp(24px, 9vw, 32px) !important; }
 
-  /* Hide non-essential UI */
   .tb-clock { display: none !important; }
 
-  /* Cards tighter */
   .glass-card { padding: 16px !important; }
 
-  /* Ref tabs scroll horizontally */
   .ref-tabs {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
@@ -4674,17 +4203,10 @@ html, body {
   .ref-tab { white-space: nowrap !important; padding: 6px 12px !important; font-size: 11.5px !important; }
 }
 
-/* ── LANDSCAPE PHONE / SHORT SCREENS ── */
 @media (max-height: 600px) and (orientation: landscape) {
-  
-  
-  
-  
-  
-  
+
 }
 
-/* ── LARGE SCREENS: 1600px+ ── */
 @media (min-width: 1600px) {
   .pane, section.pane {
     padding: 48px 64px !important;
@@ -4694,12 +4216,10 @@ html, body {
   }
 }
 
-/* ── ULTRA-WIDE: 2000px+ ── */
 @media (min-width: 2000px) {
   .pane, section.pane { padding: 56px 80px !important; max-width: 1800px !important; }
 }
 
-/* ── TOUCH DEVICES — disable custom cursor ── */
 @media (hover: none), (pointer: coarse) {
   #cur-d, #cur-r, #trail-cv { display: none !important; }
   body, button, a, input, textarea, select { cursor: auto !important; }
@@ -4708,7 +4228,6 @@ html, body {
   }
 }
 
-/* ── ENSURE NO ELEMENT OVERFLOWS ── */
 .glass-card,
 .stat-card,
 .note-card,
@@ -4720,158 +4239,44 @@ html, body {
   overflow-wrap: break-word !important;
 }
 
-/* All images and canvases never overflow */
 img, canvas, video, svg {
   max-width: 100% !important;
   height: auto !important;
 }
 
-/* Inputs never overflow */
 input, textarea, select {
   max-width: 100% !important;
   min-width: 0 !important;
 }
 
-/* Long text breaks gracefully */
 .note-title, .goal-name, .task-text, .pq-q, .sat-title, .paper-title {
   word-break: break-word !important;
   overflow-wrap: break-word !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FINAL CLEAN PASS · v20260525
-   Disable broken cursor, restore native, fix all overflow issues
-═══════════════════════════════════════════════════════════════ */
-
-/* RESTORE NATIVE CURSOR — kill all cursor: none rules */
-
-
-
-
 input, textarea, [contenteditable="true"] {
   cursor: text !important;
 }
 
-/* HIDE any leftover cursor canvas/dots */
 #cur-d, #cur-r, #trail-cv {
   display: none !important;
 }
 
-/* ───────────────────────────────────────────────────
-   WELCOME SCREEN — COMPLETE LAYOUT REBUILD
-   Use overlay scroll, contained footer, no overlaps
-─────────────────────────────────────────────────── */
-
-
-
-
-
-/* Eyebrow badge — clean pill */
-
-
-
-
-
-
-
-
-/* Headline stack */
-
-
-
-
-
-
-
-/* Subtitle */
-
-
-/* BEGIN card — fully clickable, no overlap */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Meta strip — clean, contained */
-
-
-
-
-
-
-
-
-
-
-/* Welcome footer — single line, contained, never blocks anything */
-
-
-
-
-
-
-/* Top corner markers */
-
-
-
-
-
-
-/* Background canvases fixed to viewport */
-
-
-
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-═══════════════════════════════════════════════════════════════ */
-
 @media (max-width: 900px) {
-  
-  
+
 }
 
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 
 @media (max-width: 380px) {
-  
-  
-  
-  
+
 }
 
 @media (max-height: 700px) and (orientation: landscape) {
-  
-  
-  
-  
-  
-}
 
-/* ═══════════════════════════════════════════════════════════════
-   MAIN APP RESPONSIVE — bulletproof
-═══════════════════════════════════════════════════════════════ */
+}
 
 html, body {
   max-width: 100vw !important;
@@ -4879,8 +4284,7 @@ html, body {
 }
 
 @media (max-width: 900px) {
-  
-  
+
   .main { margin-left: 0 !important; width: 100% !important; }
   .mob-toggle, .mob-menu-btn { display: inline-flex !important; }
   .topbar { padding: 0 16px !important; gap: 12px !important; height: 60px !important; }
@@ -4965,10 +4369,6 @@ html, body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   UNIVERSAL OVERFLOW SAFETY
-═══════════════════════════════════════════════════════════════ */
-
 .glass-card, .stat-card, .note-card, .ref-card, .modal, .toast {
   max-width: 100% !important;
   word-wrap: break-word !important;
@@ -4991,268 +4391,52 @@ input, textarea, select {
   overflow-wrap: break-word !important;
 }
 
-
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · v20260527 · Single authoritative module
-   Replaces all previous welcome-screen styles
-   ════════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-/* Corner markers — top only */
-
-
-
-
-
-/* Centered content wrapper */
-
-
-/* Eyebrow badge */
-
-
-
-
-
 @keyframes wPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.55; transform: scale(0.85); }
 }
 
-
-
-
-
-/* Headline stack */
-
-
-
-
-
-
-
-
-
-/* Subtitle */
-
-
-
-/* Begin card */
-
-
-
-
-
-
-
-
-
-/* CRITICAL: input must be fully interactive */
-
-
-
-
-
-
-
-
-
-
-
-
-/* Meta strip — AI · Smart · Free */
-
-
-
-
-
-
-
-
-/* Responsive */
 @media (max-width: 900px) {
   
 }
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-width: 380px) {
-  
-  
-  
-  
+
 }
 @media (max-height: 700px) and (orientation: landscape) {
-  
-  
-  
-  
-  
+
 }
 
-/* Hide any orphaned cursor system from prior versions */
 #cur-d, #cur-r, #trail-cv { display: none; }
 
-/* Make sure native cursor works everywhere */
 html, body, input, textarea, button, a, [role="button"] {
   cursor: auto;
 }
 
-
-
-/* ════════════════════════════════════════════════════════════════
-   WELCOME SCREEN FINAL POLISH · v20260529
-   - Restore blue nebula glow
-   - Fit content to viewport (no scroll)
-   ════════════════════════════════════════════════════════════════ */
-
-/* Restore the cinematic blue nebula gradient */
-
-
-/* Light theme: keep it subtle */
-
-
-/* Make welcome content fit viewport — no vertical scroll */
-
-
-
-/* Tighter spacing so everything fits without scroll */
-
-
-
-
-
-/* On short screens, compress further */
 @media (max-height: 800px) {
-  
-  
-  
-  
+
 }
 @media (max-height: 680px) {
-  
-  
-  
-  
-  
-  
-}
 
-/* Mobile: allow scroll if truly needed (only if content > screen) */
-@media (max-width: 640px) {
-  
-  
-}
-
-/* Particles canvas — make sure it's visible above the nebula but below content */
-
-
-/* Grain stays subtle on top */
-
-
-/* ════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · v20260530 · x.ai × Apple cosmic redesign
-   Same dark navy as main app + starfield + atmospheric glow
-   ════════════════════════════════════════════════════════════════ */
-
-/* Match main app's deep space color */
-
-
-/* Add a soft horizon line at the bottom (Apple-style) */
-
-
-/* Add a top glow sheen */
-
-
-
-
-
-
-/* Starfield canvas */
-
-
-
-
-
-/* Content layer above all background effects */
-
-
-
-/* Premium card refinement (Apple style — clean glass, no over-decoration) */
-
-
-
-/* Refined eyebrow — Apple/Grok hybrid */
-
-
-
-
-
-
-
-/* Top corner markers — refined */
-
-
-
-
-/* Subtitle gets a cosmic blue tint */
-
-
-
-/* Meta tiles get a subtle premium glow on hover */
-
-
-
-
-
-/* Fit-to-viewport (keep no-scroll) */
-
-
-@media (max-height: 800px) {
-  
-  
-  
-  
-}
-@media (max-height: 680px) {
-  
-  
-  
-  
-  
-  
 }
 
 @media (max-width: 640px) {
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   COMPREHENSIVE FIX PASS · v20260531
-   - Modals: center, sized properly (not full-width)
-   - Welcome screen: cleaner cosmic theme, info button
-   - Info modal: premium glass with safety notice
-   - Custom cursor (unified light + dark)
-   - Spacing & alignment refinements
-   ════════════════════════════════════════════════════════════════════ */
+@media (max-height: 800px) {
 
-/* ── MODALS: properly centered, never full-width on desktop ── */
+}
+@media (max-height: 680px) {
+
+}
+
+@media (max-width: 640px) {
+
+}
+
 .modal-overlay {
   display: none;
   position: fixed;
@@ -5345,7 +4529,6 @@ html, body, input, textarea, button, a, [role="button"] {
   background: rgba(0,0,0,0.06);
 }
 
-/* Modal form spacing */
 .modal .form-group {
   margin-bottom: 16px;
 }
@@ -5409,95 +4592,14 @@ html, body, input, textarea, button, a, [role="button"] {
   .modal-header h3 { font-size: 18px; }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · cosmic refinement
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-/* Info button (top-right of welcome) */
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   WELCOME INFO MODAL
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 560px) {
   
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 640px) {
-  
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════
-   PREMIUM CURSOR (unified, both themes, smooth)
-   ════════════════════════════════════════════════════════════════ */
-
-/* Hide custom cursor on touch / coarse pointer */
 @media (hover: hover) and (pointer: fine) {
   html, body { cursor: none; }
 
@@ -5543,7 +4645,6 @@ html, body, input, textarea, button, a, [role="button"] {
     background: rgba(80, 150, 255, 0.04);
   }
 
-  /* Hover states */
   body.cur-hover #studyos-cursor {
     width: 6px;
     height: 6px;
@@ -5581,7 +4682,6 @@ html, body, input, textarea, button, a, [role="button"] {
     height: 6px;
   }
 
-  /* Light theme cursor */
   [data-theme="light"] #studyos-cursor {
     background: rgba(0, 113, 227, 0.95);
     box-shadow:
@@ -5604,7 +4704,6 @@ html, body, input, textarea, button, a, [role="button"] {
     background: rgba(0, 113, 227, 0.15);
   }
 
-  /* Hide cursor over inputs (let browser handle the text caret) */
   input:focus ~ *, textarea:focus ~ * {}
 }
 @media (hover: none), (pointer: coarse) {
@@ -5612,11 +4711,6 @@ html, body, input, textarea, button, a, [role="button"] {
   #studyos-cursor, #studyos-cursor-ring { display: none; }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   ALIGNMENT & SPACING REFINEMENTS
-   ════════════════════════════════════════════════════════════════ */
-
-/* Practice gen card breathing room */
 .practice-gen-btn {
   margin-top: 12px;
 }
@@ -5627,12 +4721,10 @@ html, body, input, textarea, button, a, [role="button"] {
   margin-bottom: 14px;
 }
 
-/* Reference materials grid */
 .practice-refs-grid {
   gap: 14px;
 }
 
-/* Form groups inside any glass card */
 .glass-card .form-group {
   margin-bottom: 14px;
 }
@@ -5648,340 +4740,36 @@ html, body, input, textarea, button, a, [role="button"] {
   .glass-card .form-row { grid-template-columns: 1fr; }
 }
 
-
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · v20260532 · Minimal · Apple · Vercel · Linear
-   Clean, premium, no stars, no busy effects.
-   Same color palette as main app (#000008).
-   ════════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-/* Hide the canvas entirely — clean background */
-
-
-/* Subtle grain for premium texture (very faint) */
-
-
-/* ─── Top bar: brand mark + info button ─── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ─── Centered content ─── */
-
-
-/* ─── Subtle eyebrow tag ─── */
-
-
-
-
-
-
-/* ─── Clean single-line headline (Apple/Vercel style) ─── */
-
-/* Hide the second + third h-lines for cleaner single-line look */
-
-
-
-
-
-
-
-
-/* ─── Subtitle ─── */
-
-
-
-/* ─── Card with input + button ─── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Hide meta tiles (AI · Smart · Free) — keeps screen minimal */
-
-
-/* Subtle bottom credit line */
-
-
-
-
-
-/* Hide top "01" corner marker */
-
-
-/* Responsive */
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-height: 600px) and (orientation: landscape) {
-  
-  
-  
-  
-  
+
 }
-
-/* ════════════════════════════════════════════════════════════════
-   INFO MODAL — clean Apple sheet
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 540px) {  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 640px) {
-  
-  
-  
+
 }
-
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · v20260533 · PREMIUM DESIGN
-   Inspired by: Linear, Stripe, Apple, Vercel
-   Layered glow + grid pattern + gradient typography + glass card
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ─── Background: layered glow with grid pattern ─── */
-
-
-
-
-/* Layer 1: cinematic blue glows (Stripe/Linear style) */
-
-
-/* Layer 2: subtle grid pattern (Linear/Vercel signature) */
-
-
-
-
-
-
-
-
-
-
-/* ─── Topbar: brand mark + edition marker ─── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ─── Center content ─── */
-
-
-/* ─── Pill eyebrow with refined glow ─── */
-
 
 @keyframes eyebrowShine {
   0%, 100% { transform: translateX(0); opacity: 0; }
   50% { transform: translateX(380%); opacity: 1; }
 }
 
-
-
-
-
-
-/* ─── Headline: massive gradient text, 3 lines ─── */
-
-
-
-
-
-
-
-
-
-
-
-/* ─── Subtitle ─── */
-
-
-
-/* ─── Premium card with input + button ─── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ─── Meta strip: AI · Smart · Free (refined, gradient text) ─── */
-
-
-
-
-
-
-
-
-/* ─── Bottom credit line ─── */
-
-
-
-
-
-/* Hide old "01" corner */
-
-
-/* ─── Responsive ─── */
 @media (max-width: 900px) {
   
 }
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-width: 380px) {
-  
-  
-  
+
 }
 @media (max-height: 720px) and (orientation: landscape) {
-  
-  
-  
-  
-  
-  
-}
 
-/* ════════════════════════════════════════════════════════════════
-   MODAL FINAL OVERRIDE · v20260534
-   Single authoritative rule — modals stay centered, never full-width
-   ════════════════════════════════════════════════════════════════ */
+}
 
 .modal-overlay {
   position: fixed !important;
@@ -6038,7 +4826,6 @@ html, body, input, textarea, button, a, [role="button"] {
   to   { opacity: 1; transform: none; }
 }
 
-/* Modal header */
 .modal-header {
   display: flex !important;
   align-items: center !important;
@@ -6085,7 +4872,6 @@ html, body, input, textarea, button, a, [role="button"] {
   background: rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Modal form */
 .modal .form-group {
   margin-bottom: 14px !important;
 }
@@ -6139,7 +4925,6 @@ html, body, input, textarea, button, a, [role="button"] {
   margin-top: 4px !important;
 }
 
-/* Mobile sheet style */
 @media (max-width: 640px) {
   .modal-overlay {
     align-items: flex-end !important;
@@ -6161,26 +4946,6 @@ html, body, input, textarea, button, a, [role="button"] {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME PREMIUM EFFECTS · v20260535
-   - Aurora gradient mesh
-   - Mouse-follow spotlight
-   - Animated grid breathing
-   - Glass card 3D tilt
-   - Magic input glow
-   - Live time/date display
-   - Logo pulse on load
-   - Click ripple effect
-   - Word rotator
-   - Cinematic exit transition
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ─── Aurora gradient mesh blobs ─── */
-
-
-
-
-
 @keyframes auroraFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(-8%, 6%) scale(1.08); }
@@ -6195,46 +4960,20 @@ html, body, input, textarea, button, a, [role="button"] {
   50% { transform: translate(-15%, 10%) scale(1.15); opacity: 0.45; }
 }
 
-
-
-
-
-
-/* ─── Mouse-follow spotlight ─── */
-
-
-
-/* ─── Animated grid breathing ─── */
-
 @keyframes gridBreathe {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
 }
-
-/* ─── Glass card 3D tilt + premium polish ─── */
-
-
-/* ─── Magic input glow ─── */
-
-
 
 @keyframes inputGlow {
   0%, 100% { box-shadow: 0 0 0 3px rgba(80, 150, 255, 0.14), 0 0 22px rgba(80, 150, 255, 0.14), 0 0 50px rgba(80, 150, 255, 0.06); }
   50%      { box-shadow: 0 0 0 3px rgba(80, 150, 255, 0.20), 0 0 30px rgba(80, 150, 255, 0.22), 0 0 70px rgba(80, 150, 255, 0.10); }
 }
 
-
-/* ─── Live time/date status ─── */
-
 @keyframes statusPulse {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.4; }
 }
-
-
-
-
-/* ─── Logo pulse on load ─── */
 
 @keyframes brandPulse {
   0% { transform: scale(0); opacity: 0; }
@@ -6246,9 +4985,6 @@ html, body, input, textarea, button, a, [role="button"] {
   0% { opacity: 0.85; transform: scale(0.85); }
   100% { opacity: 0; transform: scale(1.4); }
 }
-
-/* ─── Click ripple layer ─── */
-
 
 @keyframes rippleExpand {
   0% {
@@ -6268,47 +5004,14 @@ html, body, input, textarea, button, a, [role="button"] {
   100% { background: rgba(0, 113, 227, 0); }
 }
 
-/* ─── Word rotator on "intention" ─── */
-
-
-
-
-
-/* ─── Cinematic exit transition ─── */
-
-
-/* ─── Initial entrance: stagger animation ─── */
-
-
-
-
-
 @keyframes wFadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
 
-/* ─── Reduce motion respect ─── */
 @media (prefers-reduced-motion: reduce) {
-  
-  
+
 }
-
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME SCREEN · v20260536 · WORLD-CLASS PREMIUM
-   Inspired by: Apple Vision Pro, Linear, Stripe, Tesla, Vercel, Grok
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── Screen base — no scroll, deep cosmic ── */
-
-
-
-
-
-
-
-
-/* ── Layer 1: animated nebula gradient (live!) ── */
 
 @keyframes nebulaShift {
   0%   { transform: translate(0,0) scale(1) rotate(0deg);   filter: hue-rotate(0deg)   brightness(1.00); }
@@ -6316,31 +5019,15 @@ html, body, input, textarea, button, a, [role="button"] {
   100% { transform: translate(2%,-1%) scale(1.02) rotate(-2deg); filter: hue-rotate(6deg)  brightness(1.10); }
 }
 
-
-
-/* ── Layer 2: breathing grid with light pulses ── */
-
 @keyframes gridBreathe {
   0%, 100% { opacity: 0.45; background-position: -1px -1px; }
   50%      { opacity: 1;    background-position: -1px -1px; }
 }
 
-/* Additional pulsing grid line wave */
-
-
-/* ── Beam of light (Apple Vision Pro style) ── */
-
 @keyframes beamSweep {
   0%   { transform: rotate(28deg) translateX(0);    opacity: 0.7; }
   100% { transform: rotate(32deg) translateX(-3vw); opacity: 1; }
 }
-
-
-/* ── Aurora blobs (kept, refined) ── */
-
-
-
-
 
 @keyframes auroraFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -6355,18 +5042,6 @@ html, body, input, textarea, button, a, [role="button"] {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.28; }
   50% { transform: translate(-15%, 10%) scale(1.15); opacity: 0.40; }
 }
-
-
-
-
-
-
-/* ── Floating geometric shapes ── */
-
-
-
-
-
 
 @keyframes shapeFloat {
   0%, 100% { transform: translate(0, 0); opacity: 0.18; }
@@ -6385,41 +5060,15 @@ html, body, input, textarea, button, a, [role="button"] {
   50%      { transform: rotate(60deg) translate(12px, 20px); }
 }
 
-
-
-
-
-
-
-/* ── Border glow (subtle bezel light) ── */
-
 @keyframes borderGlowPulse {
   0%, 100% { box-shadow: inset 0 0 0 1px rgba(120, 180, 255, 0.04), inset 0 0 80px rgba(80, 150, 255, 0.06),  inset 0 0 200px rgba(80, 150, 255, 0.03); }
   50%      { box-shadow: inset 0 0 0 1px rgba(120, 180, 255, 0.10), inset 0 0 100px rgba(80, 150, 255, 0.12), inset 0 0 240px rgba(80, 150, 255, 0.06); }
 }
 
-
-/* ── Mouse-follow spotlight ── */
-
-
-
-/* ── Click ripple layer ── */
-
-
 @keyframes rippleExpand {
   0%   { width: 8px;   height: 8px;   background: rgba(120,180,255,0.55); }
   100% { width: 520px; height: 520px; background: rgba(120,180,255,0); }
 }
-
-
-/* ── Topbar ── */
-
-
-
-
-
-
-
 
 @keyframes logoEntrance {
   0%   { transform: scale(0) rotate(-90deg); opacity: 0; }
@@ -6435,14 +5084,6 @@ html, body, input, textarea, button, a, [role="button"] {
   50%      { left: 130%; }
 }
 
-
-
-
-
-/* ── Top-right meta: live datetime, refined ── */
-
-
-
 @keyframes statusBeat {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%      { opacity: 0.65; transform: scale(0.85); }
@@ -6452,150 +5093,38 @@ html, body, input, textarea, button, a, [role="button"] {
   100% { opacity: 0; transform: scale(2.2); }
 }
 
-
-/* ── Center content ── */
-
-
-/* ── Eyebrow (premium) ── */
-
-
 @keyframes eyebrowShine {
   0%, 100% { transform: translateX(0); opacity: 0; }
   50%      { transform: translateX(440%); opacity: 1; }
 }
-
-
-
-
-
-
-/* ── Headline — gradient text, visible! ── */
-
-
-
-
-
-
-/* The rotating-word line ── VISIBLE gradient */
-
-
-
-
-
-
-
-
-/* ── Subtitle ── */
-
-
-
-/* ── Card ── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @keyframes inputGlow {
   0%, 100% { box-shadow: 0 0 0 3px rgba(80,150,255,0.14), 0 0 22px rgba(80,150,255,0.14), 0 0 50px rgba(80,150,255,0.06); }
   50%      { box-shadow: 0 0 0 3px rgba(80,150,255,0.20), 0 0 30px rgba(80,150,255,0.22), 0 0 70px rgba(80,150,255,0.10); }
 }
 
-
-
-
-/* ── BUTTON: blue gradient on hover (premium) ── */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ── Meta strip: AI · Smart · Free ── */
-
-
-
-
-
-
-
-
-/* Stagger animation keyframe */
 @keyframes wFadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
 
-/* Hide leftover corner */
-
-
-/* ── Responsive ── */
 @media (max-width: 900px) {
-  
-  
+
 }
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-width: 380px) {
-  
-  
-  
+
 }
 @media (max-height: 720px) and (orientation: landscape) {
-  
-  
-  
-  
-  
+
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   DROPDOWN / SELECT OPTIONS FIX · v20260537
-   Make all <option> items clearly visible in both themes
-   ════════════════════════════════════════════════════════════════════ */
-
-/* All select elements — uniform option visibility */
 select.input-field option,
 select.select-sm option,
 select option {
@@ -6623,13 +5152,11 @@ select option:hover {
   color: #ffffff !important;
 }
 
-/* Disabled options (subtle gray) */
 select option:disabled {
   color: rgba(245, 245, 247, 0.30) !important;
   background-color: #050810 !important;
 }
 
-/* Light theme dropdown options */
 [data-theme="light"] select.input-field option,
 [data-theme="light"] select.select-sm option,
 [data-theme="light"] select option {
@@ -6656,7 +5183,6 @@ select option:disabled {
   background-color: #fafafa !important;
 }
 
-/* Optgroup label styling (just in case any exist) */
 select optgroup {
   background-color: #050810 !important;
   color: rgba(120, 180, 255, 0.85) !important;
@@ -6673,7 +5199,6 @@ select optgroup {
   color: #0071e3 !important;
 }
 
-/* Ensure the closed select itself is well-styled */
 select.input-field,
 select.select-sm {
   color-scheme: dark;
@@ -6683,7 +5208,6 @@ select.select-sm {
   color-scheme: light;
 }
 
-/* Refine closed-state appearance with brighter chevron */
 select.input-field {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23a8b8d8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
@@ -6703,56 +5227,15 @@ select.input-field {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23636366' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   FORCE VISIBLE PASS · v20260538
-   Boost visibility of all welcome screen effects — push past any
-   conflicting older rules with high specificity
-   ════════════════════════════════════════════════════════════════════ */
-
-/* 1) BRIGHTER LIVE GRADIENT — make it visible & moving */
-
-
-/* 2) BREATHING GRID — make pulse more visible */
-
 @keyframes gridBreathe {
   0%, 100% { opacity: 0.25; }
   50%      { opacity: 1; }
 }
 
-/* Add a second pulsing wave line that sweeps across the grid */
-
 @keyframes gridWave {
   0%   { background-position: -100% -100%; }
   100% { background-position: 100% 100%; }
 }
-
-/* 3) ROTATING WORDS — force visible white-blue gradient */
-
-
-
-
-/* Also make sure Study (w-h-1) is bright */
-
-
-
-
-/* 4) BEAM OF LIGHT — make it visible */
-
-
-
-
-/* 5) FLOATING SHAPES — make them visible */
-
-
-
-
-
-
-
-
-
-
-/* 6) BORDER GLOW — make pulse stronger */
 
 @keyframes borderGlowPulse {
   0%, 100% {
@@ -6769,61 +5252,10 @@ select.input-field {
   }
 }
 
-
-
-/* 7) MAKE SCREEN NOT SCROLLABLE — bulletproof */
-
-
-/* 8) Ensure footer is gone */
-
-
-/* ════════════════════════════════════════════════════════════════════
-   FINAL POLISH PASS · v20260539
-   - Date/time pill: contrasting, clock icon, no green dot
-   - ML badge: prominent & better
-   - Headline: better typography
-   - Real aurora lights mesh
-   - Visible shapes
-   - Shooting stars
-   - Better input glow
-   - Better click ripple
-   - Stats counter
-   - Smoother exit
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── DATE/TIME PILL: contrasting & prominent ── */
-
-
 @keyframes clockTick {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-
-
-/* ── ML-POWERED BADGE: more prominent ── */
-
-
-
-
-/* ── HEADLINE: better typography (cleaner, premium) ── */
-
-
-
-
-
-
-
-
-
-/* Letter glow on hover */
-
-
-/* ── REAL AURORA LIGHTS MESH ── */
-
-
-
-
 
 @keyframes aurora1 {
   0%   { transform: translate(0, 0) scale(1) rotate(0deg);    opacity: 0.85; }
@@ -6841,34 +5273,10 @@ select.input-field {
   100% { transform: translate(10%, -8%) scale(0.88); opacity: 0.5; }
 }
 
-
-
-
-
-
-/* ── FLOATING SHAPES: VISIBLE ── */
-
-
-
-
-
-
-
-
-
-
-
-/* ── SHOOTING STARS canvas ── */
-
-
-/* ── SUBTLE BORDER GLOW ── */
-
 @keyframes borderGlowPulseSubtle {
   0%, 100% { box-shadow: inset 0 0 0 1px rgba(120,180,255,0.06), inset 0 0 60px rgba(80,150,255,0.05),  inset 0 0 160px rgba(80,150,255,0.025); }
   50%      { box-shadow: inset 0 0 0 1px rgba(120,180,255,0.12), inset 0 0 80px rgba(80,150,255,0.10),  inset 0 0 220px rgba(80,150,255,0.05); }
 }
-
-/* ── INPUT GLOW: more visible ── */
 
 @keyframes inputGlowStrong {
   0%, 100% {
@@ -6885,9 +5293,6 @@ select.input-field {
   }
 }
 
-
-/* ── CLICK RIPPLE: bigger & more visible ── */
-
 @keyframes rippleStrong {
   0% {
     width: 12px;
@@ -6903,24 +5308,13 @@ select.input-field {
   }
 }
 
-/* ── STATS COUNTER on load ── */
-
-
-
-
-
-
-
 @media (max-width: 640px) {
-  
-  
-  
+
 }
 @media (max-height: 720px) and (orientation: landscape) {
   
 }
 
-/* ── SMOOTHER CINEMATIC EXIT ── */
 #screen-welcome.hidden {
   opacity: 0 !important;
   transform: scale(1.08) !important;
@@ -6931,270 +5325,37 @@ select.input-field {
     filter 0.75s cubic-bezier(0.6, 0, 0.4, 1) !important;
 }
 
-/* Pre-exit anticipation tweak — content slightly contracts before scaling */
-
-
-/* ════════════════════════════════════════════════════════════════════
-   FINAL TWEAKS · v20260540
-   - Headline: editorial serif font for Study + rotating word
-   - Eyebrow: bigger & more prominent
-   - Date/time pill cleaned up (clock icon only)
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── HEADLINE: editorial serif font ── */
-
-
-
-
-
-
-/* Hide the 'with' line completely if any leftover */
-
-
-/* ── EYEBROW: bigger and more prominent ── */
-
-
-
-
-
-
-
-/* ── DATE/TIME PILL: clean & contrasting (no green dot, just clock icon) ── */
-
-
-
-/* Responsive */
 @media (max-width: 640px) {
-  
-  
-  
+
 }
 @media (max-width: 380px) {
   
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   FINAL CORRECTIONS · v20260541
-   - Headline: Study / with / intention (intention same as Study)
-   - Eyebrow: bigger + green dot back
-   - Aurora: more visible
-   - Shapes: more subtle
-   - Stats counter removed (clean layout)
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── HEADLINE: Study with intention — uniform styling ── */
-
-
-/* "Study" line */
-
-
-/* "with" line — visible, restored */
-
-
-
-/* "intention" — SAME styling as "Study" (no rotator, no highlight) */
-
-
-/* The blue period */
-
-
-/* Hide leftover rotator elements if any */
-
-
-/* Light theme */
-
-
-
-/* ── EYEBROW: bigger with green dot back ── */
-
-
-
-
-
-
-
-
-/* ── AURORA: MORE VISIBLE (push past prior !important) ── */
-
-
-
-
-
-
-
-
-/* ── SHAPES: MORE SUBTLE ── */
-
-
-
-
-
-
-
-
-/* Stats counter removed — hide if any leftover */
-
-
-/* Make sure meta tiles (AI/Smart/Free) are clean and don't overlap */
-
-
-/* ════════════════════════════════════════════════════════════════════
-   FINAL FIT + PALETTE · v20260542
-   - Fit content in viewport (no cutoff)
-   - Use site palette: --blue #2997ff, --bg #000008
-   - Remove shooting stars
-   ════════════════════════════════════════════════════════════════════ */
-
-/* Ensure no shooting stars canvas remains visible */
-
-
-/* Allow scroll fallback only if viewport too small; otherwise fit */
 #screen-welcome {
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 
-/* Tighter center column for fit */
-
-
-/* Smaller, tighter eyebrow */
-
-
-
-/* Headline: significantly tighter line gaps */
-
-
-
-/* Subtitle: compact */
-
-
-/* Card: tight */
-
-
-/* Meta tiles: smaller, less margin so they fit */
-
-
-
-
-
-/* Compress on shorter screens */
 @media (max-height: 860px) {
-  
-  
-  
-  
+
 }
 @media (max-height: 760px) {
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 
-/* ── COLOR PALETTE — use the site's --blue (#2997ff) everywhere ── */
-
-
-
-
-/* Aurora with site blue */
-
-
-
-
-/* Shapes with site blue (very subtle) */
-
-
-
-
-
-
-/* Beam with site blue */
-
-
-/* Border glow with site blue */
-
-
-/* Spotlight with site blue */
-
-
-/* Input focus & button with site blue */
-
-
-
-
-/* Headline glow with site blue */
-
-
-
-/* Click ripple with site blue */
-
-
-/* Top brand icon with site blue */
-
-
-
-/* Meta separator with site blue */
-
-
-/* ════════════════════════════════════════════════════════════════════
-   UNIFORM SPACING · v20260543
-   Spread the welcome screen content evenly across viewport
-   ════════════════════════════════════════════════════════════════════ */
-
-/* Center vertically, distribute breathing space evenly */
-
-
-/* Generous spacing between elements */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Compact mode for shorter laptop screens */
 @media (max-height: 820px) {
-  
-  
-  
-  
-  
+
 }
 
 @media (max-height: 720px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 
 @media (max-width: 640px) {
-  
-  
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════
-   DASHBOARD TASK PRIORITY DOT · v20260546
-   ════════════════════════════════════════════════════════════════ */
 .task-mini-prio {
   display: inline-block;
   width: 6px;
@@ -7207,13 +5368,6 @@ select.input-field {
   gap: 10px;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME · v20260547 · UNIFIED WITH MAIN APP
-   Uses the EXACT same fonts, colors, gradients, and design tokens
-   as the rest of the site (Dashboard, Sidebar, AI panels, etc.)
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── BACKGROUND: identical to main app's --bg-glow ── */
 #screen-welcome {
   background:
     radial-gradient(ellipse 90% 70% at 75% -20%, rgba(41, 100, 200, 0.40) 0%, transparent 50%),
@@ -7231,7 +5385,6 @@ select.input-field {
     #f5f5f7 !important;
 }
 
-/* Subtle nebula motion - keeps the alive feel */
 #screen-welcome::before {
   animation: nebulaShiftMain 28s ease-in-out infinite alternate !important;
 }
@@ -7240,7 +5393,6 @@ select.input-field {
   100% { transform: translate(1.5%, -1%) scale(1.03) rotate(1deg); opacity: 0.92; }
 }
 
-/* Refined grid — matches the subtle texture used elsewhere */
 #screen-welcome::after {
   background-image:
     linear-gradient(rgba(41, 151, 255, 0.04) 1px, transparent 1px),
@@ -7253,155 +5405,16 @@ select.input-field {
   50%      { opacity: 1; }
 }
 
-/* Hide overpowered effects - cleaner look */
-
-
-/* Aurora — subtler, matches main app tone */
-
-
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   TOPBAR — matches main app's topbar style
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-/* Date/time pill — same look as sidebar streak/profile chips */
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   EYEBROW — same as main app eyebrow tags
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   HEADLINE — Bricolage Grotesque (same as .pane-title)
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   SUBTITLE — same as .pane-sub
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   CARD — same .glass-card style as main app
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-
-/* Input — matches .input-field from main app */
-
-
-
-
-
-
-
-/* Button — matches .btn-primary from main app */
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   META — same as main app's stat tiles
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   LAYOUT — proper centering, no scroll
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-/* Spotlight refined */
-
-
-/* Border glow subtler */
-
-
-/* Responsive */
 @media (max-height: 820px) {
-  
-  
-  
-  
-  
+
 }
 @media (max-height: 720px) {
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 @media (max-width: 640px) {
-  
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME · v20260548 · EXACT MAIN APP DESIGN
-   Uses the literal same CSS variables, fonts, and patterns as
-   sidebar, dashboard, and other panes
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── Background: literal copy of main app's body bg ── */
 #screen-welcome {
   background: var(--bg) !important;
   position: fixed !important;
@@ -7424,7 +5437,6 @@ select.input-field {
   100% { transform: translate(1%, -0.5%) scale(1.02); opacity: 0.92; }
 }
 
-/* Subtle grid like .pane-bg patterns */
 #screen-welcome::after {
   content: '' !important;
   position: absolute !important;
@@ -7444,137 +5456,16 @@ select.input-field {
   50%      { opacity: 1; }
 }
 
-/* Hide all the extra effects - the main app doesn't have them */
-
-
-/* ════════════════════════════════════════════════════════════════
-   TOPBAR — mirrors .sidebar header structure
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-/* Brand mark — copies .sb-head structure */
-
-
-
-
-
-
-
-
-
-/* Clock pill — same as topbar .tb-clock pattern */
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   CENTER CONTENT
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   EYEBROW — same pattern as .card-label-meta and AI badges
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   HEADLINE — identical to .pane-title
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   SUBTITLE — identical to .pane-sub
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   CARD — identical .glass-card
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-/* Card label same as .card-label */
-
-
-/* Input — identical to .input-field */
-
-
-
-
-/* Button — identical to .btn-primary */
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   META — uses same .stat-num / .stat-label tokens
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
-
-
-/* ── Responsive ── */
 @media (max-height: 800px) {
-  
-  
-  
-  
+
 }
 @media (max-height: 700px) {
-  
-  
-  
-  
+
 }
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   WELCOME · v20260549 · CINEMATIC PREMIUM
-   Same palette · live aurora · shooting stars · ambient particles
-   ════════════════════════════════════════════════════════════════════ */
-
-/* Re-enable canvases */
-
-
-
-/* Re-enable atmospheric layers, hide only the busy shapes */
-
-
-
-
-
-
-
-/* ── Base screen: deep cosmic, slowly drifting ── */
 #screen-welcome {
   background:
     radial-gradient(ellipse 90% 70% at 75% -20%, rgba(41, 100, 200, 0.34) 0%, transparent 50%),
@@ -7592,7 +5483,6 @@ select.input-field {
   100% { transform: translate(1.5%, -0.5%) scale(1.04) rotate(-1deg); opacity: 0.88; filter: hue-rotate(4deg); }
 }
 
-/* Grid breathing — subtle */
 #screen-welcome::after {
   background-image:
     linear-gradient(rgba(41, 151, 255, 0.035) 1px, transparent 1px),
@@ -7604,12 +5494,6 @@ select.input-field {
   0%, 100% { opacity: 0.40; }
   50%      { opacity: 0.85; }
 }
-
-/* ── AURORA: slow organic drift with site palette ── */
-
-
-
-
 
 @keyframes auroraOne {
   0%   { transform: translate(0, 0) scale(1) rotate(0deg);     opacity: 0.85; }
@@ -7627,72 +5511,31 @@ select.input-field {
   100% { transform: translate(6%, -5%) scale(0.92); opacity: 0.50; }
 }
 
-/* ── BEAM OF LIGHT (Apple Vision Pro style) ── */
-
 @keyframes beamSweepGentle {
   0%   { transform: rotate(28deg) translateX(0);     opacity: 0.70; }
   100% { transform: rotate(31deg) translateX(-3vw);  opacity: 1; }
 }
-
-/* ── Border glow (subtle) ── */
 
 @keyframes borderGlowSubtle {
   0%, 100% { box-shadow: inset 0 0 0 1px rgba(41,151,255,0.05),  inset 0 0 80px rgba(41,151,255,0.05),  inset 0 0 200px rgba(41,151,255,0.025); }
   50%      { box-shadow: inset 0 0 0 1px rgba(41,151,255,0.10),  inset 0 0 100px rgba(41,151,255,0.10), inset 0 0 240px rgba(41,151,255,0.05); }
 }
 
-/* ── Mouse-follow spotlight (parallax glow) ── */
-
-
-/* ── Faint glowing dust/noise texture ── */
-
-
-/* ════════════════════════════════════════════════════════════════
-   PREMIUM CARD: glassmorphism with refined border glow
-   ════════════════════════════════════════════════════════════════ */
-
-
-
 @keyframes wCardRise {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: none; }
 }
-
-/* Input — refined with glow on focus */
-
-
 
 @keyframes inputGlowSubtle {
   0%, 100% { box-shadow: 0 0 0 3px rgba(41,151,255,0.16), 0 0 28px rgba(41,151,255,0.18), 0 0 70px rgba(41,151,255,0.08); }
   50%      { box-shadow: 0 0 0 3px rgba(41,151,255,0.22), 0 0 36px rgba(41,151,255,0.24), 0 0 90px rgba(41,151,255,0.12); }
 }
 
-/* Button — premium with blue gradient on hover */
-
-
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   STAGGER ENTRANCE — premium motion design
-   ════════════════════════════════════════════════════════════════ */
-
-
-
-
 @keyframes wRise {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   CINEMATIC EXIT
-   ════════════════════════════════════════════════════════════════ */
 #screen-welcome.hidden {
   opacity: 0 !important;
   transform: scale(1.08) !important;
@@ -7703,25 +5546,14 @@ select.input-field {
     filter 0.75s cubic-bezier(0.6, 0, 0.4, 1) !important;
 }
 
-
-/* ════════════════════════════════════════════════════════════════
-   MOBILE — simplified for performance
-   ════════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
-  
-  
+
   #screen-welcome::after { background-size: 60px 60px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  
-  
-}
 
-/* ════════════════════════════════════════════════════════════════════
-   LOGIN SCREEN · v20260550 · WORLD-CLASS PREMIUM
-   Uses the literal site design tokens — no overrides, no !important
-   ════════════════════════════════════════════════════════════════════ */
+}
 
 #screen-welcome {
   position: fixed;
@@ -7744,17 +5576,10 @@ select.input-field {
 }
 #screen-welcome.gone { display: none; }
 
-/* ── Atmospheric background layers (matches the rest of the site) ── */
-
-
 @keyframes loBgDrift {
   0%   { transform: translate(0, 0) scale(1); opacity: 1; }
   100% { transform: translate(1.5%, -1%) scale(1.04); opacity: 0.92; }
 }
-
-/* Soft aurora orbs — uses only --blue palette */
-
-
 
 @keyframes loAuroraOne {
   0%   { transform: translate(0, 0) scale(1) rotate(0deg);     opacity: 0.85; }
@@ -7765,125 +5590,39 @@ select.input-field {
   100% { transform: translate(6%, -5%) scale(1.12) rotate(-4deg); opacity: 0.90; }
 }
 
-/* Linear/Vercel-style grid */
-
 @keyframes loGridPulse {
   0%, 100% { opacity: 0.5; }
   50%      { opacity: 1; }
 }
 
-/* Faint film grain */
-
-
-/* Mouse-follow spotlight (subtle) */
-
-
-/* Light theme background */
 [data-theme="light"] #screen-welcome { background: #f5f5f7; }
-
-
-
-
-
-
-/* ── STAGE: perfectly centered ── */
-
-
-/* ── CARD: one luxurious container ── */
-
 
 @keyframes loCardRise {
   from { opacity: 0; transform: translateY(20px) scale(0.985); }
   to   { opacity: 1; transform: none; }
 }
 
-
-
-/* ── CARD HEAD: brand mark + name ── */
-
-
-
-
-
-
-
-
-
-/* ── HERO section ── */
-
-
-
 @keyframes loDotPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%      { opacity: 0.55; transform: scale(0.85); }
 }
-
-
-
-
-
-
-/* ── FORM ── */
-
-
-
-
-
-/* Reusing .input-field exactly; just adding focus glow refinement */
-
-
-
-/* CTA Button — extends .btn-primary with full-width + hover sheen */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ── FOOTER STATS (in-card, no global footer) ── */
-
-
-
-
-
 
 @keyframes loFade {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* ── Responsive ── */
 @media (max-width: 640px) {
-  
-  
-  
-  
-  
-  
-  
+
 }
 
 @media (max-height: 700px) {
-  
-  
+
 }
 
 @media (prefers-reduced-motion: reduce) {
   
 }
-
-/* ════════════════════════════════════════════════════════════════════
-   LOGIN · v20260551 · FREE LAYOUT · AURORA BG · BUTTON STAYS WHITE
-   No glass card wrapping everything. Logo top-left, hero centered,
-   stats bottom. Uses literal site design tokens.
-   ════════════════════════════════════════════════════════════════════ */
 
 #screen-welcome {
   position: fixed;
@@ -7909,7 +5648,6 @@ select.input-field {
 
 [data-theme="light"] #screen-welcome { background: #f5f5f7; }
 
-/* ── BACKGROUND: aurora + mesh + grid + grain ── */
 .lo-bg {
   position: fixed;
   inset: 0;
@@ -7918,7 +5656,6 @@ select.input-field {
   overflow: hidden;
 }
 
-/* Aurora — 3 flowing blue light blobs */
 .lo-aurora {
   position: absolute;
   border-radius: 50%;
@@ -7982,7 +5719,6 @@ select.input-field {
   background: radial-gradient(circle, rgba(0,113,227,0.10) 0%, transparent 75%);
 }
 
-/* Mesh: animated gradient overlay */
 .lo-mesh {
   position: absolute;
   inset: 0;
@@ -8003,7 +5739,6 @@ select.input-field {
     radial-gradient(ellipse 60% 50% at 20% 90%, rgba(0,113,227,0.05) 0%, transparent 60%);
 }
 
-/* Grid — breathing */
 .lo-grid {
   position: absolute;
   inset: 0;
@@ -8025,7 +5760,6 @@ select.input-field {
     linear-gradient(90deg, rgba(0,113,227,0.045) 1px, transparent 1px);
 }
 
-/* Faint grain */
 .lo-grain {
   position: absolute;
   inset: 0;
@@ -8034,7 +5768,6 @@ select.input-field {
   background-size: 220px;
 }
 
-/* Spotlight follows cursor */
 .lo-spotlight {
   position: fixed;
   inset: 0;
@@ -8052,10 +5785,6 @@ select.input-field {
   background: radial-gradient(circle 420px at var(--sx) var(--sy),
     rgba(0, 113, 227, 0.06) 0%, transparent 70%);
 }
-
-/* ════════════════════════════════════════════════════════════════
-   TOP-LEFT LOGO (no header bar — floats freely)
-   ════════════════════════════════════════════════════════════════ */
 
 .lo-logo {
   position: fixed;
@@ -8101,10 +5830,6 @@ select.input-field {
   margin-top: 3px;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   CENTER STAGE — no card, freely flowing content
-   ════════════════════════════════════════════════════════════════ */
-
 .lo-stage {
   position: relative;
   z-index: 10;
@@ -8121,7 +5846,6 @@ select.input-field {
   box-sizing: border-box;
 }
 
-/* Eyebrow */
 .lo-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -8158,7 +5882,6 @@ select.input-field {
   box-shadow: 0 0 10px rgba(26, 138, 52, 0.5);
 }
 
-/* Title — matches .pane-title exactly */
 .lo-title {
   font-family: var(--f-display);
   font-size: clamp(34px, 4vw, 52px);
@@ -8191,7 +5914,6 @@ select.input-field {
   -webkit-text-fill-color: transparent;
 }
 
-/* Subtitle */
 .lo-sub {
   font-family: var(--f-body);
   font-size: clamp(14.5px, 1.15vw, 16px);
@@ -8204,7 +5926,6 @@ select.input-field {
   animation: lo-fade 0.7s var(--ease-out) 0.62s both;
 }
 
-/* Form — input + button stacked, properly sized */
 .lo-form {
   display: flex;
   flex-direction: column;
@@ -8246,7 +5967,6 @@ select.input-field {
 [data-theme="light"] .lo-input { color: #1d1d1f; }
 [data-theme="light"] .lo-input::placeholder { color: rgba(99, 99, 102, 0.55); }
 
-/* CTA button — sized properly, stays WHITE on hover */
 .lo-cta {
   display: inline-flex;
   align-items: center;
@@ -8320,10 +6040,6 @@ select.input-field {
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   BOTTOM STATS — 3 items only
-   ════════════════════════════════════════════════════════════════ */
-
 .lo-stats {
   position: relative;
   z-index: 10;
@@ -8363,15 +6079,10 @@ select.input-field {
   background: linear-gradient(180deg, transparent, var(--bd-2), transparent);
 }
 
-/* Stagger entrance keyframe */
 @keyframes lo-fade {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
 }
-
-/* ════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 760px) {
   .lo-logo { top: 18px; left: 18px; }
@@ -8408,11 +6119,6 @@ select.input-field {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   LOGIN TITLE · v20260552 · Hero scale (bigger than .pane-title)
-   The pane-title size works inside a content page with sidebars,
-   but the login hero needs more presence to feel balanced.
-   ════════════════════════════════════════════════════════════════ */
 .lo-title {
   font-size: clamp(44px, 6.5vw, 84px);
   line-height: 1.02;
@@ -8426,13 +6132,6 @@ select.input-field {
   .lo-title { font-size: clamp(34px, 6.5vh, 54px); }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   SELECT DROPDOWN FIX · v20260553
-   - Force no-repeat chevron
-   - Light theme: proper dark text on white background
-   - Override any stray repeating pattern
-   ════════════════════════════════════════════════════════════════════ */
-
 select.input-field,
 select.select-sm,
 select {
@@ -8444,7 +6143,6 @@ select {
   padding-right: 40px !important;
 }
 
-/* Dark theme chevron */
 select.input-field,
 select.select-sm {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23a8b8d8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
@@ -8452,7 +6150,6 @@ select.select-sm {
   color: var(--tx-1) !important;
 }
 
-/* Light theme — dark chevron + dark text + light bg */
 [data-theme="light"] select.input-field,
 [data-theme="light"] select.select-sm,
 [data-theme="light"] select {
@@ -8469,7 +6166,6 @@ select.select-sm {
   border-color: var(--blue) !important;
 }
 
-/* Options inside the dropdown */
 select option {
   background-color: #0a0e1c !important;
   color: #f5f5f7 !important;
@@ -8479,9 +6175,6 @@ select option {
   color: #1d1d1f !important;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   FOOTER LICENSE LINK · v20260554
-   ════════════════════════════════════════════════════════════════ */
 .footer-license {
   font-family: var(--f-mono);
   font-size: 11px;
@@ -8512,14 +6205,6 @@ select option {
   background: rgba(0, 113, 227, 0.06);
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   FIX PASS · v20260556
-   - Pinned goal highlight refined
-   - Light theme 30-day trend + report colors
-   - Note hover render bug (sub-pixel artifacts on saves)
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── Pinned goal — clean amber accent (not overpowering) ── */
 .goal-slot.filled[style*="amber"],
 .goal-slot.filled:has(.goal-pinned-badge) {
   position: relative;
@@ -8562,7 +6247,6 @@ select option {
   box-shadow: 0 0 6px rgba(204, 119, 0, 0.6);
 }
 
-/* ── Notes: prevent hover-reveal render bug + smooth painting ── */
 .note-card {
   contain: layout style paint;
   transform: translateZ(0);
@@ -8570,7 +6254,6 @@ select option {
   -webkit-backface-visibility: hidden;
 }
 
-/* Notes pinned state — clean badge */
 .note-card.pinned {
   border-color: rgba(255, 159, 10, 0.30);
   background: linear-gradient(180deg, rgba(255, 159, 10, 0.03), transparent);
@@ -8580,7 +6263,6 @@ select option {
   background: linear-gradient(180deg, rgba(204, 119, 0, 0.04), transparent);
 }
 
-/* ── 30-day trend + AI report: light theme color parity ── */
 [data-theme="light"] .trend-row,
 [data-theme="light"] .trend-bar,
 [data-theme="light"] .perf-report-row,
@@ -8607,7 +6289,6 @@ select option {
   color: #3a3a3c !important;
 }
 
-/* Any white-text on white-bg in light theme — force dark */
 [data-theme="light"] .glass-card *[style*="color:#fff"],
 [data-theme="light"] .glass-card *[style*="color: #fff"],
 [data-theme="light"] .glass-card *[style*="color:white"],
@@ -8615,7 +6296,6 @@ select option {
   color: #1d1d1f !important;
 }
 
-/* AI report card delete button visibility */
 .score-del,
 .report-del,
 .perf-del {
@@ -8658,18 +6338,10 @@ select option {
   background: rgba(214, 56, 49, 0.12) !important;
 }
 
-/* Practice difficulty dropdown — clean look */
 @media (max-width: 640px) {
   #practiceLevel { font-size: 14px; }
 }
 
-/* ════════════════════════════════════════════════════════════════
-   FIXES · v20260557
-   - Goal pinned badge moves to top-LEFT to not overlap actions
-   - Goal-head needs top padding when pinned (badge sits above)
-   ════════════════════════════════════════════════════════════════ */
-
-/* Move pinned badge to top-LEFT corner (clear of action buttons on right) */
 .goal-slot.filled .goal-pinned-badge {
   position: absolute;
   top: 10px;
@@ -8702,12 +6374,10 @@ select option {
   flex-shrink: 0;
 }
 
-/* When pinned, push content down so badge has room */
 .goal-slot.filled:has(.goal-pinned-badge) .goal-head {
   margin-top: 22px;
 }
 
-/* Ensure goal-actions sit cleanly on the right */
 .goal-slot.filled .goal-actions {
   position: relative;
   z-index: 3;
@@ -8723,16 +6393,8 @@ select option {
   box-shadow: 0 0 6px rgba(204, 119, 0, 0.6);
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   MOBILE SIDEBAR · v20260561 · iOS + ANDROID UNIFIED
-   - No display:none transitions (Android can't transition display)
-   - No backdrop-filter on sidebar (iOS Safari bug with transform)
-   - Solid opaque backgrounds (works everywhere)
-   - Opacity-based overlay (smooth on both platforms)
-   ════════════════════════════════════════════════════════════════════ */
-
 @media (max-width: 700px) {
-  /* ── Kill ALL backdrop filters on sidebar and its children ── */
+  
   html body nav#sidebar,
   html body nav#sidebar *,
   html body nav#sidebar.sidebar,
@@ -8743,7 +6405,6 @@ select option {
     filter: none !important;
   }
 
-  /* ── The sidebar: solid, slide-in from left ── */
   html body nav#sidebar.sidebar {
     position: fixed !important;
     top: 0 !important;
@@ -8781,7 +6442,6 @@ select option {
     -webkit-transform: translateX(0) translateZ(0) !important;
   }
 
-  /* Light theme sidebar */
   html body[data-theme="light"] nav#sidebar.sidebar {
     background: #ffffff !important;
     background-color: #ffffff !important;
@@ -8789,7 +6449,6 @@ select option {
     box-shadow: 4px 0 60px rgba(0, 0, 0, 0.25) !important;
   }
 
-  /* ── Force visibility on EVERY child element ── */
   html body nav#sidebar.sidebar > *,
   html body nav#sidebar.sidebar .sb-head,
   html body nav#sidebar.sidebar .sb-nav,
@@ -8819,7 +6478,6 @@ select option {
     -webkit-text-fill-color: inherit !important;
   }
 
-  /* ── Dark theme text colors (forced) ── */
   html body nav#sidebar.sidebar .sb-brand {
     color: #f5f5f7 !important;
     -webkit-text-fill-color: #f5f5f7 !important;
@@ -8870,7 +6528,6 @@ select option {
     opacity: 1 !important;
   }
 
-  /* ── Light theme text colors (forced) ── */
   html body[data-theme="light"] nav#sidebar.sidebar .sb-brand {
     color: #1d1d1f !important;
     -webkit-text-fill-color: #1d1d1f !important;
@@ -8902,7 +6559,6 @@ select option {
     -webkit-text-fill-color: #fff !important;
   }
 
-  /* ── Overlay: opacity-based (no display:none transitions) ── */
   html body .mob-overlay {
     position: fixed !important;
     inset: 0 !important;
@@ -8924,7 +6580,6 @@ select option {
     background: rgba(0, 0, 0, 0.32) !important;
   }
 
-  /* ── Hamburger button ── */
   html body .mob-toggle {
     display: inline-flex !important;
     align-items: center !important;
@@ -8953,27 +6608,19 @@ select option {
     transform: scale(0.95) !important;
   }
 
-  /* ── Body scroll-lock when sidebar open (Android safe) ── */
   html body.sidebar-open {
     overflow: hidden !important;
     touch-action: none !important;
   }
 }
 
-/* Desktop: hide mobile elements */
 @media (min-width: 701px) {
   .mob-toggle { display: none !important; }
   .mob-overlay { display: none !important; }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   MOBILE SIDEBAR · v20260562 · ONE TRUE FIX
-   Covers iPhone (Safari/Chrome) AND Android (Chrome/Samsung/Firefox)
-   Breakpoint 900px catches phones in both portrait AND landscape
-   ════════════════════════════════════════════════════════════════════ */
-
 @media (max-width: 900px) {
-  /* ── Kill ALL filters/blurs on sidebar tree ── */
+  
   .sidebar,
   .sidebar * {
     -webkit-backdrop-filter: none !important;
@@ -8982,7 +6629,6 @@ select option {
     filter: none !important;
   }
 
-  /* ── The sidebar: solid, slide-in from left, max z-index ── */
   .sidebar {
     position: fixed !important;
     top: 0 !important;
@@ -9026,7 +6672,6 @@ select option {
     box-shadow: 4px 0 60px rgba(0, 0, 0, 0.25) !important;
   }
 
-  /* ── Force visibility on EVERY child ── */
   .sidebar > *,
   .sidebar .sb-head,
   .sidebar .sb-nav,
@@ -9051,7 +6696,6 @@ select option {
     opacity: 1 !important;
   }
 
-  /* ── Dark theme text colors (FORCED with text-fill-color) ── */
   .sidebar .sb-brand {
     color: #f5f5f7 !important;
     -webkit-text-fill-color: #f5f5f7 !important;
@@ -9100,7 +6744,6 @@ select option {
   }
   .sidebar .nav-item.active svg { opacity: 1 !important; }
 
-  /* ── Light theme overrides ── */
   [data-theme="light"] .sidebar .sb-brand {
     color: #1d1d1f !important;
     -webkit-text-fill-color: #1d1d1f !important;
@@ -9132,7 +6775,6 @@ select option {
     -webkit-text-fill-color: #fff !important;
   }
 
-  /* ── Overlay ── */
   .mob-overlay {
     position: fixed !important;
     inset: 0 !important;
@@ -9157,7 +6799,6 @@ select option {
     background: rgba(0, 0, 0, 0.32) !important;
   }
 
-  /* ── Hamburger button ── */
   .mob-toggle,
   .mob-menu-btn {
     display: inline-flex !important;
@@ -9187,7 +6828,6 @@ select option {
     transform: scale(0.95) !important;
   }
 
-  /* ── Body scroll-lock ── */
   body.sidebar-open {
     overflow: hidden !important;
     position: fixed !important;
@@ -9195,7 +6835,6 @@ select option {
     touch-action: none !important;
   }
 
-  /* ── Main content full-width on mobile ── */
   .main {
     margin-left: 0 !important;
     width: 100% !important;
@@ -9205,4 +6844,543 @@ select option {
 @media (min-width: 901px) {
   .mob-toggle, .mob-menu-btn { display: none !important; }
   .mob-overlay { display: none !important; }
+}
+
+[data-theme="light"] {
+  
+  --bg: #f5f5f7 !important;
+  --bg-elev-1: #ffffff !important;
+  --bg-elev-2: #fbfbfd !important;
+  --bg-elev-3: #f5f5f7 !important;
+  --bg-elev-4: rgba(0, 0, 0, 0.04) !important;
+
+  --bd-1: rgba(0, 0, 0, 0.08) !important;
+  --bd-2: rgba(0, 0, 0, 0.12) !important;
+  --bd-3: rgba(0, 0, 0, 0.18) !important;
+  --bd-4: rgba(0, 0, 0, 0.28) !important;
+
+  --tx-1: #1d1d1f !important;
+  --tx-2: #515154 !important;
+  --tx-3: #6e6e73 !important;
+  --tx-4: #86868b !important;
+  --tx-5: #a1a1a6 !important;
+
+  --sh-sm: 0 1px 2px rgba(0, 30, 80, 0.04), 0 1px 1px rgba(0, 30, 80, 0.03) !important;
+  --sh-md: 0 4px 12px rgba(0, 30, 80, 0.06), 0 2px 4px rgba(0, 30, 80, 0.04) !important;
+  --sh-lg: 0 10px 28px rgba(0, 30, 80, 0.08), 0 4px 10px rgba(0, 30, 80, 0.05) !important;
+  --sh-xl: 0 24px 60px rgba(0, 30, 80, 0.12), 0 8px 20px rgba(0, 30, 80, 0.06) !important;
+  --sh-glow: 0 0 0 3px rgba(0, 113, 227, 0.14), 0 0 24px rgba(0, 113, 227, 0.10) !important;
+}
+
+[data-theme="light"] .glass-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow:
+    0 1px 2px rgba(0, 30, 80, 0.04),
+    0 4px 16px rgba(0, 30, 80, 0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+[data-theme="light"] .glass-card:hover {
+  box-shadow:
+    0 1px 2px rgba(0, 30, 80, 0.05),
+    0 8px 28px rgba(0, 30, 80, 0.10) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+[data-theme="light"] .glass-card::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 227, 0.20), transparent) !important;
+}
+
+[data-theme="light"] .sidebar {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 0 40px rgba(0, 30, 80, 0.04) !important;
+}
+[data-theme="light"] .sb-brand {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+[data-theme="light"] .sb-brand-sub {
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .sb-mark {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .nav-item {
+  color: #424245 !important;
+}
+[data-theme="light"] .nav-item:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .nav-item.active {
+  background: rgba(0, 113, 227, 0.08) !important;
+  color: #0071e3 !important;
+}
+[data-theme="light"] .sb-section-label {
+  color: #86868b !important;
+}
+[data-theme="light"] .sb-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .topbar {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="light"] .tb-greeting { color: #1d1d1f !important; }
+[data-theme="light"] .tb-streak {
+  background: rgba(0, 113, 227, 0.06) !important;
+  border: 1px solid rgba(0, 113, 227, 0.18) !important;
+  color: #0071e3 !important;
+}
+[data-theme="light"] .tb-clock {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .tb-icon-btn {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #424245 !important;
+}
+[data-theme="light"] .tb-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] .input-field,
+[data-theme="light"] .form-input,
+[data-theme="light"] textarea.input-field,
+[data-theme="light"] select.input-field {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #1d1d1f !important;
+  box-shadow: 0 1px 2px rgba(0, 30, 80, 0.04) !important;
+}
+[data-theme="light"] .input-field:hover,
+[data-theme="light"] .form-input:hover {
+  border-color: rgba(0, 0, 0, 0.20) !important;
+}
+[data-theme="light"] .input-field:focus,
+[data-theme="light"] .form-input:focus {
+  background: #ffffff !important;
+  border-color: #0071e3 !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 113, 227, 0.14),
+    0 0 0 1px #0071e3 !important;
+  outline: none !important;
+}
+[data-theme="light"] .input-field::placeholder,
+[data-theme="light"] .form-input::placeholder {
+  color: rgba(99, 99, 102, 0.55) !important;
+}
+[data-theme="light"] label {
+  color: #424245 !important;
+}
+
+[data-theme="light"] .btn-primary {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.10),
+    0 4px 14px rgba(0, 0, 0, 0.10) !important;
+}
+[data-theme="light"] .btn-primary:hover {
+  background: #2a2a2c !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 113, 227, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] .btn-outline {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #1d1d1f !important;
+  box-shadow: 0 1px 2px rgba(0, 30, 80, 0.04) !important;
+}
+[data-theme="light"] .btn-secondary:hover,
+[data-theme="light"] .btn-outline:hover {
+  background: #f5f5f7 !important;
+  border-color: rgba(0, 0, 0, 0.20) !important;
+}
+[data-theme="light"] .btn-link {
+  color: #0071e3 !important;
+}
+[data-theme="light"] .btn-link:hover {
+  color: #005bb5 !important;
+}
+
+[data-theme="light"] .modal-overlay {
+  background: rgba(0, 30, 80, 0.32) !important;
+  backdrop-filter: blur(8px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+}
+[data-theme="light"] .modal {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 30, 80, 0.18),
+    0 8px 24px rgba(0, 30, 80, 0.10) !important;
+}
+[data-theme="light"] .modal h3,
+[data-theme="light"] .modal h2 {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .modal-close {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .modal-close:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] .chip {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  color: #424245 !important;
+}
+[data-theme="light"] .chip:hover {
+  background: #f5f5f7 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .chip.active {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+  border-color: #1d1d1f !important;
+}
+[data-theme="light"] .tag,
+[data-theme="light"] .tag-a {
+  background: rgba(0, 113, 227, 0.08) !important;
+  color: #0071e3 !important;
+  border: 1px solid rgba(0, 113, 227, 0.18) !important;
+}
+
+[data-theme="light"] .card-label,
+[data-theme="light"] .card-label span,
+[data-theme="light"] .pane-eyebrow {
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .section-divider {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+}
+[data-theme="light"] .section-divider span {
+  background: #f5f5f7 !important;
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .pane-title {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .pane-sub {
+  color: #6e6e73 !important;
+}
+
+[data-theme="light"] .stat-num,
+[data-theme="light"] .stat-card-num {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+[data-theme="light"] .stat-lbl,
+[data-theme="light"] .stat-card-label {
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .quote-text {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .quote-mark {
+  color: rgba(0, 113, 227, 0.20) !important;
+}
+[data-theme="light"] .task-mini-item {
+  background: #fbfbfd !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="light"] .task-mini-item:hover {
+  background: #f5f5f7 !important;
+}
+[data-theme="light"] .task-mini-check {
+  border: 1.5px solid rgba(0, 0, 0, 0.22) !important;
+  background: #ffffff !important;
+}
+[data-theme="light"] .task-mini-check.done {
+  background: #0071e3 !important;
+  border-color: #0071e3 !important;
+}
+
+[data-theme="light"] .task-item,
+[data-theme="light"] .note-card,
+[data-theme="light"] .goal-slot,
+[data-theme="light"] .paper-card,
+[data-theme="light"] .ref-item,
+[data-theme="light"] .sat-row {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 1px 2px rgba(0, 30, 80, 0.03) !important;
+}
+[data-theme="light"] .task-item:hover,
+[data-theme="light"] .note-card:hover,
+[data-theme="light"] .paper-card:hover,
+[data-theme="light"] .sat-row:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
+  box-shadow:
+    0 4px 14px rgba(0, 30, 80, 0.06),
+    0 1px 4px rgba(0, 30, 80, 0.04) !important;
+}
+[data-theme="light"] .goal-slot.empty {
+  background: #fbfbfd !important;
+  border: 1.5px dashed rgba(0, 0, 0, 0.15) !important;
+}
+[data-theme="light"] .goal-slot.empty:hover {
+  background: #f5f5f7 !important;
+  border-color: rgba(0, 113, 227, 0.40) !important;
+}
+[data-theme="light"] .note-title,
+[data-theme="light"] .task-text,
+[data-theme="light"] .goal-subject,
+[data-theme="light"] .paper-title,
+[data-theme="light"] .ref-title,
+[data-theme="light"] .sat-title {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .note-meta,
+[data-theme="light"] .task-meta,
+[data-theme="light"] .goal-meta,
+[data-theme="light"] .paper-meta,
+[data-theme="light"] .ref-meta,
+[data-theme="light"] .sat-meta {
+  color: #6e6e73 !important;
+}
+
+[data-theme="light"] .focus-time {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .focus-label {
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .focus-ring-bg {
+  stroke: rgba(0, 0, 0, 0.08) !important;
+}
+[data-theme="light"] .focus-ring-fg {
+  stroke: #0071e3 !important;
+}
+
+[data-theme="light"] .progress-bar,
+[data-theme="light"] .trend-bar-bg,
+[data-theme="light"] .perf-bar-bg {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="light"] .progress-fill,
+[data-theme="light"] .trend-bar,
+[data-theme="light"] .perf-bar {
+  background: linear-gradient(90deg, #0071e3, #5ac8fa) !important;
+}
+[data-theme="light"] .trend-label,
+[data-theme="light"] .trend-date,
+[data-theme="light"] .perf-subj-name,
+[data-theme="light"] .report-subj-name,
+[data-theme="light"] .progress-num,
+[data-theme="light"] .progress-label {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+[data-theme="light"] .trend-value,
+[data-theme="light"] .perf-subj-value,
+[data-theme="light"] .report-subj-pct {
+  color: #515154 !important;
+}
+
+[data-theme="light"] select,
+[data-theme="light"] select.input-field,
+[data-theme="light"] select.select-sm {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%236e6e73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+  background-size: 12px 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #1d1d1f !important;
+  box-shadow: 0 1px 2px rgba(0, 30, 80, 0.04) !important;
+}
+[data-theme="light"] select option {
+  background-color: #ffffff !important;
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] .toast {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+  box-shadow:
+    0 8px 32px rgba(0, 30, 80, 0.12),
+    0 2px 8px rgba(0, 30, 80, 0.08) !important;
+}
+[data-theme="light"] .toast.g {
+  background: rgba(52, 168, 83, 0.08) !important;
+  border-color: rgba(52, 168, 83, 0.30) !important;
+  color: #1a8a34 !important;
+}
+[data-theme="light"] .toast.r {
+  background: rgba(232, 60, 56, 0.08) !important;
+  border-color: rgba(232, 60, 56, 0.30) !important;
+  color: #c52e2a !important;
+}
+[data-theme="light"] .toast.y {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.30) !important;
+  color: #b8730d !important;
+}
+
+[data-theme="light"] .app-footer {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="light"] .footer-copy,
+[data-theme="light"] .footer-version {
+  color: #6e6e73 !important;
+}
+[data-theme="light"] .footer-brand {
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] *[style*="color:#fff"]:not(.btn-primary):not(.lo-cta):not(.task-mini-check.done):not(.chip.active):not(.sat-num),
+[data-theme="light"] *[style*="color: #fff"]:not(.btn-primary):not(.lo-cta):not(.task-mini-check.done):not(.chip.active):not(.sat-num),
+[data-theme="light"] *[style*="color:white"]:not(.btn-primary):not(.lo-cta):not(.task-mini-check.done):not(.chip.active):not(.sat-num) {
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] svg {
+  stroke: currentColor;
+}
+
+[data-theme="light"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+[data-theme="light"] ::-webkit-scrollbar-track { background: transparent; }
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  border: 2px solid #f5f5f7;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(0, 113, 227, 0.20);
+  color: #1d1d1f;
+}
+
+#screen-welcome .lo-copyright {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 var(--sp-5) clamp(20px, 3vh, 28px);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  color: var(--tx-4);
+  animation: lo-fade 0.7s var(--ease-out) 1.10s both;
+  user-select: none;
+}
+#screen-welcome .lo-copyright strong {
+  color: var(--tx-3);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+[data-theme="light"] #screen-welcome .lo-copyright {
+  color: rgba(99, 99, 102, 0.65);
+}
+[data-theme="light"] #screen-welcome .lo-copyright strong {
+  color: rgba(29, 29, 31, 0.75);
+}
+
+@media (max-width: 640px) {
+  #screen-welcome .lo-copyright {
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    padding: 0 var(--sp-4) var(--sp-5);
+  }
+}
+@media (max-height: 700px) {
+  #screen-welcome .lo-copyright {
+    padding-bottom: 14px;
+    font-size: 9.5px;
+  }
+}
+
+[data-theme="light"] .nav-item,
+[data-theme="light"] .chip,
+[data-theme="light"] .tag,
+[data-theme="light"] .pill,
+[data-theme="light"] .glass-card,
+[data-theme="light"] .task-item,
+[data-theme="light"] .note-card,
+[data-theme="light"] .goal-slot,
+[data-theme="light"] .paper-card,
+[data-theme="light"] .sat-row,
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] .btn-outline,
+[data-theme="light"] .btn-link,
+[data-theme="light"] .input-field,
+[data-theme="light"] select,
+[data-theme="light"] .tb-icon-btn,
+[data-theme="light"] .modal-close {
+  transition:
+    background-color .25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color .25s cubic-bezier(0.16, 1, 0.3, 1),
+    color .25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow .25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] hr,
+[data-theme="light"] .divider {
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  background: rgba(0, 0, 0, 0.10) !important;
+}
+
+[data-theme="light"] .badge {
+  background: rgba(0, 113, 227, 0.10) !important;
+  color: #0071e3 !important;
+  border: 1px solid rgba(0, 113, 227, 0.22) !important;
+}
+
+[data-theme="light"] .alert-info {
+  background: rgba(0, 113, 227, 0.06) !important;
+  border: 1px solid rgba(0, 113, 227, 0.20) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .alert-success {
+  background: rgba(52, 168, 83, 0.08) !important;
+  border: 1px solid rgba(52, 168, 83, 0.25) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .alert-warning {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border: 1px solid rgba(245, 158, 11, 0.28) !important;
+  color: #1d1d1f !important;
+}
+[data-theme="light"] .alert-error {
+  background: rgba(232, 60, 56, 0.06) !important;
+  border: 1px solid rgba(232, 60, 56, 0.25) !important;
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] *:focus-visible {
+  outline: 2px solid #0071e3 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+[data-theme="light"] [disabled],
+[data-theme="light"] :disabled,
+[data-theme="light"] .disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
 }
