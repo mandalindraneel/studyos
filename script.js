@@ -1,18 +1,15 @@
 'use strict';
 /* ══════════════════════════════════════════════════════
-   STUDYOS
+   STUDYOS · MMXXVI
    © Indraneel Mandal
    ML-powered academic workspace
 ══════════════════════════════════════════════════════ */
-
-/* ── STORAGE ─────────────────────────────────────── */
 const LS = {
   get(k, d = null) { try { const v = localStorage.getItem(k); return v != null ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 };
 const sv = (k, v) => { st[k] = v; LS.set('sos2_' + k, v); };
 
-/* ── STATE ───────────────────────────────────────── */
 const st = {
   name:       LS.get('sos2_name', ''),
   streak:     LS.get('sos2_streak', 0),
@@ -33,7 +30,6 @@ const st = {
   sec: 'dashboard',
 };
 
-/* ── UTILS ───────────────────────────────────────── */
 const esc = s => { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; };
 const pad = n => String(n).padStart(2, '0');
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
@@ -66,7 +62,6 @@ const COLOR_BDS = {
   cyan: 'rgba(90,200,250,.22)'
 };
 
-/* ── TOAST ───────────────────────────────────────── */
 const TCOLS = { a: '#2997ff', g: '#30d158', y: '#ffd60a', r: '#ff453a', p: '#bf5af2', c: '#5ac8fa' };
 function toast(msg, c = 'a') {
   const tc = $('toastContainer');
@@ -77,7 +72,6 @@ function toast(msg, c = 'a') {
   setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 280); }, 3600);
 }
 
-/* ── CONFETTI ────────────────────────────────────── */
 function confetti() {
   const cols = ['#FFFFFF', '#22C55E', '#EAB308', '#EF4444', '#A855F7', '#06B6D4'];
   for (let i = 0; i < 70; i++) {
@@ -91,7 +85,6 @@ function confetti() {
   }
 }
 
-/* ── THEME ───────────────────────────────────────── */
 function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   sv('theme', t);
@@ -108,7 +101,6 @@ $('themeToggle').onclick = () => {
   }, 80);
 };
 
-/* ── QUOTES ──────────────────────────────────────── */
 const QUOTES = [
   { t: "The secret of getting ahead is getting started.", a: "Mark Twain" },
   { t: "It always seems impossible until it's done.", a: "Nelson Mandela" },
@@ -135,7 +127,6 @@ function renderQuote() {
   if (qa) qa.textContent = '— ' + q.a;
 }
 
-/* ── CLOCK ───────────────────────────────────────── */
 const DAYS_S = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS_S = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 function tickClock() {
@@ -144,7 +135,6 @@ function tickClock() {
 }
 setInterval(tickClock, 1000); tickClock();
 
-/* ── GREETING ────────────────────────────────────── */
 function setGreeting(name) {
   const h = new Date().getHours();
   const g = h < 5 ? 'Good night' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : h < 21 ? 'Good evening' : 'Good night';
@@ -155,7 +145,6 @@ function setGreeting(name) {
   const sbMeta = $('sbMeta'); if (sbMeta) sbMeta.textContent = `Active · ${DAYS_S[new Date().getDay()]}`;
 }
 
-/* ── STREAK ──────────────────────────────────────── */
 function checkStreak() {
   const t = todayStr(), y = new Date(Date.now() - 86400000).toDateString();
   if (st.last === t) return;
@@ -167,7 +156,6 @@ function updateStreakUI() {
 }
 setInterval(() => { if (st.last !== todayStr()) { checkStreak(); updateStreakUI(); } }, 60000);
 
-/* ── COUNTDOWN ───────────────────────────────────── */
 let cdTimer = null;
 function startCD() {
   if (cdTimer) clearInterval(cdTimer);
@@ -190,13 +178,11 @@ function updateCD() {
   if (eb) { eb.textContent = `${st.exam.name || 'Exam'} · ${dd}d`; eb.style.display = ''; }
 }
 
-/* ── NAVIGATION ──────────────────────────────────── */
 function nav(sec) {
   document.querySelectorAll('.nav-item').forEach(i => i.classList.toggle('active', i.dataset.pane === sec));
   document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === 'p-' + sec));
   st.sec = sec;
 
-  // Scroll to top of new section
   try {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
@@ -208,7 +194,7 @@ function nav(sec) {
       activePane.scrollTop = 0;
       activePane.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
-  } catch (e) { /* no-op */ }
+  } catch (e) {  }
 
   if (window.innerWidth <= 700) { $('sidebar').classList.remove('open'); $('mobOverlay').style.display = 'none'; document.body.classList.remove('sidebar-open'); }
   if (sec === 'dashboard') renderDashboard();
@@ -222,14 +208,12 @@ function nav(sec) {
 }
 
 document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListener('click', () => nav(i.dataset.pane)));
-// ── Mobile sidebar — cross-platform (iOS + Android) ──
 (function mobileSidebar() {
   const toggle = document.getElementById('mobToggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('mobOverlay');
   if (!toggle || !sidebar || !overlay) return;
 
-  // Debounce timer — prevents double-fire on Android (touchend+click)
   let lockUntil = 0;
   const LOCK_MS = 350;
 
@@ -254,29 +238,23 @@ document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListene
   function toggleSidebar(e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     const now = Date.now();
-    if (now < lockUntil) return; // debounce
+    if (now < lockUntil) return;
     lockUntil = now + LOCK_MS;
     if (sidebar.classList.contains('open')) closeSidebar();
     else openSidebar();
   }
 
-  // Use pointerup (modern, works on both iOS & Android), with click as fallback
-  // pointerup fires once regardless of device — solves the double-fire issue
   if (window.PointerEvent) {
     toggle.addEventListener('pointerup', toggleSidebar);
   } else {
-    // Fallback for ancient browsers: bind click only
     toggle.addEventListener('click', toggleSidebar);
   }
-  // Always expose .onclick as a last-resort fallback
   toggle.onclick = function(e) {
-    // Only fire if pointerup didn't already handle it
     const now = Date.now();
     if (now < lockUntil) return;
     toggleSidebar(e);
   };
 
-  // Overlay: close on tap (single event)
   function closeFromOverlay(e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     const now = Date.now();
@@ -290,28 +268,23 @@ document.querySelectorAll('.nav-item[data-pane]').forEach(i => i.addEventListene
     overlay.addEventListener('click', closeFromOverlay);
   }
 
-  // Escape closes (desktop)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
   });
 
-  // Nav item tap → close sidebar on mobile
   sidebar.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
       if (window.innerWidth <= 700) setTimeout(closeSidebar, 60);
     });
   });
 
-  // Resize to desktop closes the open sidebar
   window.addEventListener('resize', () => {
     if (window.innerWidth > 700 && sidebar.classList.contains('open')) closeSidebar();
   });
 
-  // Initial state on mobile
   if (window.innerWidth <= 700) closeSidebar();
 })();
 
-/* ── MODALS ──────────────────────────────────────── */
 function openModal(id) { $(id).classList.add('on'); }
 function closeModal(id) { $(id).classList.remove('on'); }
 document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('on'); }));
@@ -322,9 +295,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ══════════════════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════════════════ */
 function updateStatsUI() {
   const s = (id, v) => { const el = $(id); if (el) el.textContent = v; };
   s('statSessions', st.sessions);
@@ -343,7 +313,6 @@ function renderDashboard() {
 }
 function renderDashTasks() {
   const el = $('dashTasks'); if (!el) return;
-  // Show ALL pending tasks (high, medium, low) — sorted by priority then due date
   const prioRank = { high: 0, medium: 1, low: 2 };
   const arr = [...st.tasks]
     .filter(t => !t.done)
@@ -351,7 +320,6 @@ function renderDashTasks() {
       const pa = prioRank[a.priority] ?? 1;
       const pb = prioRank[b.priority] ?? 1;
       if (pa !== pb) return pa - pb;
-      // Same priority: sooner due date first; no-due-date last
       if (!a.due && b.due) return 1;
       if (a.due && !b.due) return -1;
       if (!a.due && !b.due) return 0;
@@ -389,11 +357,10 @@ function renderDashInsights() {
   if (st.perfHist.length < 3) { el.innerHTML = ''; return; }
 
   const strengths = getSubjectStrengths();
-  const weakest = strengths[0]; // sorted by avg ascending
+  const weakest = strengths[0];
   const strongest = strengths[strengths.length - 1];
   const totalAvg = Math.round(st.perfHist.reduce((a, h) => a + h.pct, 0) / st.perfHist.length);
 
-  // Build recommendations
   const recs = [];
   if (weakest && weakest.avg < 60) recs.push(`<strong>${esc(weakest.name)}</strong> is your weakest subject at ${weakest.avg}%. Focus extra study time here.`);
   if (weakest && weakest.trend === 'declining') recs.push(`<strong>${esc(weakest.name)}</strong> scores are declining. Consider changing your study approach.`);
@@ -402,7 +369,6 @@ function renderDashInsights() {
   else if (totalAvg >= 60) recs.push('Solid foundation. Target your weakest areas for the biggest score gains.');
   else recs.push('Focus on fundamentals. Short daily sessions are more effective than long cramming.');
 
-  // Predict overall trajectory
   const sorted = [...st.perfHist].sort((a, b) => new Date(a.date) - new Date(b.date));
   const reg = linearRegression(sorted.map((_, i) => i), sorted.map(h => h.pct));
   const predicted = Math.round(Math.min(100, Math.max(0, reg.slope * (sorted.length + 3) + reg.intercept)));
@@ -429,9 +395,6 @@ function renderDashInsights() {
   </div>`;
 }
 
-/* ══════════════════════════════════════════════════
-   TASKS
-══════════════════════════════════════════════════ */
 let taskFilter = 'all';
 function renderTasks(f) {
   if (f !== undefined) taskFilter = f;
@@ -486,7 +449,6 @@ function saveTaskHandler() {
   if (!btn) { setTimeout(bindTaskSave, 100); return; }
   btn.onclick = saveTaskHandler;
   btn.addEventListener('click', saveTaskHandler);
-  // Also allow Enter key in task text input
   const txt = $('taskText');
   if (txt) {
     txt.addEventListener('keydown', (e) => {
@@ -500,7 +462,6 @@ function toggleTask(id) {
 }
 function delTask(id) { sv('tasks', st.tasks.filter(t => t.id !== id)); renderTasks(); renderDashTasks(); updateStatsUI(); }
 
-/* ── EXAM + CALENDAR ─────────────────────────────── */
 $('saveExamBtn').onclick = () => {
   const dt = $('exDate').value;
   if (!dt) { toast('Please select a date', 'r'); return; }
@@ -544,9 +505,6 @@ function renderSchedule() {
 }
 function saveSch(el) { sv('schedule', { ...st.schedule, [el.dataset.k]: el.textContent.trim() }); }
 
-/* ══════════════════════════════════════════════════
-   GOALS
-══════════════════════════════════════════════════ */
 let editGoalSlot = -1;
 function renderGoals() {
   const el = $('goalsGrid'); if (!el) return;
@@ -578,11 +536,9 @@ function pinGoal(slot) {
   const arr = [...(st.goals || [])];
   while (arr.length < 4) arr.push(null);
   if (st.pinnedGoal === slot) {
-    // Unpinning
     sv('pinnedGoal', null);
     toast('Goal unpinned', 'y');
   } else {
-    // Pinning: move goal to slot 0 and track new pinned index
     if (slot !== 0 && arr[slot]) {
       const pinnedGoal = arr[slot];
       const displaced = arr[0];
@@ -642,9 +598,6 @@ function delGoal(slot) { const arr = [...(st.goals || [])]; while (arr.length < 
   }
 })();
 
-/* ══════════════════════════════════════════════════
-   PERFORMANCE BREAKDOWN
-══════════════════════════════════════════════════ */
 const GRADES = [
   { min: 90, g: 'A+', c: 'green' }, { min: 80, g: 'A', c: 'green' },
   { min: 70, g: 'B+', c: 'blue' }, { min: 60, g: 'B', c: 'blue' },
@@ -669,7 +622,6 @@ $('logScoreBtn').onclick = () => {
   renderAICoach(entry);
 };
 
-/* ── ML API Configuration ── */
 const ML_API_URL = 'https://studyos-api-8eli.onrender.com'; 
 
 async function renderAICoach(entry) {
@@ -679,7 +631,6 @@ async function renderAICoach(entry) {
   const colD = COLOR_DIMS[gr.c] || COLOR_DIMS.blue;
   const colB = COLOR_BDS[gr.c] || COLOR_BDS.blue;
 
-  // Show loading
   card.innerHTML = `<div class="ai-score-hero" style="background:${colD};border:1px solid ${colB}">
     <div style="font-family:var(--mono);font-size:.54rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:${col}">${esc(entry.subject)}</div>
     <span class="ai-score-big" style="color:${col}">${entry.pct}%</span>
@@ -688,7 +639,6 @@ async function renderAICoach(entry) {
   <div class="ai-section"><div class="ai-section-label">Generating AI Report</div>
   <div class="ai-section-body" style="display:flex;align-items:center;gap:12px"><div style="width:18px;height:18px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite"></div>Analyzing your performance and preparing personalized recommendations...</div></div>`;
 
-  // Prepare data for API
   const payload = {
     scores: st.perfHist.map(h => ({ subject: h.subject, pct: h.pct, date: h.date, weak: h.weak || [] })),
     current: { subject: entry.subject, pct: entry.pct, score: entry.score, total: entry.total, weak: entry.weak || [] },
@@ -721,7 +671,6 @@ function renderMLReport(r, entry) {
   const S = (title, body) => `<div class="ai-section"><div class="ai-section-label">${title}</div><div class="ai-section-body">${body}</div></div>`;
   let html = '';
 
-  // Hero
   html += `<div class="ai-score-hero" style="background:${colD};border:1px solid ${colB}">
     <div style="font-family:var(--mono);font-size:.54rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:${col}">${esc(entry.subject)}</div>
     <span class="ai-score-big" style="color:${col}">${entry.pct}%</span>
@@ -731,7 +680,6 @@ function renderMLReport(r, entry) {
     </div>
   </div>`;
 
-  // 1. Identified Weak Areas
   if (entry.weak?.length) {
     html += `<div class="ai-section" style="background:var(--amber-dim);border-color:var(--amber-bd)">
       <div class="ai-section-label" style="color:var(--amber)">Identified Weak Areas</div>
@@ -740,7 +688,6 @@ function renderMLReport(r, entry) {
     </div>`;
   }
 
-  // 2. Optimal Review Schedule (spaced repetition)
   const sr = r.spaced_rep;
   if (sr && entry.weak?.length) {
     const today = new Date();
@@ -759,7 +706,6 @@ function renderMLReport(r, entry) {
     html += S('Optimal Review Schedule', b);
   }
 
-  // 3. Recommendations (elaborate, valuable, human-friendly)
   const recs = (r.recommendations || []).filter(rec => rec.text && rec.text.length > 8);
   const elaborateRecs = buildElaborateRecommendations(entry, r, recs);
   if (elaborateRecs.length) {
@@ -791,7 +737,6 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
   const risk = r.risk || {};
   const mom = r.momentum || {};
 
-  // Score-based recommendation
   if (pct < 50) {
     recs.push({
       priority: 'high',
@@ -818,7 +763,6 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     });
   }
 
-  // Weak areas
   if (weak.length) {
     const topicList = weak.slice(0, 3).map(w => `<strong style="color:var(--t1)">${esc(w)}</strong>`).join(', ');
     recs.push({
@@ -828,7 +772,6 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     });
   }
 
-  // Trend-based
   if (lr.available && lr.trend === 'declining') {
     recs.push({
       priority: 'high',
@@ -843,7 +786,6 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     });
   }
 
-  // Consistency
   if (stats.available && stats.std_dev > 12) {
     recs.push({
       priority: 'medium',
@@ -852,7 +794,6 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     });
   }
 
-  // High risk
   if (risk.available && risk.risk_level === 'high') {
     recs.push({
       priority: 'high',
@@ -861,11 +802,9 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     });
   }
 
-  // Add API recommendations that aren't already covered (text-based merge)
   apiRecs.forEach(rec => {
     const priority = rec.priority || 'medium';
     if (rec.text && rec.text.length > 20 && !recs.find(r => r.body.includes(rec.text.slice(0, 20)))) {
-      // Convert short API rec into a fuller form
       recs.push({
         priority,
         title: rec.source || 'Insight',
@@ -874,14 +813,13 @@ function buildElaborateRecommendations(entry, r, apiRecs) {
     }
   });
 
-  // Always end with a positive habit nudge
   recs.push({
     priority: 'low',
     title: 'Build a daily habit',
     body: `Beyond exam prep, the single biggest predictor of long-term performance is daily consistency. Aim for 25-50 minutes of focused study on ${subj} every day, ideally at the same time and place. Use the Pomodoro timer in StudyOS to stay focused. Sleep matters: 7+ hours significantly improves memory consolidation. And pause every 2-3 days to review what you've learned — review beats re-learning.`
   });
 
-  return recs.slice(0, 6); // cap at 6 recommendations
+  return recs.slice(0, 6);
 }
 
 function generateDataReport(entry) {
@@ -915,7 +853,6 @@ function generateDataReport(entry) {
     return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
   };
 
-  // Build fake "r" object for buildElaborateRecommendations
   const fakeR = {
     linear: regData ? { available: true, trend: trendWord, slope: Math.round(regData.slope * 10) / 10 } : { available: false },
     statistics: subjScores.length >= 2 ? { available: true, std_dev: stdDev, best, worst } : { available: false },
@@ -926,7 +863,6 @@ function generateDataReport(entry) {
   const S = (title, body) => `<div class="ai-section"><div class="ai-section-label">${title}</div><div class="ai-section-body">${body}</div></div>`;
   let html = '';
 
-  // Hero
   html += `<div class="ai-score-hero" style="background:${colD};border:1px solid ${colB}">
     <div style="font-family:var(--mono);font-size:.54rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:${col}">${esc(subj)}</div>
     <span class="ai-score-big" style="color:${col}">${pct}%</span>
@@ -936,7 +872,6 @@ function generateDataReport(entry) {
     </div>
   </div>`;
 
-  // 1. Identified Weak Areas
   if (entry.weak?.length) {
     html += `<div class="ai-section" style="background:var(--amber-dim);border-color:var(--amber-bd)">
       <div class="ai-section-label" style="color:var(--amber)">Identified Weak Areas</div>
@@ -945,7 +880,6 @@ function generateDataReport(entry) {
     </div>`;
   }
 
-  // 2. Optimal Review Schedule
   if (entry.weak?.length) {
     let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Here's when you should revisit each weak topic for maximum retention, based on proven spaced-repetition timing:</div>`;
     b += `<div style="display:flex;gap:8px;flex-wrap:wrap">${intervals.map((d, i) => `
@@ -957,7 +891,6 @@ function generateDataReport(entry) {
     html += S('Optimal Review Schedule', b);
   }
 
-  // 3. Elaborate Recommendations
   const elaborateRecs = buildElaborateRecommendations(entry, fakeR, []);
   if (elaborateRecs.length) {
     let b = `<div style="font-size:.86rem;color:var(--t2);line-height:1.65;margin-bottom:14px">Concrete, actionable steps tailored to your performance pattern:</div>`;
@@ -978,7 +911,6 @@ function generateDataReport(entry) {
   return html;
 }
 
-// Helper: Returns interval days as numbers (used by both ML and local report)
 function computeSpacedIntervalsArr(scorePct) {
   const ease = Math.max(1.3, 1.3 + (scorePct - 50) * 0.02);
   const base = scorePct >= 80 ? 3 : scorePct >= 60 ? 2 : 1;
@@ -990,9 +922,6 @@ function computeSpacedIntervalsArr(scorePct) {
   ];
 }
 
-/* ── ALGORITHMIC INTELLIGENCE ──────────────────── */
-
-// Simple linear regression: y = slope * x + intercept
 function linearRegression(xs, ys) {
   const n = xs.length;
   if (n < 2) return { slope: 0, intercept: ys[0] || 0, r2: 0 };
@@ -1005,7 +934,6 @@ function linearRegression(xs, ys) {
   if (denom === 0) return { slope: 0, intercept: sumY / n, r2: 0 };
   const slope = (n * sumXY - sumX * sumY) / denom;
   const intercept = (sumY - slope * sumX) / n;
-  // R-squared
   const yMean = sumY / n;
   const ssRes = ys.reduce((a, y, i) => a + Math.pow(y - (slope * xs[i] + intercept), 2), 0);
   const ssTot = ys.reduce((a, y) => a + Math.pow(y - yMean, 2), 0);
@@ -1013,11 +941,9 @@ function linearRegression(xs, ys) {
   return { slope, intercept, r2 };
 }
 
-// SM-2 inspired spaced repetition intervals based on score
 function computeSpacedIntervals(scorePct) {
-  // Lower score = shorter intervals (more review needed)
-  const ease = Math.max(1.3, 1.3 + (scorePct - 50) * 0.02); // 1.3 to 2.3
-  const base = scorePct >= 80 ? 3 : scorePct >= 60 ? 2 : 1; // days
+  const ease = Math.max(1.3, 1.3 + (scorePct - 50) * 0.02);
+  const base = scorePct >= 80 ? 3 : scorePct >= 60 ? 2 : 1;
   return [
     `${base} day${base > 1 ? 's' : ''}`,
     `${Math.round(base * ease)} days`,
@@ -1026,7 +952,6 @@ function computeSpacedIntervals(scorePct) {
   ];
 }
 
-// Subject strength analysis for dashboard
 function getSubjectStrengths() {
   const subjects = {};
   st.perfHist.forEach(h => {
@@ -1047,9 +972,6 @@ function getSubjectStrengths() {
   }).sort((a, b) => a.avg - b.avg);
 }
 
-/* ══════════════════════════════════════════════════
-   CHARTS
-══════════════════════════════════════════════════ */
 const SChart = {
   dpr: Math.min(window.devicePixelRatio || 1, 2),
   setup(cv, w, h) {
@@ -1166,7 +1088,6 @@ function renderPerfDashboard() {
     return;
   }
   const subjects = [...new Set(data.map(h => h.subject))];
-  // Filter data by selected subject
   const filteredData = perfSubjectFilter === 'All' ? data : data.filter(h => h.subject === perfSubjectFilter);
   const sorted = [...filteredData].sort((a, b) => new Date(a.date) - new Date(b.date));
   const avg = filteredData.length ? Math.round(filteredData.reduce((s, h) => s + h.pct, 0) / filteredData.length) : 0;
@@ -1182,7 +1103,6 @@ function renderPerfDashboard() {
     return { subject: s, avg: Math.round(sd.reduce((a, h) => a + h.pct, 0) / sd.length) };
   }).sort((a, b) => b.avg - a.avg);
 
-  // Subject dropdown options
   const subjectOptions = ['All', ...subjects].map(s => `<option value="${esc(s)}" ${s === perfSubjectFilter ? 'selected' : ''}>${esc(s)}</option>`).join('');
 
   dash.innerHTML = `<div class="tracker-stats">
@@ -1228,9 +1148,6 @@ function setPerfSubject(s) {
   renderPerfDashboard();
 }
 
-/* ══════════════════════════════════════════════════
-   NOTES
-══════════════════════════════════════════════════ */
 let noteEditIdx = -1, noteSubjectFilter = 'all', noteSearchQ = '', noteSortMode = 'newest';
 
 function initNoteEditor() {
@@ -1241,9 +1158,7 @@ function initNoteEditor() {
     setTimeout(() => $('neBody').focus(), 100);
   };
   $('neCancelBtn').onclick = e => { e.preventDefault(); $('noteEditorWrap').style.display = 'none'; noteEditIdx = -1; };
-  // Prevent toolbar mousedown from stealing selection
   $('neToolbar').addEventListener('mousedown', e => { e.preventDefault(); e.stopPropagation(); });
-  // Also force all toolbar buttons to type="button" (so they don't submit forms)
   $('neToolbar').querySelectorAll('button').forEach(b => { if (!b.type) b.type = 'button'; });
 
   $('neToolbar').addEventListener('click', e => {
@@ -1252,7 +1167,6 @@ function initNoteEditor() {
     const btn = e.target.closest('.ne-tool[data-cmd]');
     const sw = e.target.closest('.ne-swatch');
     if (!btn && !sw) return;
-    // Ensure the editor has focus AND retain current selection
     const body = $('neBody');
     if (document.activeElement !== body) body.focus();
     try {
@@ -1323,7 +1237,6 @@ function renderNotes(f) {
   if (noteSortMode === 'newest') arr.sort((a, b) => new Date(b.date) - new Date(a.date));
   else if (noteSortMode === 'oldest') arr.sort((a, b) => new Date(a.date) - new Date(b.date));
   else if (noteSortMode === 'az') arr.sort((a, b) => (a.title || a.subject || '').localeCompare(b.title || b.subject || ''));
-  // Pinned notes always at top
   arr.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
   if (!arr.length) {
     el.innerHTML = `<div style="column-span:all;text-align:center;padding:44px 20px;color:var(--t4);font-family:var(--font);font-style:italic;font-size:.88rem">${noteSearchQ ? 'No results found.' : 'No notes yet. Click "New Note" to begin.'}</div>`;
@@ -1408,9 +1321,6 @@ function viewNote(i) {
   vm.classList.add('on');
 }
 
-/* ══════════════════════════════════════════════════
-   PAPERS
-══════════════════════════════════════════════════ */
 const SAT_TESTS = [
   { n: 1, label: 'SAT Practice Test 1', year: 'Paper Format', url: 'https://360031.fs1.hubspotusercontent-na1.net/hubfs/360031/PrepScholar-sat-practice-test-1.pdf' },
   { n: 2, label: 'SAT Practice Test 2', year: 'Paper Format', url: 'https://360031.fs1.hubspotusercontent-na1.net/hubfs/360031/PrepScholar-sat-practice-test-2.pdf' },
@@ -1459,7 +1369,6 @@ function renderRefSheets() {
   el.innerHTML = sheets.map(s => `<div class="sat-row"><div class="sat-num" style="background:var(--blue);color:#fff">${pad(s.n)}</div><div class="sat-info"><div class="sat-title">${esc(s.label)}</div><div class="sat-meta">${esc(s.sub)}</div></div><a class="sat-link" href="${s.url}" target="_blank" rel="noopener">Open</a></div>`).join('');
 }
 
-
 function renderPapers(f) {
   const chips = $('paperChips'), el = $('paperList'); if (!chips || !el) return;
   const subs = ['All', ...new Set(st.papers.map(p => p.subject || 'Other'))];
@@ -1484,30 +1393,23 @@ $('savePaperBtn').onclick = () => {
 };
 function delPaper(id) { sv('papers', st.papers.filter(p => p.id !== id)); renderPapers(); }
 
-/* ══════════════════════════════════════════════════
-   PRACTICE QUESTIONS
-══════════════════════════════════════════════════ */
 const QUESTION_BANK = (function buildQuestionBank() {
   const rand = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
-  // ── MATHEMATICS · Procedural (effectively infinite variety) ──
   const mathGen = () => {
     const out = [];
-    // Linear equations: 60 variants per call with random coefficients
     for (let i = 0; i < 60; i++) {
       const a = rand(2, 19), b = rand(1, 50), c = rand(30, 200);
       const x = ((c - b) / a).toFixed(2);
       out.push({ q: `Solve for x: ${a}x + ${b} = ${c}`, a: `x = ${x}`, topic: "Linear Equations" });
     }
-    // Two-variable linear systems
     for (let i = 0; i < 30; i++) {
       const x = rand(-9, 9), y = rand(-9, 9);
       const a1 = rand(1, 5), b1 = rand(1, 5), c1 = a1 * x + b1 * y;
       const a2 = rand(1, 5), b2 = rand(1, 5), c2 = a2 * x + b2 * y;
       out.push({ q: `Solve the system: ${a1}x + ${b1}y = ${c1}, ${a2}x + ${b2}y = ${c2}`, a: `x = ${x}, y = ${y}`, topic: "Linear Systems" });
     }
-    // Quadratic by factoring with random roots
     for (let i = 0; i < 50; i++) {
       const r1 = rand(-8, 8), r2 = rand(-8, 8);
       const b = -(r1 + r2), c = r1 * r2;
@@ -1515,30 +1417,25 @@ const QUESTION_BANK = (function buildQuestionBank() {
       const cSign = c >= 0 ? '+' : '';
       out.push({ q: `Solve x² ${bSign}${b}x ${cSign}${c} = 0`, a: r1 === r2 ? `x = ${r1} (double root)` : `x = ${r1} or x = ${r2}`, topic: "Quadratic Equations" });
     }
-    // Quadratic formula problems
     for (let i = 0; i < 40; i++) {
       const a = rand(1, 4), p = rand(-7, 7), q = rand(-7, 7);
       const bv = -(p + q) * a, cv = a * p * q;
       out.push({ q: `Find the roots of ${a}x² + ${bv}x + ${cv} = 0`, a: p === q ? `x = ${p}` : `x = ${p} or x = ${q}`, topic: "Quadratic Equations" });
     }
-    // Discriminant
     for (let i = 0; i < 20; i++) {
       const a = rand(1, 5), b = rand(-10, 10), c = rand(-10, 10);
       const d = b * b - 4 * a * c;
       out.push({ q: `Find discriminant: ${a}x² + ${b}x + ${c} = 0`, a: `D = ${d}; ${d > 0 ? 'two real roots' : d === 0 ? 'one real root' : 'no real roots'}`, topic: "Quadratic Equations" });
     }
-    // Distance formula
     for (let i = 0; i < 40; i++) {
       const x1 = rand(-10, 10), y1 = rand(-10, 10), x2 = rand(-10, 10), y2 = rand(-10, 10);
       const d = Math.sqrt((x2-x1)**2 + (y2-y1)**2).toFixed(2);
       out.push({ q: `Distance between (${x1}, ${y1}) and (${x2}, ${y2})?`, a: `√((${x2-x1})² + (${y2-y1})²) = ${d}`, topic: "Coordinate Geometry" });
     }
-    // Midpoint
     for (let i = 0; i < 30; i++) {
       const x1 = rand(-15, 15), y1 = rand(-15, 15), x2 = rand(-15, 15), y2 = rand(-15, 15);
       out.push({ q: `Midpoint of (${x1}, ${y1}) and (${x2}, ${y2})?`, a: `(${(x1+x2)/2}, ${(y1+y2)/2})`, topic: "Coordinate Geometry" });
     }
-    // Slope
     for (let i = 0; i < 30; i++) {
       const x1 = rand(-9, 9), y1 = rand(-9, 9);
       let x2 = rand(-9, 9); if (x2 === x1) x2 += 1;
@@ -1546,13 +1443,11 @@ const QUESTION_BANK = (function buildQuestionBank() {
       const m = ((y2 - y1) / (x2 - x1)).toFixed(2);
       out.push({ q: `Slope through (${x1}, ${y1}) and (${x2}, ${y2})?`, a: `m = ${m}`, topic: "Coordinate Geometry" });
     }
-    // Pythagorean
     const pythTrips = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[9,40,41],[20,21,29],[12,35,37],[11,60,61],[6,8,10],[9,12,15],[10,24,26]];
     for (let i = 0; i < 30; i++) {
       const t = pick(pythTrips), k = rand(1, 5);
       out.push({ q: `Right triangle with legs ${t[0]*k} and ${t[1]*k}. Hypotenuse?`, a: `${t[2]*k} (since ${t[0]*k}² + ${t[1]*k}² = ${t[2]*k}²)`, topic: "Geometry" });
     }
-    // Area & perimeter
     for (let i = 0; i < 30; i++) {
       const l = rand(3, 25), w = rand(3, 25);
       out.push({ q: `Area of rectangle with length ${l} and width ${w}?`, a: `${l * w} square units`, topic: "Geometry" });
@@ -1565,12 +1460,10 @@ const QUESTION_BANK = (function buildQuestionBank() {
       const r = rand(2, 20);
       out.push({ q: `Circumference of circle with radius ${r}? (Use π = 3.14)`, a: `${(2 * 3.14 * r).toFixed(2)} units`, topic: "Geometry" });
     }
-    // Volume
     for (let i = 0; i < 20; i++) {
       const l = rand(2, 12), w = rand(2, 12), h = rand(2, 12);
       out.push({ q: `Volume of cuboid ${l}×${w}×${h}?`, a: `${l*w*h} cubic units`, topic: "Geometry" });
     }
-    // Percentages
     for (let i = 0; i < 30; i++) {
       const p = pick([5,10,12,15,20,25,30,35,40,45,50,60,75,80]), n = rand(40, 800);
       out.push({ q: `${p}% of ${n}?`, a: `${(p * n / 100).toFixed(2)}`, topic: "Percentages" });
@@ -1579,24 +1472,20 @@ const QUESTION_BANK = (function buildQuestionBank() {
       const part = rand(5, 90), whole = rand(100, 500);
       out.push({ q: `${part} is what percent of ${whole}?`, a: `${(part / whole * 100).toFixed(2)}%`, topic: "Percentages" });
     }
-    // Ratios
     for (let i = 0; i < 20; i++) {
       const k = rand(2, 8), a = rand(2, 9), b = rand(2, 9);
       out.push({ q: `Simplify the ratio ${a*k}:${b*k}`, a: `${a}:${b}`, topic: "Ratios" });
     }
-    // Simple interest
     for (let i = 0; i < 25; i++) {
       const P = rand(500, 20000), R = rand(3, 15), T = rand(1, 10);
       const SI = (P * R * T / 100).toFixed(2);
       out.push({ q: `Simple Interest: P=${P}, R=${R}%, T=${T} years?`, a: `SI = ${SI}`, topic: "Simple Interest" });
     }
-    // Compound interest
     for (let i = 0; i < 20; i++) {
       const P = rand(1000, 10000), R = rand(4, 12), T = rand(2, 5);
       const CI = (P * Math.pow(1 + R/100, T) - P).toFixed(2);
       out.push({ q: `Compound Interest: P=${P}, R=${R}%, T=${T} years (annually compounded)?`, a: `CI ≈ ${CI}`, topic: "Compound Interest" });
     }
-    // Statistics — mean/median/mode/range
     for (let i = 0; i < 30; i++) {
       const arr = [];
       for (let j = 0; j < 6; j++) arr.push(rand(1, 50));
@@ -1614,7 +1503,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
       for (let j = 0; j < 6; j++) arr.push(rand(1, 30));
       out.push({ q: `Range of ${arr.join(", ")}?`, a: `${Math.max(...arr) - Math.min(...arr)}`, topic: "Statistics" });
     }
-    // Trigonometry
     const trigs = [
       { q: "sin 30°?", a: "1/2 = 0.5" }, { q: "sin 45°?", a: "√2/2 ≈ 0.707" }, { q: "sin 60°?", a: "√3/2 ≈ 0.866" }, { q: "sin 90°?", a: "1" }, { q: "sin 0°?", a: "0" },
       { q: "cos 30°?", a: "√3/2 ≈ 0.866" }, { q: "cos 45°?", a: "√2/2 ≈ 0.707" }, { q: "cos 60°?", a: "1/2 = 0.5" }, { q: "cos 90°?", a: "0" }, { q: "cos 0°?", a: "1" },
@@ -1631,7 +1519,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
       { q: "Convert 90° to radians", a: "π/2 ≈ 1.571 rad" },
     ];
     for (let i = 0; i < 30; i++) out.push({ ...pick(trigs), topic: "Trigonometry" });
-    // Logarithms
     const logs = [
       { q: "log₁₀(100)?", a: "2" }, { q: "log₁₀(1000)?", a: "3" }, { q: "log₁₀(1)?", a: "0" },
       { q: "log₂(8)?", a: "3" }, { q: "log₂(32)?", a: "5" }, { q: "log₂(64)?", a: "6" }, { q: "log₂(128)?", a: "7" }, { q: "log₂(256)?", a: "8" },
@@ -1645,7 +1532,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
       { q: "Change of base: log_a(b) = ?", a: "log(b)/log(a)" },
     ];
     for (let i = 0; i < 25; i++) out.push({ ...pick(logs), topic: "Logarithms" });
-    // Calculus essentials
     const calcQs = [
       { q: "d/dx [x²]?", a: "2x" }, { q: "d/dx [x³]?", a: "3x²" }, { q: "d/dx [x^n]?", a: "n·x^(n-1)" },
       { q: "d/dx [sin x]?", a: "cos x" }, { q: "d/dx [cos x]?", a: "-sin x" }, { q: "d/dx [tan x]?", a: "sec²x" },
@@ -1660,7 +1546,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
       { q: "L'Hôpital's rule applies when?", a: "Limit gives 0/0 or ∞/∞" },
     ];
     for (let i = 0; i < 40; i++) out.push({ ...pick(calcQs), topic: "Calculus" });
-    // Sequences
     for (let i = 0; i < 20; i++) {
       const a = rand(1, 20), d = rand(2, 9), n = rand(5, 15);
       out.push({ q: `Find ${n}th term of AP: first=${a}, common diff=${d}`, a: `${a + (n-1)*d}`, topic: "Sequences" });
@@ -1669,7 +1554,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
       const a = rand(1, 8), r = rand(2, 4), n = rand(3, 7);
       out.push({ q: `Find ${n}th term of GP: first=${a}, ratio=${r}`, a: `${a * Math.pow(r, n-1)}`, topic: "Sequences" });
     }
-    // Probability
     for (let i = 0; i < 25; i++) {
       const tot = rand(8, 20), fav = rand(1, tot - 1);
       out.push({ q: `Bag has ${tot} balls. ${fav} are red. P(red)?`, a: `${fav}/${tot} = ${(fav/tot).toFixed(3)}`, topic: "Probability" });
@@ -1678,67 +1562,54 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const mathQs = mathGen();
 
-  // ── PHYSICS · Procedural ──
   const physGen = () => {
     const out = [];
-    // Kinematics: v = u + at
     for (let i = 0; i < 50; i++) {
       const u = rand(0, 25), a = rand(2, 12), t = rand(1, 15);
       out.push({ q: `Initial velocity ${u} m/s, acceleration ${a} m/s². Velocity after ${t}s?`, a: `v = u + at = ${u} + ${a}×${t} = ${u + a*t} m/s`, topic: "Kinematics" });
     }
-    // Distance: s = ut + ½at²
     for (let i = 0; i < 40; i++) {
       const u = rand(0, 20), a = rand(2, 10), t = rand(2, 10);
       const s = (u * t + 0.5 * a * t * t).toFixed(2);
       out.push({ q: `Initial velocity ${u} m/s, acceleration ${a} m/s². Distance in ${t}s?`, a: `s = ut + ½at² = ${s} m`, topic: "Kinematics" });
     }
-    // v² = u² + 2as
     for (let i = 0; i < 30; i++) {
       const u = rand(0, 20), a = rand(2, 10), s = rand(10, 100);
       const v = Math.sqrt(u*u + 2*a*s).toFixed(2);
       out.push({ q: `u = ${u} m/s, a = ${a} m/s², distance = ${s} m. Final velocity?`, a: `v² = u² + 2as = ${u*u + 2*a*s}; v = ${v} m/s`, topic: "Kinematics" });
     }
-    // Newton's 2nd: F = ma
     for (let i = 0; i < 40; i++) {
       const m = rand(2, 80), a = rand(2, 25);
       out.push({ q: `Mass ${m} kg, acceleration ${a} m/s². Net force?`, a: `F = ma = ${m * a} N`, topic: "Newton's Laws" });
     }
-    // Weight: W = mg (g=9.8)
     for (let i = 0; i < 30; i++) {
       const m = rand(5, 200);
       out.push({ q: `Mass ${m} kg. Weight on Earth (g=9.8)?`, a: `W = mg = ${(m * 9.8).toFixed(2)} N`, topic: "Newton's Laws" });
     }
-    // Momentum
     for (let i = 0; i < 30; i++) {
       const m = rand(1, 50), v = rand(2, 40);
       out.push({ q: `Mass ${m} kg moving at ${v} m/s. Momentum?`, a: `p = mv = ${m * v} kg·m/s`, topic: "Momentum" });
     }
-    // KE
     for (let i = 0; i < 30; i++) {
       const m = rand(2, 100), v = rand(2, 30);
       out.push({ q: `KE of ${m} kg object at ${v} m/s?`, a: `KE = ½mv² = ${(0.5 * m * v * v).toFixed(2)} J`, topic: "Energy" });
     }
-    // PE
     for (let i = 0; i < 25; i++) {
       const m = rand(2, 60), h = rand(2, 50);
       out.push({ q: `PE of ${m} kg at height ${h} m (g=9.8)?`, a: `PE = mgh = ${(m * 9.8 * h).toFixed(2)} J`, topic: "Energy" });
     }
-    // Power
     for (let i = 0; i < 20; i++) {
       const w = rand(100, 5000), t = rand(2, 60);
       out.push({ q: `${w} J of work done in ${t} s. Power?`, a: `P = W/t = ${(w / t).toFixed(2)} W`, topic: "Energy" });
     }
-    // Ohm's law
     for (let i = 0; i < 40; i++) {
       const v = rand(6, 240), r = rand(2, 50);
       out.push({ q: `Voltage ${v}V, resistance ${r}Ω. Current?`, a: `I = V/R = ${(v / r).toFixed(2)} A`, topic: "Electricity" });
     }
-    // Power dissipated
     for (let i = 0; i < 25; i++) {
       const v = rand(10, 240), r = rand(5, 100);
       out.push({ q: `Voltage ${v}V across ${r}Ω. Power dissipated?`, a: `P = V²/R = ${(v*v/r).toFixed(2)} W`, topic: "Electricity" });
     }
-    // Conceptual
     const cQs = [
       { q: "State Newton's First Law", a: "An object remains at rest or in uniform motion unless acted on by a net external force (inertia)." },
       { q: "State Newton's Third Law", a: "For every action, there is an equal and opposite reaction." },
@@ -1798,7 +1669,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const physQs = physGen();
 
-  // ── CHEMISTRY · Procedural ──
   const chemGen = () => {
     const out = [];
     const elements = [
@@ -1823,22 +1693,18 @@ const QUESTION_BANK = (function buildQuestionBank() {
       else if (which === 1) out.push({ q: `Symbol of ${el.name}?`, a: el.sym, topic: "Periodic Table" });
       else out.push({ q: `Atomic mass of ${el.name}?`, a: `${el.mass} u`, topic: "Periodic Table" });
     }
-    // pH-based questions
     for (let i = 0; i < 25; i++) {
       const ph = rand(0, 14);
       out.push({ q: `Solution has pH = ${ph}. Is it acidic, basic, or neutral?`, a: ph < 7 ? "Acidic" : ph > 7 ? "Basic" : "Neutral", topic: "Acids & Bases" });
     }
-    // Molarity
     for (let i = 0; i < 25; i++) {
       const m = rand(1, 50), v = rand(1, 10);
       out.push({ q: `${m} moles of solute in ${v} L of solution. Molarity?`, a: `M = ${(m/v).toFixed(2)} mol/L`, topic: "Solutions" });
     }
-    // Moles
     for (let i = 0; i < 25; i++) {
       const mass = rand(10, 500), mm = rand(18, 200);
       out.push({ q: `Moles in ${mass} g of substance with molar mass ${mm} g/mol?`, a: `${(mass/mm).toFixed(3)} mol`, topic: "Stoichiometry" });
     }
-    // Concepts
     const cQs = [
       { q: "What is an atom?", a: "Smallest unit of matter that retains element's identity" },
       { q: "Define isotope", a: "Atoms of same element with different mass numbers (same protons, different neutrons)" },
@@ -1888,7 +1754,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const chemQs = chemGen();
 
-  // ── BIOLOGY ──
   const bioGen = () => {
     const out = [];
     const qs = [
@@ -2024,7 +1889,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const bioQs = bioGen();
 
-  // ── COMPUTER SCIENCE ──
   const csGen = () => {
     const out = [];
     const qs = [
@@ -2132,7 +1996,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const csQs = csGen();
 
-  // ── ENGLISH ──
   const engGen = () => {
     const out = [];
     const qs = [
@@ -2248,7 +2111,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const engQs = engGen();
 
-  // ── HISTORY ──
   const histGen = () => {
     const out = [];
     const qs = [
@@ -2367,7 +2229,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const histQs = histGen();
 
-  // ── GEOGRAPHY ──
   const geoGen = () => {
     const out = [];
     const qs = [
@@ -2478,7 +2339,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const geoQs = geoGen();
 
-  // ── PSYCHOLOGY ──
   const psyGen = () => {
     const out = [];
     const qs = [
@@ -2521,7 +2381,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const psyQs = psyGen();
 
-  // ── ECONOMICS ──
   const econGen = () => {
     const out = [];
     const qs = [
@@ -2568,7 +2427,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const econQs = econGen();
 
-  // ── POLITICAL SCIENCE ──
   const polGen = () => {
     const out = [];
     const qs = [
@@ -2615,7 +2473,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const polQs = polGen();
 
-  // ── PHILOSOPHY ──
   const phiGen = () => {
     const out = [];
     const qs = [
@@ -2661,7 +2518,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const phiQs = phiGen();
 
-  // ── SOCIOLOGY ──
   const socGen = () => {
     const out = [];
     const qs = [
@@ -2709,7 +2565,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const socQs = socGen();
 
-  // ── STATISTICS ──
   const statsGen = () => {
     const out = [];
     const qs = [
@@ -2755,7 +2610,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const statsQs = statsGen();
 
-  // ── BUSINESS STUDIES ──
   const bizGen = () => {
     const out = [];
     const qs = [
@@ -2816,7 +2670,6 @@ const QUESTION_BANK = (function buildQuestionBank() {
   };
   const bizQs = bizGen();
 
-  // ── ACCOUNTANCY ──
   const acctGen = () => {
     const out = [];
     const qs = [
@@ -3295,55 +3148,38 @@ const REFERENCE_LINKS = (function() {
   };
 })();
 
-
-// Map level codes to display labels and difficulty bands
-// ── DIFFICULTY MAPPING ──
-// Topics tagged by difficulty. Anything not listed defaults to 'medium'.
 const DIFFICULTY_MAP = {
   easy: new Set([
-    // Math
     'Arithmetic','Basic Operations','Fractions','Decimals','Percentages',
     'Ratios','Number Patterns','Place Value','Simple Geometry','Perimeter',
     'Area Basics','Time','Money','Linear Equations','Mean Median Mode',
-    // Physics
     'Units','Measurement','Forces Basic','Simple Machines','States of Matter',
     'Reflection','Sound Basics','Heat Basics','Energy Forms',
-    // Chemistry
     'Elements','Mixtures','Acids and Bases','Periodic Table Basics',
     'Physical Changes','Chemical Symbols',
-    // Biology
     'Cell Basics','Plant Parts','Body Systems Basic','Food Chain',
     'Habitats','Classification Basics','Plant Growth',
-    // English
     'Parts of Speech','Vocabulary','Synonyms','Antonyms','Spelling',
     'Punctuation','Sentence Structure','Reading Basic',
-    // CS
     'Variables','Data Types','Print Statements','Comments','Basic Loops',
-    // History/Geography
     'Continents','Oceans','Capitals','Famous People','Time Periods',
     'Maps Basic','Climate Basics'
   ]),
   hard: new Set([
-    // Math
     'Calculus','Differentiation','Integration','Logarithms','Trigonometry',
     'Linear Systems','Matrices','Complex Numbers','Vectors',
     'Probability Advanced','Statistics Advanced','Sequences and Series',
     'Limits','Derivatives','Integrals','Differential Equations',
-    // Physics
     'Modern Physics','Quantum','Relativity','Electromagnetism',
     'Thermodynamics','Oscillations','Waves Advanced','Optics Advanced',
     'Nuclear Physics','Particle Physics',
-    // Chemistry
     'Organic','Equilibrium','Electrochemistry','Thermochemistry',
     'Kinetics','Coordination Chemistry','Spectroscopy','Polymers',
-    // Biology
     'Molecular Biology','Biochemistry','Genetics Advanced','Biotechnology',
     'Evolution Advanced','Immunology','Neurobiology',
-    // CS
     'AI','OOP','Algorithms','Compilers','Operating Systems',
     'Data Structures Advanced','Computational Complexity','Cryptography',
     'Machine Learning','Distributed Systems',
-    // History/Philosophy/Econ
     'Cold War','World War I','World War II','Renaissance',
     'Existentialism','Metaphysics','Epistemology','Inferential',
     'Macroeconomics Advanced','Game Theory','Econometrics',
@@ -3355,7 +3191,6 @@ function classifyDifficulty(topic) {
   if (!topic) return 'medium';
   if (DIFFICULTY_MAP.easy.has(topic)) return 'easy';
   if (DIFFICULTY_MAP.hard.has(topic)) return 'hard';
-  // Heuristic checks for compound topics
   const t = topic.toLowerCase();
   if (t.includes('advanced') || t.includes('calc') || t.includes('quantum') ||
       t.includes('molecular') || t.includes('logarithm') || t.includes('trig')) return 'hard';
@@ -3369,13 +3204,11 @@ function levelInfo(level) {
   return { label: labels[level] || 'Medium', difficulty: level || 'medium', count: counts[level] || 12 };
 }
 
-// Strict difficulty filter: easy → only easy, medium → only medium, hard → only hard
 function selectByLevel(bank, level) {
   const info = levelInfo(level);
   if (!bank || !bank.length) return [];
   const want = info.difficulty;
   let pool = bank.filter(q => classifyDifficulty(q.topic) === want);
-  // Safety: if no exact-difficulty questions exist in bank, fallback to widest matching pool
   if (!pool.length) {
     if (want === 'easy') pool = bank.filter(q => classifyDifficulty(q.topic) !== 'hard');
     else if (want === 'hard') pool = bank.filter(q => classifyDifficulty(q.topic) !== 'easy');
@@ -3437,7 +3270,6 @@ function renderPracticeRefs(subj) {
     el.innerHTML = `<div style="font-size:.84rem;color:var(--t3);padding:8px 0;font-style:italic">No references available for this subject.</div>`;
     return;
   }
-  // Cap to top 20 references
   const refs = allRefs.slice(0, 20);
   el.innerHTML = refs.map(r => `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:6px">
     <span style="flex:1;font-size:.84rem;font-weight:600;color:var(--t1)">${esc(r.name)}</span>
@@ -3446,9 +3278,6 @@ function renderPracticeRefs(subj) {
   </div>`).join('');
 }
 
-/* ══════════════════════════════════════════════════
-   JOURNAL
-══════════════════════════════════════════════════ */
 let curMood = '';
 $('moodRow').addEventListener('click', e => {
   const b = e.target.closest('.mood-btn'); if (!b) return;
@@ -3556,9 +3385,6 @@ function renderMoodViz() {
   });
 }
 
-/* ══════════════════════════════════════════════════
-   FOCUS TIMER
-══════════════════════════════════════════════════ */
 let pSt = { wm: 25, bm: 5, left: 1500, isWork: true, running: false, iv: null, sess: 0 };
 const CIRC = 578;
 
@@ -3658,9 +3484,6 @@ function beep() {
   } catch {}
 }
 
-/* ══════════════════════════════════════════════════
-   AMBIENT SOUNDS
-══════════════════════════════════════════════════ */
 let ambCtx = null, ambNodes = [], ambGain = null;
 function stopAmb() {
   ambNodes.forEach(n => { try { if (n.stop) n.stop(0); n.disconnect(); } catch {} });
@@ -3852,14 +3675,8 @@ function setAmb(type, btn) {
   }, ambGain ? 700 : 50);
 }
 
-/* ══════════════════════════════════════════════════
-   WELCOME CANVAS — ambient orbs
-══════════════════════════════════════════════════ */
-function initWCanvas() { /* canvas removed */ }
+function initWCanvas() {  }
 
-/* ══════════════════════════════════════════════════
-   BOOT
-══════════════════════════════════════════════════ */
 function bootApp(name) {
   const app = $('app'), sW = $('screen-welcome');
   app.classList.add('on');
@@ -3915,8 +3732,6 @@ const _wName = $('wName');
 if (_wName) {
   _wName.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); triggerLaunch(); } });
 }
-
-/* ── AUTO-INIT ───────────────────────────────────── */
 
 function initCursorCompanion() {
   const CD = document.getElementById('cur-d');
@@ -4045,7 +3860,6 @@ function initMotionLayer() {
   });
 }
 
-// Welcome info modal
 (function () {
   const btn = document.getElementById('welcomeInfoBtn');
   const modal = document.getElementById('welcomeInfoModal');
@@ -4061,9 +3875,7 @@ function initMotionLayer() {
   });
 })();
 
-// ═══════════════ PREMIUM CURSOR ═══════════════
 (function () {
-  // Only on hover-capable, fine pointer devices
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   if (document.getElementById('studyos-cursor')) return;
 
@@ -4088,7 +3900,6 @@ function initMotionLayer() {
     }
   }, { passive: true });
 
-  // Smooth follow for ring
   function loop() {
     rx += (mx - rx) * 0.18;
     ry += (my - ry) * 0.18;
@@ -4097,7 +3908,6 @@ function initMotionLayer() {
   }
   loop();
 
-  // Hover detection
   const hoverSelectors = 'a, button, [role="button"], input[type="submit"], input[type="button"], .clickable, .nav-item, .ref-card, .note-card, .goal-slot, .task-item, .pq-item, .modal-close, .preset, .pomo-preset-btn, .ref-tab, .mood-btn, .ne-tool, .task-mini-item, .practice-gen-btn, .w-btn, .w-info-btn, .w-info-close, label[for], .tb-icon-btn, .tb-streak, .tb-avatar, .sb-mark, select, .footer-link';
   const textSelectors = 'input[type="text"], input[type="email"], input[type="search"], input[type="number"], input[type="password"], input:not([type]), textarea, [contenteditable="true"]';
 
@@ -4128,13 +3938,10 @@ function initMotionLayer() {
   });
 })();
 
-
-// ═══════════════ LOGIN SCREEN EFFECTS ═══════════════
 (function loginEffects() {
   const screen = document.getElementById('screen-welcome');
   if (!screen) return;
 
-  // Mouse-follow spotlight (subtle parallax)
   const spotlight = screen.querySelector('.lo-spotlight');
   if (spotlight) {
     let raf = 0;
@@ -4150,7 +3957,6 @@ function initMotionLayer() {
     }, { passive: true });
   }
 
-  // Enter key on input → submit
   const input = document.getElementById('wName');
   const btn = document.getElementById('wBtn');
   if (input && btn) {
@@ -4166,7 +3972,6 @@ function initMotionLayer() {
 (function init() {
   initWCanvas();
   applyTheme(st.theme);
-  // initCursorCompanion(); // disabled - using native cursor
   if (st.name) setTimeout(() => doLaunch(st.name), 300);
   setTimeout(initMotionLayer, 400);
 })();
