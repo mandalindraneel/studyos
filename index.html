@@ -7,7 +7,7 @@
 <meta name="author" content="Indraneel Mandal">
 <meta name="theme-color" content="#000008" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-<title>StudyOS</title>
+<title>StudyOS — Indraneel Mandal</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000008'/%3E%3Cg fill='none' stroke='%232997ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 6 L6 11 L16 16 L26 11 Z'/%3E%3Cpath d='M6 16 L16 21 L26 16'/%3E%3Cpath d='M6 21 L16 26 L26 21'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +15,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260562">
+<link rel="stylesheet" href="styles.css?v=20260564">
 </head>
 <body>
 
-
-<!-- ══════════════════════════ WELCOME ══════════════════════════ -->
 <div class="screen" id="screen-welcome">
 
-  <!-- Atmospheric background: aurora lights + mesh -->
   <div class="lo-bg" aria-hidden="true">
     <div class="lo-aurora lo-aurora-1"></div>
     <div class="lo-aurora lo-aurora-2"></div>
@@ -34,7 +31,6 @@
   </div>
   <div class="lo-spotlight" aria-hidden="true"></div>
 
-  <!-- Top-left logo (no header bar) -->
   <div class="lo-logo" aria-label="StudyOS">
     <div class="lo-logo-mark">
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -49,7 +45,6 @@
     </div>
   </div>
 
-  <!-- Centered content (no card wrapper) -->
   <main class="lo-stage" role="main">
 
     <span class="lo-eyebrow">
@@ -85,7 +80,6 @@
 
   </main>
 
-  <!-- Bottom stats: AI · Private · Free -->
   <div class="lo-stats" aria-hidden="true">
     <div class="lo-stat">
       <span class="lo-stat-num">AI</span>
@@ -103,12 +97,14 @@
     </div>
   </div>
 
+  <div class="lo-copyright" aria-hidden="true">
+    &copy; 2026 <strong>Indraneel Mandal</strong> &middot; All Rights Reserved
+  </div>
+
 </div>
 
-<!-- ══════════════════════════ APP ══════════════════════════ -->
 <div id="app">
 
-  <!-- SIDEBAR -->
   <nav class="sidebar" id="sidebar">
     <div class="sb-head">
       <div class="sb-mark">
@@ -176,7 +172,6 @@
     </div>
   </nav>
 
-  <!-- MAIN -->
   <div class="main" id="main">
 
     <header class="topbar">
@@ -198,7 +193,6 @@
       </div>
     </header>
 
-    <!-- DASHBOARD -->
     <section class="pane active" id="p-dashboard">
       <div class="pane-header">
         <div>
@@ -265,7 +259,6 @@
       <div id="dashInsights"></div>
     </section>
 
-    <!-- STUDY PLAN -->
     <section class="pane" id="p-studyplan">
       <div class="pane-header">
         <div>
@@ -334,7 +327,6 @@
       </div>
     </section>
 
-    <!-- FOCUS TIMER -->
     <section class="pane" id="p-focus">
       <div class="pane-header">
         <div>
@@ -412,7 +404,6 @@
       </div>
     </section>
 
-    <!-- GOALS & PROGRESS -->
     <section class="pane" id="p-goals">
       <div class="pane-header">
         <div>
@@ -471,7 +462,6 @@
       <div id="perfDashboard"></div>
     </section>
 
-    <!-- NOTES -->
     <section class="pane" id="p-notes">
       <div class="pane-header">
         <div>
@@ -536,7 +526,6 @@
       <div id="notesGrid" class="notes-masonry"></div>
     </section>
 
-    <!-- PAPERS -->
     <section class="pane" id="p-papers">
       <div class="pane-header">
         <div>
@@ -566,7 +555,6 @@
       </div>
     </section>
 
-    <!-- PRACTICE -->
     <section class="pane" id="p-practice">
       <div class="pane-header">
         <div>
@@ -623,7 +611,6 @@
       </div>
     </section>
 
-    <!-- JOURNAL -->
     <section class="pane" id="p-journal">
       <div class="pane-header">
         <div>
@@ -682,7 +669,6 @@
 <div class="mob-overlay" id="mobOverlay"></div>
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- MODALS -->
 <div class="modal-overlay" id="taskModal">
   <div class="modal">
     <div class="modal-header">
@@ -780,7 +766,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260562"></script>
+<script src="script.js?v=20260564"></script>
 
 </body>
 </html>
