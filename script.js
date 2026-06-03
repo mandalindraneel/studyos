@@ -1,9 +1,5 @@
 'use strict';
-/* ══════════════════════════════════════════════════════
-   STUDYOS · MMXXVI
-   © Indraneel Mandal
-   ML-powered academic workspace
-══════════════════════════════════════════════════════ */
+// StudyOS — Indraneel Mandal, 2026
 const LS = {
   get(k, d = null) { try { const v = localStorage.getItem(k); return v != null ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
