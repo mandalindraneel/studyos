@@ -1,760 +1,193 @@
-                       STUDYOS PROPRIETARY LICENSE
-                            Version 2.0, 2026
-
-         Copyright (c) 2026 Indraneel Mandal. All Rights Reserved.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                              PREAMBLE                                 ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-This Software, including but not limited to all source code, object code,
-compiled binaries, scripts, stylesheets, markup, configuration files,
-data files, asset files, documentation, design specifications, user
-interface elements, brand identity, visual layouts, written content,
-icons, illustrations, animations, sound design, and any and all materials
-accompanying or contained within this repository (collectively, the
-"Software" or "Work"), constitutes the original creative work and
-exclusive intellectual property of Indraneel Mandal, an individual
-residing in the Republic of India (the "Author" or "Licensor").
-
-The Software is protected by the laws of copyright, trade secret,
-trademark, design right, and any other applicable intellectual property
-laws of the Republic of India, the United States of America, the
-European Union, and the United Kingdom, as well as by all applicable
-international treaties and conventions, including but not limited to:
-
-   (a) The Indian Copyright Act, 1957 (as amended);
-   (b) The Berne Convention for the Protection of Literary and Artistic
-       Works (1886, as revised);
-   (c) The WIPO Copyright Treaty (1996);
-   (d) The Universal Copyright Convention (1952);
-   (e) The Agreement on Trade-Related Aspects of Intellectual Property
-       Rights (TRIPS, 1994);
-   (f) The Digital Millennium Copyright Act (DMCA, 17 U.S.C. § 512);
-   (g) The European Union Copyright Directive (Directive 2019/790); and
-   (h) The Information Technology Act, 2000 (India), as amended.
-
-The Software is published in a publicly accessible source code repository
-solely for the limited purposes of (i) public hosting of the deployed
-live application by the Author; (ii) personal and academic portfolio
-review by educational institutions, scholarship committees, competition
-adjudicators, prospective employers, and bona fide collaborators; and
-(iii) good-faith technical demonstration. The Software's public
-visibility shall not, under any circumstance and irrespective of
-inference, custom, practice, or interpretation, be construed as,
-constitute, or operate as:
-
-   (1) a publication into the public domain;
-   (2) a grant, transfer, assignment, or license of any right of any
-       kind to any party other than as expressly stated in Section 2 of
-       this License;
-   (3) a waiver, abandonment, estoppel, or forfeiture of any of the
-       Author's rights, claims, or remedies;
-   (4) any implied license under the doctrines of equity, exhaustion,
-       or implied authorization; or
-   (5) consent to any use, reproduction, distribution, modification,
-       or exploitation of the Software in any manner whatsoever.
-
-This License governs all access to, use of, viewing of, downloading of,
-or interaction with the Software in any form. By accessing the Software
-or its repository, you ("You" or "Licensee") agree to be bound by the
-terms of this License in their entirety.
-
-If you do not agree with any provision of this License, you must
-immediately and irrevocably cease all access to, viewing of, downloading
-of, and interaction with the Software.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                       SECTION 1. DEFINITIONS                          ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-For the purposes of this License, the following terms shall have the
-meanings set forth below. Defined terms appear in capitalised form
-throughout the document.
-
-1.1. "Author" or "Licensor" means Indraneel Mandal, an individual
-     residing in the Republic of India, being the sole and exclusive
-     owner and copyright holder of the Software.
-
-1.2. "Software" or "Work" means the entire body of materials defined in
-     the Preamble of this License, including without limitation:
-
-     (a) Source code in any programming language, including but not
-         limited to HTML, CSS, JavaScript, Python, and any associated
-         configuration, manifest, or metadata files;
-     (b) Compiled, transpiled, minified, bundled, or otherwise processed
-         derivatives of the source code;
-     (c) Visual design, layout, typography, colour palette, iconography,
-         and brand identity;
-     (d) User interface components, including all animations, micro-
-         interactions, transitions, and behavioural states;
-     (e) Written content, documentation, prompts, labels, and copy;
-     (f) Data structures, algorithms, schemas, and architectural designs
-         expressed in the Software;
-     (g) The trained or configured machine learning models, weights,
-         parameters, hyperparameters, and feature engineering logic
-         contained within the Software;
-     (h) The deployed live application accessible at the public URL or
-         URLs operated by the Author from time to time;
-     (i) Any and all backend services, APIs, endpoints, and server-side
-         logic operated in connection with the Software; and
-     (j) Any updates, revisions, patches, bug fixes, enhancements, or
-         derivatives of the foregoing made by the Author.
-
-1.3. "You" or "Licensee" means any individual, group, organisation,
-     corporation, partnership, governmental entity, educational
-     institution, machine, automated agent, or other legal or natural
-     person accessing, viewing, downloading, executing, or otherwise
-     interacting with the Software in any capacity whatsoever.
-
-1.4. "Derivative Work" means any work, in any medium or form, that is
-     based upon, derived from, adapted from, translated from, ported
-     from, refactored from, rewritten from, modified from, or
-     substantially similar to the Software, in whole or in any
-     identifiable part, whether or not such derivative is explicitly
-     identified as such, including but not limited to:
-
-     (a) Translations into other programming languages;
-     (b) Re-implementations using different frameworks or libraries;
-     (c) Refactored, modularised, or restructured versions;
-     (d) Visual reproductions, recreations, or imitations of the user
-         interface, layout, or design;
-     (e) Functional clones reproducing the substantial behaviour, flow,
-         or feature set;
-     (f) Educational, instructional, or tutorial materials that
-         reproduce substantial portions of the Software;
-     (g) Compilations, anthologies, or collections that include the
-         Software;
-     (h) Any work that incorporates, embeds, or references the Software
-         such that the Software is materially identifiable therein.
-
-1.5. "Use" means any act of accessing, viewing, downloading, cloning,
-     forking, copying, executing, running, deploying, hosting, modifying,
-     adapting, translating, distributing, publishing, displaying,
-     publicly performing, transmitting, broadcasting, reverse-engineering,
-     decompiling, disassembling, or in any other manner interacting with
-     or exploiting the Software.
-
-1.6. "Repository" means the public source code repository hosted at the
-     URL https://github.com/mandalindraneel/studyos or any successor URL
-     designated by the Author from time to time.
-
-1.7. "Live Application" means the deployed, publicly accessible instance
-     of the Software hosted at https://mandalindraneel.github.io/studyos
-     or any successor URL designated by the Author.
-
-1.8. "Permitted Purpose" means any purpose expressly permitted under
-     Section 2 of this License, and no other purpose.
-
-1.9. "Prohibited Conduct" means any conduct described in Section 3 of
-     this License.
-
-1.10. "Effective Date" means the moment at which You first access,
-      view, download, or otherwise interact with the Software.
-
-1.11. "Term" means the period commencing on the Effective Date and
-      continuing until terminated pursuant to Section 5 of this
-      License.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║              SECTION 2. GRANT OF LIMITED PERMISSIONS                  ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-2.1. Subject to Your strict and continuing compliance with all of the
-     terms and conditions of this License, including without limitation
-     the prohibitions set forth in Section 3, the Author hereby grants
-     You a limited, personal, non-exclusive, non-transferable, non-
-     sublicensable, non-assignable, revocable permission to engage in
-     the following activities and no others:
-
-     (a) To view the source code of the Software through the web
-         interface provided by the hosting platform (GitHub) for the
-         sole purpose of casual inspection and bona fide non-commercial
-         academic or journalistic study;
-
-     (b) To access and interact with the Live Application through its
-         public URL for personal, non-commercial evaluation, the
-         demonstration of features, and academic study;
-
-     (c) To reference the Software, by hyperlink to the Repository or
-         the Live Application, in non-commercial academic discourse,
-         journalistic articles, educational materials, or personal
-         correspondence, provided that proper and prominent attribution
-         to the Author by name is included; and
-
-     (d) To request licensing or commercial use from the Author by
-         direct communication through the channels published in the
-         Author's public repository profile.
-
-2.2. The permissions set forth in Section 2.1 are limited, conditional,
-     and revocable in their entirety at the sole discretion of the
-     Author, with or without notice and with or without cause.
-
-2.3. No rights, permissions, or licenses, whether express, implied,
-     statutory, or otherwise, are granted to You by this License except
-     as expressly stated in Section 2.1. All rights not expressly
-     granted herein are reserved by the Author.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                  SECTION 3. PROHIBITED CONDUCT                        ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-You shall not, without the prior express written permission of the
-Author, signed by the Author and bearing a verifiable date:
-
-3.1. RESTRICTIONS ON COPYING AND REPRODUCTION.
-     Copy, reproduce, duplicate, clone, fork, mirror, archive, snapshot,
-     cache (other than ordinary, transient browser caching as a
-     technical necessity of viewing), or otherwise create any copy of
-     the Software, in whole or in part, by any means whatsoever, in any
-     medium now known or hereafter devised, for any purpose whatsoever.
-
-3.2. RESTRICTIONS ON MODIFICATION AND ADAPTATION.
-     Modify, adapt, translate, port, refactor, rewrite, restructure,
-     decompile, reverse-engineer, disassemble, derive source code from
-     compiled or minified outputs, or in any other manner attempt to
-     access, derive, infer, or reconstruct any portion of the
-     Software's source code, structure, organisation, algorithms, data
-     models, or underlying ideas, concepts, or techniques.
-
-3.3. RESTRICTIONS ON DERIVATIVE WORKS.
-     Create, develop, prepare, author, publish, distribute, sell,
-     license, sublicense, rent, lease, lend, host, deploy, broadcast,
-     transmit, or otherwise make available any Derivative Work based
-     upon, derived from, or substantially similar to the Software.
-
-3.4. RESTRICTIONS ON DISTRIBUTION.
-     Distribute, sell, license, sublicense, rent, lease, lend, transfer,
-     assign, bequeath, donate, gift, give, share, publish, broadcast,
-     transmit, or otherwise make available the Software, or any portion
-     of the Software, to any third party.
-
-3.5. RESTRICTIONS ON COMMERCIAL USE.
-     Use, exploit, or commercialise the Software, or any portion of the
-     Software, in connection with any commercial product, service,
-     application, website, advertisement, offering, business, venture,
-     enterprise, or undertaking, whether for-profit, non-profit, or of
-     any other character, irrespective of revenue, scale, or
-     compensation.
-
-3.6. RESTRICTIONS ON NON-COMMERCIAL USE.
-     Use the Software, or any portion of the Software, in connection
-     with any non-commercial product, service, application, project, or
-     undertaking, including but not limited to open-source projects,
-     personal projects, hobby projects, community projects, or
-     volunteer initiatives, by any party other than the Author.
-
-3.7. RESTRICTIONS ON ACADEMIC AND COMPETITIVE USE.
-     Use the Software, or any portion of the Software, or any
-     identifiable element, design, idea, or feature thereof, in
-     connection with:
-
-     (a) Academic coursework, assignments, projects, theses,
-         dissertations, capstones, term papers, or examinations;
-     (b) College, university, or scholarship admission applications,
-         portfolios, statements, or essays;
-     (c) Competition entries, hackathon submissions, or contest
-         submissions of any nature;
-     (d) Grant applications, fellowship applications, or research
-         funding submissions;
-     (e) Job applications, internship applications, employment
-         portfolios, or professional profiles;
-     (f) Any representation, claim, or implication that You or any
-         third party authored, designed, contributed to, or owns any
-         portion of the Software,
-
-     by any party other than the Author.
-
-3.8. RESTRICTIONS ON ATTRIBUTION AND NOTICES.
-     Remove, alter, modify, obscure, conceal, deface, hide, omit, fail
-     to reproduce, or in any way diminish the visibility, prominence,
-     or completeness of any copyright notice, attribution, byline,
-     trademark, watermark, branding element, version information,
-     digital signature, or other proprietary notice contained within
-     the Software.
-
-3.9. RESTRICTIONS ON MACHINE LEARNING AND ARTIFICIAL INTELLIGENCE.
-     Use the Software, or any portion of the Software, as:
-
-     (a) Training data, fine-tuning data, instruction-tuning data,
-         reinforcement-learning data, or alignment data for any
-         machine learning model, large language model, foundation
-         model, neural network, or artificial intelligence system;
-     (b) Evaluation data, benchmark data, validation data, or test
-         data for any machine learning model or artificial
-         intelligence system;
-     (c) Input, prompt, context, retrieval source, or reference
-         material for any automated code-generation tool, code-
-         completion tool, copilot system, or autocomplete service;
-     (d) Source material for any data scraping, harvesting,
-         aggregation, or mining operation conducted by automated
-         agents or programmes;
-     (e) Subject matter for any embedding, indexing, or vector-store
-         operation conducted for the purpose of machine learning or
-         retrieval-augmented generation;
-
-     irrespective of whether such use is for research, commercial,
-     academic, personal, or any other purpose, and irrespective of
-     whether the resulting model or system is publicly released,
-     privately retained, or otherwise distributed.
-
-3.10. RESTRICTIONS ON AUTOMATED ACCESS.
-      Scrape, harvest, crawl, spider, index, archive, snapshot,
-      systematically download, or otherwise access the Software, the
-      Repository, or the Live Application by means of any automated
-      tool, bot, robot, agent, programme, script, or similar means.
-
-3.11. RESTRICTIONS ON MISREPRESENTATION.
-      Misrepresent, falsify, or misstate the authorship, origin,
-      ownership, provenance, or chain of custody of the Software,
-      including by claiming, implying, or permitting the inference that
-      You or any third party created, contributed to, owns, sponsors,
-      or endorses any part of the Software.
-
-3.12. RESTRICTIONS ON ILLEGAL OR HARMFUL USE.
-      Use the Software in any manner that:
-
-      (a) Violates any applicable law, statute, regulation, treaty, or
-          rule of any jurisdiction;
-      (b) Infringes upon the intellectual property, privacy, publicity,
-          contractual, or any other rights of the Author or any third
-          party;
-      (c) Is intended or reasonably foreseeable to harass, defame,
-          defraud, deceive, stalk, threaten, or harm any person; or
-      (d) Promotes or facilitates any unlawful activity.
-
-3.13. RESTRICTIONS ON CIRCUMVENTION.
-      Circumvent, disable, interfere with, tamper with, or attempt to
-      circumvent any security mechanism, authentication mechanism,
-      access-control mechanism, rate-limiting mechanism, copyright-
-      protection mechanism, or technological protection measure of the
-      Software, the Repository, or the Live Application.
-
-3.14. RESTRICTIONS ON FACILITATION.
-      Permit, enable, encourage, induce, solicit, assist, or aid any
-      third party to engage, attempt to engage, or conspire to engage
-      in any of the Prohibited Conduct described in this Section 3.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║            SECTION 4. INTELLECTUAL PROPERTY OWNERSHIP                 ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-4.1. The Software is licensed, not sold. The Author retains exclusive
-     ownership of, and reserves all right, title, and interest in and
-     to, the Software, including without limitation:
-
-     (a) All copyrights, including the rights of reproduction,
-         distribution, adaptation, public display, public performance,
-         and the moral rights of attribution and integrity;
-     (b) All patents, patent applications, and patentable subject
-         matter embodied in the Software;
-     (c) All trade secrets, know-how, and confidential information
-         embodied in the Software;
-     (d) All trademarks, service marks, trade dress, and brand
-         identity associated with the Software;
-     (e) All design rights, industrial design protections, and other
-         proprietary rights protectable under applicable law; and
-     (f) All goodwill associated with the foregoing.
-
-4.2. You acquire no ownership interest, equitable interest, beneficial
-     interest, or any other right, title, or interest in or to the
-     Software by virtue of this License or by any Use of the Software
-     whatsoever.
-
-4.3. FEEDBACK AND SUGGESTIONS.
-     Any feedback, suggestions, comments, ideas, improvements,
-     recommendations, or contributions of any kind that You voluntarily
-     submit, communicate, or otherwise provide to the Author regarding
-     the Software (collectively, "Feedback") shall be deemed:
-
-     (a) Non-confidential and non-proprietary to You;
-     (b) Provided without expectation of compensation, royalty, or
-         credit;
-     (c) Owned exclusively by the Author upon submission; and
-     (d) Available to the Author for any purpose whatsoever, including
-         commercial exploitation, without obligation to You.
-
-     You hereby irrevocably assign to the Author all right, title, and
-     interest, including all intellectual property rights, in and to
-     any Feedback that You provide.
-
-4.4. NO TRADEMARK LICENSE.
-     Nothing in this License grants You any right or license to use the
-     Author's name, the StudyOS brand, or any trademark, service mark,
-     trade name, or logo of the Author, except as may be required to
-     comply with the attribution provisions of Section 2.1(c).
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                     SECTION 5. TERMINATION                            ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-5.1. AUTOMATIC TERMINATION.
-     This License and all permissions granted hereunder shall terminate
-     automatically and immediately, without notice, action, or formality
-     of any kind, upon Your failure to comply with any provision of
-     this License.
-
-5.2. TERMINATION BY THE AUTHOR.
-     The Author may, at any time and in the Author's sole and absolute
-     discretion, with or without cause and with or without notice,
-     revoke, suspend, modify, or terminate this License in whole or in
-     part, in respect of any or all Licensees.
-
-5.3. EFFECT OF TERMINATION.
-     Upon termination of this License for any reason:
-
-     (a) Your rights under this License, including without limitation
-         the limited permissions granted in Section 2, shall cease
-         immediately;
-     (b) You must immediately cease all Use of the Software;
-     (c) You must immediately destroy, delete, or expunge all copies,
-         partial copies, fragments, derivatives, adaptations, and
-         Derivative Works of the Software in Your possession, custody,
-         or control, including all backups, archives, and cached
-         versions;
-     (d) You must, within seven (7) days of termination and upon the
-         Author's written request, certify in writing to the Author
-         that You have complied with the requirements of this Section
-         5.3.
-
-5.4. SURVIVAL OF PROVISIONS.
-     The following Sections shall survive termination of this License
-     and shall remain in full force and effect notwithstanding such
-     termination: Section 3 (Prohibited Conduct), Section 4
-     (Intellectual Property Ownership), Section 5 (Termination),
-     Section 6 (Disclaimer of Warranty), Section 7 (Limitation of
-     Liability), Section 8 (Indemnification), Section 9 (Enforcement),
-     and Section 10 (General Provisions).
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║              SECTION 6. DISCLAIMER OF WARRANTY                        ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-6.1. THE SOFTWARE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS,
-     WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED, STATUTORY,
-     OR OTHERWISE.
-
-6.2. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AUTHOR
-     EXPRESSLY DISCLAIMS ALL WARRANTIES OF EVERY KIND, INCLUDING WITHOUT
-     LIMITATION:
-
-     (a) ALL IMPLIED WARRANTIES OF MERCHANTABILITY, SATISFACTORY
-         QUALITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT,
-         TITLE, ACCURACY, RELIABILITY, COMPLETENESS, TIMELINESS,
-         AVAILABILITY, AND QUIET ENJOYMENT;
-
-     (b) ANY WARRANTIES ARISING OUT OF COURSE OF DEALING, COURSE OF
-         PERFORMANCE, USAGE OF TRADE, OR INDUSTRY CUSTOM;
-
-     (c) ANY WARRANTIES THAT THE SOFTWARE WILL BE FREE FROM DEFECTS,
-         BUGS, ERRORS, OR OMISSIONS;
-
-     (d) ANY WARRANTIES THAT THE SOFTWARE WILL MEET YOUR REQUIREMENTS;
-
-     (e) ANY WARRANTIES THAT THE SOFTWARE WILL OPERATE WITHOUT
-         INTERRUPTION, BE COMPATIBLE WITH ANY HARDWARE OR SOFTWARE
-         CONFIGURATION, OR BE SECURE FROM UNAUTHORISED ACCESS; AND
-
-     (f) ANY WARRANTIES THAT DEFECTS IN THE SOFTWARE WILL BE CORRECTED.
-
-6.3. THE AUTHOR MAKES NO WARRANTY OR REPRESENTATION REGARDING THE
-     ACCURACY, RELIABILITY, OR COMPLETENESS OF ANY OUTPUT, RESULT,
-     PREDICTION, RECOMMENDATION, OR INSIGHT GENERATED BY THE SOFTWARE'S
-     MACHINE LEARNING MODELS OR ANY OTHER COMPONENT OF THE SOFTWARE.
-     ALL SUCH OUTPUTS ARE PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND
-     SHALL NOT BE RELIED UPON FOR ACADEMIC, MEDICAL, FINANCIAL, LEGAL,
-     OR ANY OTHER CONSEQUENTIAL DECISIONS.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║              SECTION 7. LIMITATION OF LIABILITY                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-7.1. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT
-     SHALL THE AUTHOR BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY
-     DAMAGES OF ANY KIND, INCLUDING WITHOUT LIMITATION ANY:
-
-     (a) DIRECT DAMAGES;
-     (b) INDIRECT DAMAGES;
-     (c) INCIDENTAL DAMAGES;
-     (d) SPECIAL DAMAGES;
-     (e) EXEMPLARY OR PUNITIVE DAMAGES;
-     (f) CONSEQUENTIAL DAMAGES;
-     (g) LOST PROFITS, LOST REVENUES, LOST BUSINESS OPPORTUNITIES, OR
-         LOSS OF GOODWILL;
-     (h) LOSS OF USE, LOSS OF DATA, OR COST OF SUBSTITUTE GOODS OR
-         SERVICES; OR
-     (i) BUSINESS INTERRUPTION, SERVICE INTERRUPTION, OR LOSS OF
-         PRODUCTIVITY,
-
-     ARISING OUT OF, RELATED TO, OR IN CONNECTION WITH THIS LICENSE OR
-     THE USE OF, OR INABILITY TO USE, THE SOFTWARE, WHETHER BASED ON
-     CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, PRODUCT
-     LIABILITY, BREACH OF WARRANTY, OR ANY OTHER LEGAL OR EQUITABLE
-     THEORY, AND EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY
-     OF SUCH DAMAGES OR IF SUCH DAMAGES WERE FORESEEABLE.
-
-7.2. AGGREGATE LIABILITY CAP.
-     Notwithstanding any other provision of this License, the Author's
-     aggregate liability to You for all claims arising out of or
-     relating to this License or the Software shall not exceed the
-     total amount paid by You to the Author for the Software during the
-     twelve (12) months immediately preceding the event giving rise to
-     liability, which amount the Parties acknowledge is zero (INR 0.00)
-     in respect of all use governed by this License.
-
-7.3. ESSENTIAL PURPOSE.
-     The Parties acknowledge that the limitations of liability set forth
-     in this Section 7 are an essential element of the bargain between
-     them, and that the Author would not enter into this License but for
-     such limitations. These limitations shall apply notwithstanding
-     the failure of essential purpose of any limited remedy.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                  SECTION 8. INDEMNIFICATION                           ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-8.1. You agree to indemnify, defend, and hold harmless the Author, and
-     the Author's heirs, successors, assigns, agents, representatives,
-     and affiliates, from and against any and all claims, demands,
-     suits, actions, proceedings, losses, damages, liabilities, costs,
-     and expenses (including reasonable attorneys' fees and court
-     costs) arising out of, related to, or in connection with:
-
-     (a) Your Use of the Software;
-     (b) Your breach or alleged breach of this License;
-     (c) Your violation of any applicable law, regulation, or third-
-         party right; or
-     (d) Any content, data, or material that You upload, transmit, or
-         otherwise communicate through or in connection with the
-         Software.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                     SECTION 9. ENFORCEMENT                            ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-9.1. AVAILABLE REMEDIES.
-     The Author reserves the right to enforce this License through any
-     and all lawful means, including without limitation:
-
-     (a) Filing copyright infringement takedown notices under the
-         Digital Millennium Copyright Act, 17 U.S.C. § 512;
-
-     (b) Filing analogous notice-and-takedown requests under Article 17
-         of the European Union Copyright Directive (Directive
-         2019/790) and corresponding national transpositions;
-
-     (c) Filing takedown requests under the Information Technology
-         (Intermediary Guidelines and Digital Media Ethics Code) Rules,
-         2021, of India;
-
-     (d) Pursuing civil litigation for copyright infringement under the
-         Indian Copyright Act, 1957, including statutory damages, actual
-         damages, accounts of profits, injunctive relief, anton piller
-         orders, mareva injunctions, declaratory relief, and recovery
-         of legal costs;
-
-     (e) Pursuing criminal prosecution where applicable under
-         Sections 63, 63A, 63B, 64, 65, 65A, 65B, 66, 67, 68, 69, and
-         70 of the Indian Copyright Act, 1957;
-
-     (f) Pursuing criminal prosecution under the Information Technology
-         Act, 2000 (India), where applicable;
-
-     (g) Reporting infringing accounts, content, repositories, and
-         activity to:
-         (i)   Hosting platforms (including GitHub, GitLab, Bitbucket,
-               and similar);
-         (ii)  Domain name registrars and DNS providers;
-         (iii) Internet service providers and content delivery networks;
-         (iv)  Search engines (including Google, Bing, and similar);
-         (v)   Payment processors and financial institutions;
-         (vi)  Academic institutions and university honour councils;
-         (vii) Professional bodies and trade associations; and
-         (viii) Law enforcement agencies of competent jurisdiction; and
-
-     (h) Any other remedy available at law or in equity.
-
-9.2. EQUITABLE RELIEF.
-     You acknowledge and agree that any breach or threatened breach of
-     this License may cause irreparable harm to the Author for which
-     monetary damages would be inadequate, and that the Author shall be
-     entitled, in addition to all other available remedies, to seek and
-     obtain equitable relief, including without limitation temporary
-     restraining orders, preliminary and permanent injunctions, and
-     specific performance, without the requirement of posting a bond,
-     surety, or other security.
-
-9.3. ATTORNEYS' FEES AND COSTS.
-     In any action, proceeding, or arbitration brought to enforce this
-     License or to recover damages or other relief in connection with
-     this License or the Software, the prevailing party shall be
-     entitled to recover its reasonable attorneys' fees, expert witness
-     fees, court costs, and other costs of suit from the non-prevailing
-     party.
-
-9.4. STATUTE OF LIMITATIONS.
-     Any claim arising out of or related to this License or the
-     Software shall be commenced within the period prescribed by the
-     applicable statute of limitations, and the Parties expressly waive
-     any defence based on a shorter contractual limitation period.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                  SECTION 10. GENERAL PROVISIONS                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-10.1. GOVERNING LAW.
-      This License shall be governed by, construed under, and enforced
-      in accordance with the laws of the Republic of India, without
-      regard to or application of its conflict-of-laws principles. The
-      United Nations Convention on Contracts for the International
-      Sale of Goods is expressly excluded and shall not apply to this
-      License.
-
-10.2. JURISDICTION AND VENUE.
-      The Parties agree that any dispute, controversy, claim, or
-      difference of any kind whatsoever arising out of, relating to, or
-      in connection with this License or the Software, including any
-      question regarding its existence, validity, or termination,
-      shall be subject to the exclusive jurisdiction of the competent
-      courts located in Kolkata, West Bengal, Republic of India. You
-      hereby irrevocably consent to the personal jurisdiction of such
-      courts and waive any objection based on inconvenience of forum.
-
-10.3. SEVERABILITY.
-      If any provision of this License is held by a court of competent
-      jurisdiction to be invalid, illegal, unenforceable, or contrary
-      to public policy, in whole or in part, such invalidity,
-      illegality, or unenforceability shall not affect any other
-      provision of this License, and the License shall be construed as
-      if such invalid, illegal, or unenforceable provision had been
-      modified to the minimum extent necessary to make it valid, legal,
-      and enforceable, or, if such modification is not possible, as if
-      such provision had been omitted, in each case while preserving to
-      the maximum extent possible the original intent of the Parties.
-
-10.4. NO WAIVER.
-      No failure or delay by the Author in exercising any right, power,
-      or remedy under this License shall operate as a waiver thereof,
-      nor shall any single or partial exercise of any such right,
-      power, or remedy preclude any other or further exercise thereof
-      or the exercise of any other right, power, or remedy. Any waiver
-      by the Author of any provision of this License shall be effective
-      only if in writing and signed by the Author and shall apply only
-      to the specific instance and purpose for which given.
-
-10.5. ENTIRE AGREEMENT.
-      This License constitutes the entire and exclusive understanding
-      and agreement between You and the Author with respect to the
-      Software, and supersedes all prior or contemporaneous oral or
-      written understandings, agreements, communications,
-      representations, or proposals between the Parties with respect to
-      the subject matter of this License.
-
-10.6. AMENDMENTS.
-      The Author reserves the right to amend, modify, or update this
-      License at any time and from time to time, in the Author's sole
-      and absolute discretion. The current and authoritative version of
-      this License shall be the version published in the Repository as
-      of the date of Your access. By continuing to access the Software
-      after any amendment, You agree to be bound by the amended
-      License.
-
-10.7. ASSIGNMENT.
-      You may not assign, transfer, sublicense, delegate, or otherwise
-      dispose of any of Your rights or obligations under this License,
-      in whole or in part, whether voluntarily, involuntarily, by
-      operation of law, by merger, by acquisition, by sale of
-      substantially all assets, or otherwise, without the prior written
-      consent of the Author. Any attempted assignment or transfer in
-      violation of this Section shall be null, void, and of no force or
-      effect. The Author may freely assign or transfer this License or
-      any of its rights or obligations hereunder.
-
-10.8. RELATIONSHIP OF PARTIES.
-      Nothing in this License shall be construed to create any
-      partnership, joint venture, agency, employment, fiduciary, or
-      franchise relationship between You and the Author. Neither party
-      has authority to bind the other or to incur any obligation on
-      the other's behalf.
-
-10.9. FORCE MAJEURE.
-      The Author shall not be liable for any failure or delay in
-      performance under this License due to any cause beyond the
-      Author's reasonable control, including without limitation acts of
-      God, natural disasters, war, terrorism, riot, civil disturbance,
-      pandemic, government action, labour disputes, or failure of
-      utilities or telecommunications.
-
-10.10. NOTICES.
-       All notices, requests, demands, and other communications under
-       this License shall be in writing and shall be sent to the
-       Author through the contact channels published in the Author's
-       public profile at https://github.com/mandalindraneel or such
-       other address as the Author may designate from time to time.
-
-10.11. HEADINGS.
-       The section headings used in this License are for convenience of
-       reference only and shall not affect the construction or
-       interpretation of this License.
-
-10.12. LANGUAGE.
-       This License is drafted in the English language, which shall be
-       the controlling language for all purposes. Any translation
-       provided for convenience shall not be authoritative.
-
-10.13. INTERPRETATION.
-       In this License: (a) the words "include", "includes", and
-       "including" shall be deemed to be followed by the phrase "without
-       limitation"; (b) the word "or" is not exclusive; (c) the singular
-       includes the plural and vice versa; and (d) references to any
-       agreement, statute, or other instrument shall be construed as
-       references to such agreement, statute, or instrument as amended,
-       supplemented, modified, or replaced from time to time.
-
-10.14. THIRD-PARTY BENEFICIARIES.
-       This License is solely for the benefit of the Parties and
-       confers no rights or remedies upon any third party.
-
-10.15. ELECTRONIC ACCEPTANCE.
-       The Parties acknowledge that this License is entered into and
-       accepted electronically and agree that electronic acceptance
-       (including by accessing the Software) shall have the same force
-       and effect as a handwritten signature on a paper document.
-
-
-╔═══════════════════════════════════════════════════════════════════════╗
-║                     SECTION 11. ACKNOWLEDGMENT                        ║
-╚═══════════════════════════════════════════════════════════════════════╝
-
-11.1. BY ACCESSING, VIEWING, DOWNLOADING, EXECUTING, OR OTHERWISE
-      INTERACTING WITH THE SOFTWARE OR THE REPOSITORY IN ANY MANNER, YOU
-      ACKNOWLEDGE AND AGREE THAT YOU:
-
-      (a) HAVE READ THIS LICENSE IN ITS ENTIRETY;
-      (b) UNDERSTAND THIS LICENSE AND ITS LEGAL EFFECT;
-      (c) HAVE HAD THE OPPORTUNITY TO CONSULT WITH LEGAL COUNSEL OF
-          YOUR CHOOSING REGARDING THIS LICENSE;
-      (d) AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE; AND
-      (e) ARE OF LEGAL AGE AND HAVE THE LEGAL CAPACITY TO ENTER INTO
-          THIS LICENSE IN YOUR OWN JURISDICTION.
-
-11.2. IF YOU DO NOT AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE,
-      YOU MUST IMMEDIATELY AND PERMANENTLY CEASE ALL ACCESS TO AND USE
-      OF THE SOFTWARE AND THE REPOSITORY.
-
-
-═════════════════════════════════════════════════════════════════════════
-            End of License Agreement — Version 2.0, 2026
-   Copyright (c) 2026 Indraneel Mandal. All Rights Reserved.
-═════════════════════════════════════════════════════════════════════════
+STUDYOS PROPRIETARY SOFTWARE LICENSE AGREEMENT
+Version 2.0
+
+Copyright (c) 2026 Indraneel Mandal. All Rights Reserved.
+
+
+PREAMBLE
+
+This Software, including but not limited to all source code, object code, compiled binaries, scripts, stylesheets, markup, configuration files, data files, asset files, documentation, design specifications, user interface elements, brand identity, visual layouts, written content, icons, illustrations, animations, sound design, and any and all materials accompanying or contained within this repository (collectively, the "Software" or "Work"), constitutes the original creative work and exclusive intellectual property of Indraneel Mandal, an individual residing in the Republic of India (the "Author" or "Licensor").
+
+The Software is protected by the laws of copyright, trade secret, trademark, design right, and all other applicable intellectual property laws of the Republic of India, the United States of America, the European Union, and the United Kingdom, together with all applicable international treaties and conventions, including but not limited to the Indian Copyright Act, 1957 (as amended); the Berne Convention for the Protection of Literary and Artistic Works (1886, as revised); the WIPO Copyright Treaty (1996); the Universal Copyright Convention (1952); the Agreement on Trade-Related Aspects of Intellectual Property Rights (TRIPS, 1994); the Digital Millennium Copyright Act (17 U.S.C. Section 512); the European Union Copyright Directive (Directive 2019/790); and the Information Technology Act, 2000 (India), as amended.
+
+The Software is published in a publicly accessible source code repository solely for the limited purposes of (i) public hosting of the deployed live application by the Author; (ii) personal and academic portfolio review by educational institutions, scholarship committees, competition adjudicators, prospective employers, and bona fide collaborators; and (iii) good-faith technical demonstration. The public visibility of the Software shall not, under any circumstance and irrespective of inference, custom, practice, or interpretation, be construed as, constitute, or operate as: (a) a publication into the public domain; (b) a grant, transfer, assignment, or license of any right of any kind to any party other than as expressly stated in Section 2 of this Agreement; (c) a waiver, abandonment, estoppel, or forfeiture of any of the Author's rights, claims, or remedies; (d) any implied license under the doctrines of equity, exhaustion, or implied authorization; or (e) consent to any use, reproduction, distribution, modification, or exploitation of the Software in any manner whatsoever.
+
+This Agreement governs all access to, use of, viewing of, downloading of, or interaction with the Software in any form. By accessing the Software or its repository, you ("You" or "Licensee") agree to be bound by the terms of this Agreement in their entirety. If You do not agree with any provision of this Agreement, You must immediately and irrevocably cease all access to, viewing of, downloading of, and interaction with the Software.
+
+
+1. DEFINITIONS
+
+For the purposes of this Agreement, the following terms shall have the meanings set forth below.
+
+1.1. "Author" or "Licensor" means Indraneel Mandal, an individual residing in the Republic of India, being the sole and exclusive owner and copyright holder of the Software.
+
+1.2. "Software" or "Work" means the entire body of materials defined in the Preamble, including without limitation: (a) source code in any programming language, including HTML, CSS, JavaScript, Python, and any associated configuration, manifest, or metadata files; (b) compiled, transpiled, minified, bundled, or otherwise processed derivatives of the source code; (c) visual design, layout, typography, colour palette, iconography, and brand identity; (d) user interface components, including all animations, micro-interactions, transitions, and behavioural states; (e) written content, documentation, labels, and copy; (f) data structures, algorithms, schemas, and architectural designs expressed in the Software; (g) the trained or configured machine learning models, weights, parameters, hyperparameters, and feature engineering logic contained within the Software; (h) the deployed live application accessible at the public uniform resource locator or locators operated by the Author from time to time; (i) any and all backend services, application programming interfaces, endpoints, and server-side logic operated in connection with the Software; and (j) any updates, revisions, patches, bug fixes, enhancements, or derivatives of the foregoing made by the Author.
+
+1.3. "You" or "Licensee" means any individual, group, organisation, corporation, partnership, governmental entity, educational institution, machine, automated agent, or other legal or natural person accessing, viewing, downloading, executing, or otherwise interacting with the Software in any capacity whatsoever.
+
+1.4. "Derivative Work" means any work, in any medium or form, that is based upon, derived from, adapted from, translated from, ported from, refactored from, rewritten from, modified from, or substantially similar to the Software, in whole or in any identifiable part, whether or not such derivative is explicitly identified as such, including without limitation: (a) translations into other programming languages; (b) re-implementations using different frameworks or libraries; (c) refactored, modularised, or restructured versions; (d) visual reproductions, recreations, or imitations of the user interface, layout, or design; (e) functional clones reproducing the substantial behaviour, flow, or feature set; (f) educational, instructional, or tutorial materials that reproduce substantial portions of the Software; (g) compilations, anthologies, or collections that include the Software; and (h) any work that incorporates, embeds, or references the Software such that the Software is materially identifiable therein.
+
+1.5. "Use" means any act of accessing, viewing, downloading, cloning, forking, copying, executing, running, deploying, hosting, modifying, adapting, translating, distributing, publishing, displaying, publicly performing, transmitting, broadcasting, reverse-engineering, decompiling, disassembling, or in any other manner interacting with or exploiting the Software.
+
+1.6. "Repository" means the public source code repository operated by the Author, together with any successor or replacement repository designated by the Author from time to time.
+
+1.7. "Live Application" means the deployed, publicly accessible instance of the Software hosted by the Author, together with any successor or replacement deployment designated by the Author.
+
+1.8. "Permitted Purpose" means any purpose expressly permitted under Section 2, and no other purpose.
+
+1.9. "Prohibited Conduct" means any conduct described in Section 3.
+
+1.10. "Effective Date" means the moment at which You first access, view, download, or otherwise interact with the Software.
+
+1.11. "Term" means the period commencing on the Effective Date and continuing until terminated pursuant to Section 5.
+
+
+2. GRANT OF LIMITED PERMISSIONS
+
+2.1. Subject to Your strict and continuing compliance with all of the terms and conditions of this Agreement, including without limitation the prohibitions set forth in Section 3, the Author hereby grants You a limited, personal, non-exclusive, non-transferable, non-sublicensable, non-assignable, revocable permission to engage in the following activities and no others:
+
+(a) to view the source code of the Software through the web interface provided by the hosting platform for the sole purpose of casual inspection and bona fide non-commercial academic or journalistic study;
+
+(b) to access and interact with the Live Application through its public uniform resource locator for personal, non-commercial evaluation, the demonstration of features, and academic study;
+
+(c) to reference the Software, by hyperlink to the Repository or the Live Application, in non-commercial academic discourse, journalistic articles, educational materials, or personal correspondence, provided that proper and prominent attribution to the Author by name is included; and
+
+(d) to request licensing or commercial use from the Author by direct communication through the channels published in the Author's public repository profile.
+
+2.2. The permissions set forth in Section 2.1 are limited, conditional, and revocable in their entirety at the sole discretion of the Author, with or without notice and with or without cause.
+
+2.3. No rights, permissions, or licenses, whether express, implied, statutory, or otherwise, are granted to You by this Agreement except as expressly stated in Section 2.1. All rights not expressly granted herein are reserved by the Author.
+
+
+3. PROHIBITED CONDUCT
+
+You shall not, without the prior express written permission of the Author, signed by the Author and bearing a verifiable date:
+
+3.1. Copying and Reproduction. Copy, reproduce, duplicate, clone, fork, mirror, archive, snapshot, cache (other than ordinary, transient browser caching as a technical necessity of viewing), or otherwise create any copy of the Software, in whole or in part, by any means whatsoever, in any medium now known or hereafter devised, for any purpose whatsoever.
+
+3.2. Modification and Adaptation. Modify, adapt, translate, port, refactor, rewrite, restructure, decompile, reverse-engineer, disassemble, derive source code from compiled or minified outputs, or in any other manner attempt to access, derive, infer, or reconstruct any portion of the Software's source code, structure, organisation, algorithms, data models, or underlying ideas, concepts, or techniques.
+
+3.3. Derivative Works. Create, develop, prepare, author, publish, distribute, sell, license, sublicense, rent, lease, lend, host, deploy, broadcast, transmit, or otherwise make available any Derivative Work based upon, derived from, or substantially similar to the Software.
+
+3.4. Distribution. Distribute, sell, license, sublicense, rent, lease, lend, transfer, assign, bequeath, donate, gift, give, share, publish, broadcast, transmit, or otherwise make available the Software, or any portion of the Software, to any third party.
+
+3.5. Commercial Use. Use, exploit, or commercialise the Software, or any portion of the Software, in connection with any commercial product, service, application, website, advertisement, offering, business, venture, enterprise, or undertaking, whether for-profit, non-profit, or of any other character, irrespective of revenue, scale, or compensation.
+
+3.6. Non-Commercial Use. Use the Software, or any portion of the Software, in connection with any non-commercial product, service, application, project, or undertaking, including without limitation open-source projects, personal projects, hobby projects, community projects, or volunteer initiatives, by any party other than the Author.
+
+3.7. Academic and Competitive Use. Use the Software, or any portion of the Software, or any identifiable element, design, idea, or feature thereof, in connection with: (a) academic coursework, assignments, projects, theses, dissertations, capstones, term papers, or examinations; (b) college, university, or scholarship admission applications, portfolios, statements, or essays; (c) competition entries, hackathon submissions, or contest submissions of any nature; (d) grant applications, fellowship applications, or research funding submissions; (e) job applications, internship applications, employment portfolios, or professional profiles; or (f) any representation, claim, or implication that You or any third party authored, designed, contributed to, or owns any portion of the Software, in each case by any party other than the Author.
+
+3.8. Attribution and Notices. Remove, alter, modify, obscure, conceal, deface, hide, omit, fail to reproduce, or in any way diminish the visibility, prominence, or completeness of any copyright notice, attribution, byline, trademark, watermark, branding element, version information, digital signature, or other proprietary notice contained within the Software.
+
+3.9. Machine Learning and Artificial Intelligence. Use the Software, or any portion of the Software, as: (a) training data, fine-tuning data, instruction-tuning data, reinforcement-learning data, or alignment data for any machine learning model, large language model, foundation model, neural network, or artificial intelligence system; (b) evaluation data, benchmark data, validation data, or test data for any machine learning model or artificial intelligence system; (c) input, prompt, context, retrieval source, or reference material for any automated code-generation tool, code-completion tool, or autocomplete service; (d) source material for any data scraping, harvesting, aggregation, or mining operation conducted by automated agents or programmes; or (e) subject matter for any embedding, indexing, or vector-store operation conducted for the purpose of machine learning or retrieval-augmented generation, in each case irrespective of whether such use is for research, commercial, academic, personal, or any other purpose, and irrespective of whether the resulting model or system is publicly released, privately retained, or otherwise distributed.
+
+3.10. Automated Access. Scrape, harvest, crawl, spider, index, archive, snapshot, systematically download, or otherwise access the Software, the Repository, or the Live Application by means of any automated tool, bot, robot, agent, programme, script, or similar means.
+
+3.11. Misrepresentation. Misrepresent, falsify, or misstate the authorship, origin, ownership, provenance, or chain of custody of the Software, including by claiming, implying, or permitting the inference that You or any third party created, contributed to, owns, sponsors, or endorses any part of the Software.
+
+3.12. Illegal or Harmful Use. Use the Software in any manner that: (a) violates any applicable law, statute, regulation, treaty, or rule of any jurisdiction; (b) infringes upon the intellectual property, privacy, publicity, contractual, or any other rights of the Author or any third party; (c) is intended or reasonably foreseeable to harass, defame, defraud, deceive, stalk, threaten, or harm any person; or (d) promotes or facilitates any unlawful activity.
+
+3.13. Circumvention. Circumvent, disable, interfere with, tamper with, or attempt to circumvent any security mechanism, authentication mechanism, access-control mechanism, rate-limiting mechanism, copyright-protection mechanism, or technological protection measure of the Software, the Repository, or the Live Application.
+
+3.14. Facilitation. Permit, enable, encourage, induce, solicit, assist, or aid any third party to engage, attempt to engage, or conspire to engage in any of the Prohibited Conduct described in this Section 3.
+
+
+4. INTELLECTUAL PROPERTY OWNERSHIP
+
+4.1. The Software is licensed, not sold. The Author retains exclusive ownership of, and reserves all right, title, and interest in and to, the Software, including without limitation: (a) all copyrights, including the rights of reproduction, distribution, adaptation, public display, public performance, and the moral rights of attribution and integrity; (b) all patents, patent applications, and patentable subject matter embodied in the Software; (c) all trade secrets, know-how, and confidential information embodied in the Software; (d) all trademarks, service marks, trade dress, and brand identity associated with the Software; (e) all design rights, industrial design protections, and other proprietary rights protectable under applicable law; and (f) all goodwill associated with the foregoing.
+
+4.2. You acquire no ownership interest, equitable interest, beneficial interest, or any other right, title, or interest in or to the Software by virtue of this Agreement or by any Use of the Software whatsoever.
+
+4.3. Feedback and Suggestions. Any feedback, suggestions, comments, ideas, improvements, recommendations, or contributions of any kind that You voluntarily submit, communicate, or otherwise provide to the Author regarding the Software (collectively, "Feedback") shall be deemed: (a) non-confidential and non-proprietary to You; (b) provided without expectation of compensation, royalty, or credit; (c) owned exclusively by the Author upon submission; and (d) available to the Author for any purpose whatsoever, including commercial exploitation, without obligation to You. You hereby irrevocably assign to the Author all right, title, and interest, including all intellectual property rights, in and to any Feedback that You provide.
+
+4.4. No Trademark License. Nothing in this Agreement grants You any right or license to use the Author's name, the StudyOS brand, or any trademark, service mark, trade name, or logo of the Author, except as may be required to comply with the attribution provisions of Section 2.1(c).
+
+
+5. TERMINATION
+
+5.1. Automatic Termination. This Agreement and all permissions granted hereunder shall terminate automatically and immediately, without notice, action, or formality of any kind, upon Your failure to comply with any provision of this Agreement.
+
+5.2. Termination by the Author. The Author may, at any time and in the Author's sole and absolute discretion, with or without cause and with or without notice, revoke, suspend, modify, or terminate this Agreement in whole or in part, in respect of any or all Licensees.
+
+5.3. Effect of Termination. Upon termination of this Agreement for any reason: (a) Your rights under this Agreement, including without limitation the limited permissions granted in Section 2, shall cease immediately; (b) You must immediately cease all Use of the Software; (c) You must immediately destroy, delete, or expunge all copies, partial copies, fragments, derivatives, adaptations, and Derivative Works of the Software in Your possession, custody, or control, including all backups, archives, and cached versions; and (d) You must, within seven (7) days of termination and upon the Author's written request, certify in writing to the Author that You have complied with the requirements of this Section 5.3.
+
+5.4. Survival. The following Sections shall survive termination of this Agreement and shall remain in full force and effect notwithstanding such termination: Section 3 (Prohibited Conduct), Section 4 (Intellectual Property Ownership), Section 5 (Termination), Section 6 (Disclaimer of Warranty), Section 7 (Limitation of Liability), Section 8 (Indemnification), Section 9 (Enforcement), and Section 10 (General Provisions).
+
+
+6. DISCLAIMER OF WARRANTY
+
+6.1. The Software is provided on an "as is" and "as available" basis, without warranty of any kind, whether express, implied, statutory, or otherwise.
+
+6.2. To the maximum extent permitted by applicable law, the Author expressly disclaims all warranties of every kind, including without limitation: (a) all implied warranties of merchantability, satisfactory quality, fitness for a particular purpose, non-infringement, title, accuracy, reliability, completeness, timeliness, availability, and quiet enjoyment; (b) any warranties arising out of course of dealing, course of performance, usage of trade, or industry custom; (c) any warranties that the Software will be free from defects, bugs, errors, or omissions; (d) any warranties that the Software will meet Your requirements; (e) any warranties that the Software will operate without interruption, be compatible with any hardware or software configuration, or be secure from unauthorised access; and (f) any warranties that defects in the Software will be corrected.
+
+6.3. The Author makes no warranty or representation regarding the accuracy, reliability, or completeness of any output, result, prediction, recommendation, or insight generated by the Software's machine learning models or any other component of the Software. All such outputs are provided for informational purposes only and shall not be relied upon for academic, medical, financial, legal, or any other consequential decisions.
+
+
+7. LIMITATION OF LIABILITY
+
+7.1. To the maximum extent permitted by applicable law, in no event shall the Author be liable to You or to any third party for any damages of any kind, including without limitation any direct, indirect, incidental, special, exemplary, punitive, or consequential damages; any lost profits, lost revenues, lost business opportunities, or loss of goodwill; any loss of use, loss of data, or cost of substitute goods or services; or any business interruption, service interruption, or loss of productivity, arising out of, related to, or in connection with this Agreement or the Use of, or inability to use, the Software, whether based on contract, tort (including negligence), strict liability, product liability, breach of warranty, or any other legal or equitable theory, and even if the Author has been advised of the possibility of such damages or if such damages were foreseeable.
+
+7.2. Aggregate Liability Cap. Notwithstanding any other provision of this Agreement, the Author's aggregate liability to You for all claims arising out of or relating to this Agreement or the Software shall not exceed the total amount paid by You to the Author for the Software during the twelve (12) months immediately preceding the event giving rise to liability, which amount the parties acknowledge is zero (INR 0.00) in respect of all use governed by this Agreement.
+
+7.3. Essential Purpose. The parties acknowledge that the limitations of liability set forth in this Section 7 are an essential element of the bargain between them, and that the Author would not enter into this Agreement but for such limitations. These limitations shall apply notwithstanding the failure of essential purpose of any limited remedy.
+
+
+8. INDEMNIFICATION
+
+8.1. You agree to indemnify, defend, and hold harmless the Author, and the Author's heirs, successors, assigns, agents, representatives, and affiliates, from and against any and all claims, demands, suits, actions, proceedings, losses, damages, liabilities, costs, and expenses (including reasonable attorneys' fees and court costs) arising out of, related to, or in connection with: (a) Your Use of the Software; (b) Your breach or alleged breach of this Agreement; (c) Your violation of any applicable law, regulation, or third-party right; or (d) any content, data, or material that You upload, transmit, or otherwise communicate through or in connection with the Software.
+
+
+9. ENFORCEMENT
+
+9.1. Available Remedies. The Author reserves the right to enforce this Agreement through any and all lawful means, including without limitation: (a) filing copyright infringement takedown notices under the Digital Millennium Copyright Act, 17 U.S.C. Section 512; (b) filing analogous notice-and-takedown requests under Article 17 of the European Union Copyright Directive (Directive 2019/790) and corresponding national transpositions; (c) filing takedown requests under the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, of India; (d) pursuing civil litigation for copyright infringement under the Indian Copyright Act, 1957, including statutory damages, actual damages, accounts of profits, injunctive relief, and recovery of legal costs; (e) pursuing criminal prosecution where applicable under Sections 63 through 70 of the Indian Copyright Act, 1957; (f) pursuing criminal prosecution under the Information Technology Act, 2000 (India), where applicable; (g) reporting infringing accounts, content, repositories, and activity to hosting platforms, domain name registrars, internet service providers, content delivery networks, search engines, payment processors, academic institutions, professional bodies, and law enforcement agencies of competent jurisdiction; and (h) any other remedy available at law or in equity.
+
+9.2. Equitable Relief. You acknowledge and agree that any breach or threatened breach of this Agreement may cause irreparable harm to the Author for which monetary damages would be inadequate, and that the Author shall be entitled, in addition to all other available remedies, to seek and obtain equitable relief, including without limitation temporary restraining orders, preliminary and permanent injunctions, and specific performance, without the requirement of posting a bond, surety, or other security.
+
+9.3. Attorneys' Fees and Costs. In any action, proceeding, or arbitration brought to enforce this Agreement or to recover damages or other relief in connection with this Agreement or the Software, the prevailing party shall be entitled to recover its reasonable attorneys' fees, expert witness fees, court costs, and other costs of suit from the non-prevailing party.
+
+9.4. Limitation Period. Any claim arising out of or related to this Agreement or the Software shall be commenced within the period prescribed by the applicable statute of limitations, and the parties expressly waive any defence based on a shorter contractual limitation period.
+
+
+10. GENERAL PROVISIONS
+
+10.1. Governing Law. This Agreement shall be governed by, construed under, and enforced in accordance with the laws of the Republic of India, without regard to or application of its conflict-of-laws principles. The United Nations Convention on Contracts for the International Sale of Goods is expressly excluded and shall not apply to this Agreement.
+
+10.2. Jurisdiction and Venue. The parties agree that any dispute, controversy, claim, or difference of any kind whatsoever arising out of, relating to, or in connection with this Agreement or the Software, including any question regarding its existence, validity, or termination, shall be subject to the exclusive jurisdiction of the competent courts located in Kolkata, West Bengal, Republic of India. You hereby irrevocably consent to the personal jurisdiction of such courts and waive any objection based on inconvenience of forum.
+
+10.3. Severability. If any provision of this Agreement is held by a court of competent jurisdiction to be invalid, illegal, unenforceable, or contrary to public policy, in whole or in part, such invalidity, illegality, or unenforceability shall not affect any other provision of this Agreement, and the Agreement shall be construed as if such invalid, illegal, or unenforceable provision had been modified to the minimum extent necessary to make it valid, legal, and enforceable, or, if such modification is not possible, as if such provision had been omitted, in each case while preserving to the maximum extent possible the original intent of the parties.
+
+10.4. No Waiver. No failure or delay by the Author in exercising any right, power, or remedy under this Agreement shall operate as a waiver thereof, nor shall any single or partial exercise of any such right, power, or remedy preclude any other or further exercise thereof or the exercise of any other right, power, or remedy. Any waiver by the Author of any provision of this Agreement shall be effective only if in writing and signed by the Author and shall apply only to the specific instance and purpose for which given.
+
+10.5. Entire Agreement. This Agreement constitutes the entire and exclusive understanding and agreement between You and the Author with respect to the Software, and supersedes all prior or contemporaneous oral or written understandings, agreements, communications, representations, or proposals between the parties with respect to the subject matter of this Agreement.
+
+10.6. Amendments. The Author reserves the right to amend, modify, or update this Agreement at any time and from time to time, in the Author's sole and absolute discretion. The current and authoritative version of this Agreement shall be the version published in the Repository as of the date of Your access. By continuing to access the Software after any amendment, You agree to be bound by the amended Agreement.
+
+10.7. Assignment. You may not assign, transfer, sublicense, delegate, or otherwise dispose of any of Your rights or obligations under this Agreement, in whole or in part, whether voluntarily, involuntarily, by operation of law, by merger, by acquisition, by sale of substantially all assets, or otherwise, without the prior written consent of the Author. Any attempted assignment or transfer in violation of this Section shall be null, void, and of no force or effect. The Author may freely assign or transfer this Agreement or any of its rights or obligations hereunder.
+
+10.8. Relationship of Parties. Nothing in this Agreement shall be construed to create any partnership, joint venture, agency, employment, fiduciary, or franchise relationship between You and the Author. Neither party has authority to bind the other or to incur any obligation on the other's behalf.
+
+10.9. Force Majeure. The Author shall not be liable for any failure or delay in performance under this Agreement due to any cause beyond the Author's reasonable control, including without limitation acts of God, natural disasters, war, terrorism, riot, civil disturbance, pandemic, government action, labour disputes, or failure of utilities or telecommunications.
+
+10.10. Notices. All notices, requests, demands, and other communications under this Agreement shall be in writing and shall be sent to the Author through the contact channels published in the Author's public repository profile, or to such other address as the Author may designate from time to time.
+
+10.11. Headings. The section headings used in this Agreement are for convenience of reference only and shall not affect the construction or interpretation of this Agreement.
+
+10.12. Language. This Agreement is drafted in the English language, which shall be the controlling language for all purposes. Any translation provided for convenience shall not be authoritative.
+
+10.13. Interpretation. In this Agreement: (a) the words "include", "includes", and "including" shall be deemed to be followed by the phrase "without limitation"; (b) the word "or" is not exclusive; (c) the singular includes the plural and vice versa; and (d) references to any agreement, statute, or other instrument shall be construed as references to such agreement, statute, or instrument as amended, supplemented, modified, or replaced from time to time.
+
+10.14. Third-Party Beneficiaries. This Agreement is solely for the benefit of the parties and confers no rights or remedies upon any third party.
+
+10.15. Electronic Acceptance. The parties acknowledge that this Agreement is entered into and accepted electronically and agree that electronic acceptance, including by accessing the Software, shall have the same force and effect as a handwritten signature on a paper document.
+
+
+11. ACKNOWLEDGMENT
+
+11.1. By accessing, viewing, downloading, executing, or otherwise interacting with the Software or the Repository in any manner, You acknowledge and agree that You: (a) have read this Agreement in its entirety; (b) understand this Agreement and its legal effect; (c) have had the opportunity to consult with legal counsel of Your choosing regarding this Agreement; (d) agree to be bound by the terms of this Agreement; and (e) are of legal age and have the legal capacity to enter into this Agreement in Your own jurisdiction.
+
+11.2. If You do not agree to be bound by the terms of this Agreement, You must immediately and permanently cease all access to and use of the Software and the Repository.
+
+
+END OF AGREEMENT
+
+Copyright (c) 2026 Indraneel Mandal. All Rights Reserved.
